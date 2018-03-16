@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>智慧消防平台</title>
+    <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/apiConfig.js"></script>
+    <script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="Scripts/jsmpeg.min.js"></script>
+
+</head>
+
+<body>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2 class="text-center">
+                                视频监控
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video1" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门1</p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video2" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门2</p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video3" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门3</p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video4" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门4</p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video5" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门5</p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video6" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门6</p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video7" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门7</p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video8" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门8</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        var url = 'ws://172.16.99.40:8082/';
+        var canvas1 = document.getElementById('video1');
+        var player1 = new JSMpeg.Player(url + "?1", { canvas: canvas1 });
+
+        var canvas2 = document.getElementById('video2');
+        var player2 = new JSMpeg.Player(url + "?2", { canvas: canvas2 });
+
+        var canvas3 = document.getElementById('video3');
+        var player3 = new JSMpeg.Player(url + "?2", { canvas: canvas3 });
+
+        var canvas4 = document.getElementById('video4');
+        var player4 = new JSMpeg.Player(url + "?1", { canvas: canvas4 });
+
+        var canvas5 = document.getElementById('video5');
+        var player5 = new JSMpeg.Player(url + "?2", { canvas: canvas5 });
+
+        var canvas6 = document.getElementById('video6');
+        var player6 = new JSMpeg.Player(url + "?1", { canvas: canvas6 });
+
+        var canvas7 = document.getElementById('video7');
+        var player7 = new JSMpeg.Player(url + "?2", { canvas: canvas7 });
+
+        var canvas8 = document.getElementById('video8');
+        var player8 = new JSMpeg.Player(url + "?1", { canvas: canvas8 });
+    </script>
+</body>
+</html>

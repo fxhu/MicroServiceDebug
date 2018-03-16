@@ -1,0 +1,257 @@
+﻿﻿<!--引用资源 -->
+
+<link href="/assets/css/mydesktop.css" rel="stylesheet">
+<link href="/OneMap/css/Font/material-icons.css" rel="stylesheet" type="text/css">
+<script src="/assets/js/mydesktop.js"></script>
+<script src="/assets/js/Common.js"></script>
+<div class="{{vm.myclass}}" ng-controller="app.views.dashboard as vm">
+    <div class="" style="width: 100%;">
+        <!--通知-->
+        <div class="contentNews clearfix" style="background:#EFF4FB;">
+            <div class="flexlayout clearfix" >
+                <!-- 园区搜索功能start -->
+                <div class="companyDetails pull-left ">
+                    <div class="checkDetails">
+                        <div id="compangId">
+                        </div>
+                        <div class="dropDownMenu">
+                           <!-- <select id="testInput" ng-init="selectedName = vm.selectedpark[0].text" ng-model="selectedName" ng-options="x.text for x in vm.selectedpark">
+                            </select>-->
+                            <select   id="testInput" ng-model="selectedName" ng-options="park.id as park.text for park in  parks">
+                                   <option value="">--请选择园区--</option>
+                            </select>
+                         <!--   <select name="" id="testInput" ng-if="vm.parks.length" ng-model-options="vm.selectedpark">
+                                <option value="">&#45;&#45;请选择园区&#45;&#45;</option>
+                                <option ng-repeat="menuItem in vm.parks" ng-click="vm.selectPark(menuItem.id,menuItem.text)">{{menuItem.text}}</option>
+                            </select>-->
+                        </div>
+                    </div>
+                </div>
+                <!-- 通知start -->
+                <div class="notification pull-right">
+                    <div class="news br-r-24 pull-left">
+                        <img class="av-center" src="/assets/images/informationNews.png" alt="通知照片">
+                    </div>
+                    <span class="newsDetails pull-left">武汉理工光科有限公司2018表彰大会</span>
+                </div>
+            </div>
+        </div>
+        <!--通知-->
+        <!-- BEGIN PAGE BASE CONTENT -->
+        <div class="row clearfix" style="background:#EFF4FB;">
+            <div class="col-lg-10 col-xs-10 col-sm-10 " style="padding-bottom:0">
+                <div class="clearfix" style="border:none">
+                    <ul class="reportContent clearfix">
+                        <li class="equipment bs pull-left clearfix">
+                            <span class="equipmentTitle br-r-24 ">资产</span>
+                            <div class="equipmentReport" id="equipmentReport" style="overflow:hidden"></div>
+                        </li>
+                        <li class="inspection bs pull-left clearfix">
+                            <span class="inspectionTitle br-r-24">巡检</span>
+                            <div chart="" config="vm.inspectionOption" class="inspectionReport" id="inspectionReport" style="overflow:hidden"></div>
+                        </li>
+                        <li class="hiddenTrouble bs pull-left clearfix">
+                            <span class="hiddenTroubleTitle br-r-24">隐患</span>
+                            <div chart="" config="vm.hiddenTroubleOption" class="hiddenTroubleReport" id="hiddenTroubleReport" style="overflow:hidden"></div>
+                        </li>
+                        <li class="alarm bs pull-left clearfix">
+                            <span class="alarmTitle br-r-24">告警</span>
+                            <div chart="" config="vm.alarmOption" class="alarmReport" style="overflow:hidden" id="alarmReport"></div>
+                        </li>
+                    </ul>
+                    <div class="mainContent clearfix">
+
+                        <div class="portlet-body pull-left" style="width:100%">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane active" id="Area1">
+                                    <!-- 地区图显示区域 -->
+                                    <div id="mainmap"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-xs-2 col-sm-2"  id="smallerRight">
+                <div class=" portlet-fit  portlet-light-bordered-box">
+                    <ul class="mainTask">
+                        <li class="inspectionTask bs br10">
+                            <span class="br-r-24">巡检任务</span>
+                            <div></div>
+                        </li>
+                        <li class="repairTask bs br10">
+                            <span class="br-r-24">维修任务</span>
+                            <div></div>
+                        </li>
+                        <li class="maintenanceTask bs br10">
+                            <span class="br-r-24">维保任务</span>
+                            <div></div>
+                        </li>
+                        <li class="detectionTask bs br10">
+                            <span class="br-r-24">检测任务</span>
+                            <div></div>
+                        </li>
+                        <li class="keyAreas bs  br10">
+                            <span class="br-r-24">APP下载</span>
+                            <div id="qrcode"></div>
+                        </li>
+                    </ul>
+                    <div class="portlet-body" style="min-height: 655px;display:none;">
+                        <h4 class="widget-thumb-heading clearfix" style="font-weight:600;">重点区域
+                            <a id="moreforkeyArea" style="display:none;float:right;font-size:14px;font-weight:bold;color:#3598dc;padding-right:20px;"
+                                href="/Application#!/KeyArea">更多&gt;&gt;</a>
+                        </h4>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-hover dashboard-task-infos">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 120px;">重点区域</th>
+                                            <th style="width: 60px;">所属部门</th>
+                                            <th style="width: 20px;">状态</th>
+                                            <th style="width: 20px;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="keytbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- 视频轮播 -->
+                        <div class="pane pane-video-row" style="display: none;">
+                            <div class="pane-body">
+                                <div id="carousel-videos" class="carousel slide" data-ride="carousel">
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item active" style="height: 150px;">
+                                            <div class="video-col videomanage">
+                                                <canvas id="video1" style="width: 100%; height: 100%"></canvas>
+                                            </div>
+                                            <div class="video-col videomanage">
+                                                <canvas id="video2" style="width: 100%; height: 100%"></canvas>
+                                            </div>
+                                            <div class="video-col videomanage">
+                                                <canvas id="video3" style="width: 100%; height: 100%"></canvas>
+                                            </div>
+
+                                        </div>
+                                        <div class="item">
+                                            <div class="video-col videomanage">
+                                                <canvas id="video4" style="width: 100%; height: 100%"></canvas>
+                                            </div>
+                                            <div class="video-col videomanage">
+                                                <canvas id="video5" style="width: 100%; height: 100%"></canvas>
+                                            </div>
+                                            <div class="video-col videomanage">
+                                                <canvas id="video6" style="width: 100%; height: 100%"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <h4 class="widget-thumb-heading" style="display: none;">安全分布</h4>
+                        <div class="body" style="display: none;">
+                            <div id="pingcecontainer" style="height: 280px;"></div>
+                        </div>
+                        <h4 class="widget-thumb-heading clearfix" style="font-weight:600;">待办任务
+                            <a id="morefortodoTask" style="float:right;font-size:14px;font-weight:bold;color:#3598dc;padding-right:20px;" href="Application#!/UserTask">更多&gt;&gt;</a>
+                        </h4>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-hover dashboard-task-infos">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 100px;">任务名称</th>
+                                            <th style="width: 30px;">时间</th>
+                                            <th style="width: 20px;">状态</th>
+                                            <th style="width: 60px !important;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="todoTask"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet light portlet-fit bordered" style="display: none;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-directions font-green hide"></i>
+                            <span class="caption-subject bold font-dark uppercase "> 待办任务</span>
+                            <span class="caption-helper"></span>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="header">
+
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown" style="display: none;">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a href="javascript:void(0);">进行中</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">搁置</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">待审批</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">暂停</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">已完成</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="portlet light portlet-fit bordered" style="display: none;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-directions font-green hide"></i>
+                            <span class="caption-subject bold font-dark uppercase"> 实时风险评测</span>
+                            <span class="caption-helper"></span>
+                        </div>
+                        <div class="actions">
+
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="header">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- END PAGE BASE CONTENT -->
+
+    </div>
+    <script type="text/javascript" src="/assets/js/PatrolEnum.js"></script>
+    <script type="text/javascript" src="/assets/js/DeviceEnum.js"></script>
+    <script type="text/javascript" src="/assets/js/AlarmEnum.js"></script>
+    <script type="text/javascript" src="/assets/js/hiddenDangerEnum.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="/assets/js/homepark.js"></script>
+    <script type="text/javascript" src="/assets/js/script-patch-mydesktop.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.select.js"></script>
+</div>

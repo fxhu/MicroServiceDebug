@@ -1,0 +1,25 @@
+<div ng-controller="common.views.languages.index as vm">
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject sbold">
+                    <span>语言列表</span>
+                </span>
+            </div>
+            <div class="actions">
+                <div class="btn-group">
+                    <button ng-if="vm.permissions.create" class="btn btn-primary blue" ng-click="vm.createLanguage()"><i class="fa fa-plus"></i> 创建新的语言 </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet-body">
+            <div busy-if="vm.loading">
+                <div ui-grid="vm.gridOptions" ui-grid-resize-columns ></div>
+            </div>
+            <p ng-if="vm.currentTenantId" class="margin-top-20">
+                *不能删除默认语言.只能删除或者修改自己增加的语言. 但可以改变所有语言的文本信息.
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿
+<script src="/assets/js/Common.js"></script>
+<script src="/assets/js/areaDropdown.js"></script>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.PatrolRecord as vm">   
+    <div class="portlet light bordered" style="height:100%;overflow-y:auto;overflow-x:hidden;">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject sbold">
+                    巡检报表
+                </span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div style="margin: 5px;">
+                        <select style="width:100px;height:25px;" ng-change="vm.selectedChange.patrol()" ng-model="vm.selectdate.patrolIdx" ng-options="item.id as item.type for item in  vm.timeSpan"></select>
+                        <span ng-if="vm.selectdate.patrolIdx==4">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;时间&nbsp;&nbsp;</span><input type="date" ng-model="vm.selectStart.patrol" placeholder="开始时间" /><span>&nbsp;&nbsp;至&nbsp;&nbsp;</span><input type="date" ng-model="vm.selectEnd.patrol" placeholder="结束时间" />&nbsp;&nbsp;
+                            <a href="javascript:;" style="height:30px;" class="btn btn-outline btn-circle btn-sm blue check padding-0" ng-click="vm.serchRange.patrol()"><i class="fa fa-search"></i>查询</a>
+                        </span>
+                    </div>
+                    <div id="bar_patrol" style="height: 440px;width:100%;">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div style="margin: 5px;">
+                        <select style="width:100px;height:25px;" ng-change="vm.selectedChange.person()" ng-model="vm.selectdate.personIdx" ng-options="item.id as item.type for item in  vm.timeSpan"></select>
+                        <span ng-if="vm.selectdate.personIdx==4">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;时间&nbsp;&nbsp;</span><input type="date" ng-model="vm.selectStart.person" placeholder="开始时间" /><span>&nbsp;&nbsp;至&nbsp;&nbsp;</span><input type="date" ng-model="vm.selectEnd.person" placeholder="结束时间" />&nbsp;&nbsp;
+                            <a href="javascript:;" style="height:30px;" class="btn btn-outline btn-circle btn-sm blue check padding-0" ng-click="vm.serchRange.person()"><i class="fa fa-search"></i>查询</a>
+                        </span>
+                    </div>
+                    <div id="bar_person" style="height: 440px;width:100%;">
+                    </div>
+                </div>
+            </div>
+             
+            <div class="row">
+                <div class="col-md-6">
+                    <div style="margin: 5px;">
+                        <div class="text-left">
+                            <div class="btn-group" style="margin-left:5px" ng-repeat="area in vm.areasObj.areas">
+                                <button id="patrol_{{area.level}}" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{area.btnName}}<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="child in area.childAreas">
+                                        <a ng-click="vm.areasObj.LoadArea(child.id,child.nextlevel,true,child.displayName)">{{child.displayName}}</a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a ng-click="vm.areasObj.LoadArea(area.pid,area.level,false,area.levelName)">
+                                            {{area.levelName}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: 5px;">
+                        <select style="width:100px;height:25px;" ng-change="vm.selectedChange.area()" ng-model="vm.selectdate.areaIdx" ng-options="item.id as item.type for item in  vm.timeSpan"></select>
+                        <span ng-if="vm.selectdate.areaIdx==4">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;时间&nbsp;&nbsp;</span><input type="date" ng-model="vm.selectStart.area" placeholder="开始时间" /><span>&nbsp;&nbsp;至&nbsp;&nbsp;</span><input type="date" ng-model="vm.selectEnd.area" placeholder="结束时间" />&nbsp;&nbsp;
+                            <a href="javascript:;" style="height:30px;" class="btn btn-outline btn-circle btn-sm blue check padding-0" ng-click="vm.serchRange.area()"><i class="fa fa-search"></i>查询</a>
+                        </span>
+                    </div>
+                    <div id="bar_area" style="height: 440px;width:100%;">
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>

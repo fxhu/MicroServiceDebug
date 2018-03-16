@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>报警列表</title>
+    <link href="../../assets/css/witReportCss/CommonStyle.css" rel="stylesheet" />
+    <link href="../../assets/css/witReportCss/StyleSheetpre.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="layout">
+        <h2>
+            <span id="areaName"></span>报警统计
+        </h2>
+        <main>
+            <div style="width:20%;height:99%;padding-right: 15px;">
+                <div class="aside" style="width:100%;height:45%;margin-bottom: 13px;">
+                    <div id="Alarm_pie" style="height:100%;padding-bottom:20px;"></div>
+                </div>
+                <div class="aside normalbox">
+                    <div class="contentbox">
+                        <p id="txt5"></p>
+                        <div id="count5"></div>
+                    </div>
+                    <div class="contentbox">
+                        <p id="txt4"></p>
+                        <div id="count4"></div>
+                    </div>
+                </div>
+                <div class="aside normalbox">
+                    <div class="contentbox">
+                        <p id="txt7"></p>
+                        <div id="count7"></div>
+                    </div>
+                    <div class="contentbox">
+                        <p id="txt6"></p>
+                        <div id="count6"></div>
+                    </div>
+                </div>
+                <div class="aside smallbox">
+                    <div class="contentbox" >
+                        <p id="txt3"></p>
+                        <div id="count3" style="height:45%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="lines">
+                <div id="line_AlarmFinish" style="width: 49.8%;height:32.73%;  border:solid 1px #02a4fd"></div>
+                <div id="line_AlarmUnFinish" style="width: 49.8%;height:32.73%;  border:solid 1px #02a4fd"></div>
+                <div id="line_ErrorFinish" style="width: 49.8%;height:32.73%;  border:solid 1px #02a4fd"></div>
+                <div id="line_ErrorUnFinish" style="width: 49.8%;height:32.73%;  border:solid 1px #02a4fd"></div>
+                <div class="mixLines clearfix">
+                    <div class="select">
+                        <p>同环对比</p>
+                        <div>
+                            <select id="selEndYear"></select>
+                            <select id="selStartYear"></select>
+                        </div>
+                    </div>
+                    <div id="mix"></div>
+                    <div class="change">
+                        <div id="btnBox">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div>
+            <div class="bottom">
+                <a name="detailrptlink" href="ReportHome.html">返回</a>
+            </div>
+        </div>
+    </div>
+    <script src="../../assets/js/Baidu/echarts-all-3.js"></script>
+    <script src="../../assets/js/jquery-3.2.1.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/ReportAPI.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/WeSafeEchartsHelper.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/WeSafeRptCommon.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/AlarmEnum.js"></script>
+    <script src="../../assets/js/witReportJsLib/companyJsLib/AlarmReport.js"></script>
+</body>
+
+</html>

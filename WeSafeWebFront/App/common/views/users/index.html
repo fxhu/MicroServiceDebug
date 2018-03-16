@@ -1,0 +1,92 @@
+﻿<style>
+    #filterRole .dropdown-toggle {
+        border: 0;
+    }
+    #filterRole>div {
+        height: 100%;
+    }
+    #filterRole .dropdown-toggle,
+    #filterRole .dropdown-toggle:hover {
+        box-shadow: none;
+    }
+    #filterRole select{
+        width:100%;
+    }
+</style>
+<div ng-controller="common.views.users.index as vm" style="height:100%;">
+    <div class="portlet light margin-bottom-0" style="height:100%;">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject sbold">
+                    用户管理
+                </span>
+            </div>
+            <div class="actions">
+                <div class="btn-group">
+                    <button class="btn blue" style="margin-right:10px;" ng-click="vm.exportToExcel()"><i class="fa fa-file-excel-o"></i> 导出到Excel</button>
+                    <button ng-if="vm.permissions.create" class="btn btn-primary blue" ng-click="vm.createUser()"><i class="fa fa-plus"></i> 添加用户</button>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-body">
+
+            <div class="form">
+                <form id = "formName" class="horizontal-form">
+                    <div class="form-inline" enter-key="vm.getUsers()">
+                        <div class="col-xs-12 text-right margin-bottom-10">
+
+                            <div class="form-group" style="padding-right:10px;">
+                                <div class="input-icon">
+                                    <!--<i class="fa fa-search"></i>-->
+                                    <div class="form-control input-xlarge" ng-if="vm.permissions.roles" style="padding: 0;">
+                                        <div style="height: 100%;" id="filterRole">
+                                           <!--  <role-combo class="form-control" selected-role="vm.requestParams.role" ></role-combo> -->
+											<select id="userByRole" class="form-control" ng-model="selectedName"
+												ng-options="role.id as role.displayName for role in  names">
+												<option value="">--请选择--</option>
+											</select>
+										</div>
+                                    </div>
+                                    <input type="text" class="form-control input-xlarge" ng-model="vm.filterText" placeholder="请输入...">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn blue" type="button" ng-click="vm.getUsers()">搜索</button>
+                                <button class="btn blue" type="button" ng-click="vm.reset()">重置</button>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="row margin-bottom-5">
+ 
+                    </div>
+                </form>
+            </div>
+            <div busy-if="vm.loading">
+                <div ui-grid="vm.userGridOptions" ui-grid-pagination ui-grid-resize-columns></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .ui-grid-pager-control-input {
+        width: 100px !important;
+    }
+
+    .ui-grid-pager-max-pages-number {
+        display: none;
+    }
+
+    .ui-grid-pager-max-pages-number abbr {
+        display: none;
+    }
+
+    .ui-grid-pager-count {
+        display: none;
+    }
+
+    .ui-grid-pager-count abbr {
+        display: none;
+    }
+</style>

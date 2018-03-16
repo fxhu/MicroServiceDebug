@@ -1,0 +1,54 @@
+﻿
+<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+
+<div class="row margin-bottom-5 {{vm.myclass}}" ng-controller="app.views.maintenanceplan as vm">
+    <div class="col-xs-6">
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>
+                    计划任务
+                    <small>查看系统中的任务</small>
+                </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+    </div>
+</div>
+
+<div class="row margin-bottom-5 {{vm.myclass}}">
+    <div class="col-xs-9">
+
+    </div>
+    <div class="col-xs-3 text-right">
+        <div class="form-group form-md-line-input has-info">
+            <div class="input-group">
+                <div class="input-group-control">
+                    <input type="text" class="form-control" placeholder="请输入...">
+                </div>
+                <span class="input-group-btn btn-right">
+                    <button class="btn green-haze" type="button" id="btnSearch">查找</button>
+                </span>
+            </div>
+        </div>
+        <!-- /input-group -->
+    </div>
+</div>
+
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.maintenanceplan as vm">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card main-content">
+            <div class="portlet light">
+                <div class="portlet-body">
+                    <table id="tb_plan"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

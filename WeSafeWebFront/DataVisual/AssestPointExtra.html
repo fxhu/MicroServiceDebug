@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>属性设置</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/apiConfig.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="bootstrap/js/html5shiv.min.js"></script>
+      <script src="bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="/assets/js/common.js"></script>
+    <script type="text/javascript" src="/DataVisual/js/public.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.json.js"></script>
+    <script type="text/javascript" src="/assets/lib/vue/2.4.2/vue.min.js"></script>
+    <style type="text/css">
+        .panel-heading{padding:5px}
+        .panel-footer{padding:5px}
+    </style>
+    <script type="text/javascript">
+    var AssestPointInfo={};
+    $(function(){
+        //加载属性信息
+        GetInfo(LoadPanel);
+    })
+    function LoadPanel(info){
+        if(info==null){
+            return;
+        }
+        AssestPointInfo=info;
+        //重新构建扩展属性对象
+        BuildExtraObj();
+        //绑定
+        new Vue({
+            el: '#extraPanel',
+            data: AssestPointInfo
+        })
+    }
+    function BuildExtraObj()
+    {
+        var extraObj=(AssestPointInfo.extra==null?[]:$.evalJSON(AssestPointInfo.extra));
+        var extraTemplate=(AssestPointInfo.extraTemplate==null?"":AssestPointInfo.extraTemplate);
+        if(extraTemplate!=""){
+            var attrTemplate=extraTemplate.split(";");
+            for(var i=0;i<attrTemplate.length;i++)
+            {
+                var attr_name=attrTemplate[i].split(",")[0];
+                var find=false;
+                for(var j=0;j<extraObj.length;j++){
+                    if(extraObj[j].Name.toUpperCase()==attr_name){
+                        find=true;
+                        break;
+                    }
+                }
+                //将属性模板中的属性添加进来
+                if(!find){
+                    extraObj.push({Name:attr_name,Value:""});
+                }
+            }
+        }
+        //将属性对象贴进去
+        AssestPointInfo.extraObj=extraObj;
+    }
+    function GetInfo(callback)
+    {
+        $.ajax({
+            type: "get",
+            url: authorityHost+"AssestsPoint/GetAssestPointInfo?id="+GetUrlParam("id"),
+            success: function (data) {
+                //处理回调
+                if (callback != null && typeof (callback) == "function")
+                {
+                    callback(data);
+                }
+            }
+        });
+    }
+
+    //保存
+    function doSave(){
+        $.ajax({
+            type: "post",
+            url: authorityHost+"AssestsPoint/SaveAssestPointInfo",
+            data:{
+                Id:AssestPointInfo.id,
+                VisibleLayerBegin:AssestPointInfo.visibleLayerBegin,
+                VisibleLayerEnd:AssestPointInfo.visibleLayerEnd,
+                Extra:$.toJSON(AssestPointInfo.extraObj)
+            },
+            success: function (info) {
+                if(info=="OK"){
+                    $("#resultLabel").html("保存成功").show().fadeOut('slow');
+                }
+                else
+                {
+                    $("#resultLabel").html(info);
+                }
+            },
+            error: function (err) {
+                $("#resultLabel").html(err.statusText);
+            }
+        });
+    }
+    function closeSelf(){
+        if(parent.extraMNG!=null){
+            parent.extraMNG.hide();
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="panel panel-primary" style="margin-bottom:0px">
+        <div class="panel-heading">
+                属性设置<span style='font-size:25px;line-height:20px;float:right;cursor:pointer' onclick="closeSelf()">×</span>
+        </div>
+        <div class="panel-body" style="padding:0px;height:170px;overflow:auto">
+            <table class="table table-bordered table-condensed" id="extraPanel">
+                    <tr>
+                        <td width="150">类型</td><td>{{ assestTypeName }}</td>
+                    </tr>
+                    <tr>
+                        <td width="150">编号</td><td>{{ code }}</td>
+                    </tr>
+                    <tr>
+                        <td>区域</td><td>{{ areaFullName }}</td>
+                    </tr>
+                    <tr class="hide">
+                        <td>显示图层起</td>
+                        <td>
+                            <input type="number" v-model="visibleLayerBegin" />
+                        </td>
+                    </tr>
+                    <tr class="hide">
+                        <td>显示图层止</td>
+                        <td>
+                            <input type="number" v-model="visibleLayerEnd"/>
+                        </td>
+                    </tr>
+                    <tr v-for="item in extraObj">
+                        <td width="150">{{ item.Name }}</td>
+                        <td><input v-model="item.Value" /></td>
+                    </tr>
+                </table>
+        </div>
+        
+        <div class="panel-footer" style="text-align:right">
+                <span class="label label-success" id="resultLabel"></span>
+                <button class="btn btn-primary btn-sm" onclick="doSave()">保存</button>
+        </div>
+    </div>
+</body>
+</html>

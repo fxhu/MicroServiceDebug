@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>智慧消防平台</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="AbpZeroTemplate" name="description" />
+    <meta content="AbpZeroTemplate" name="keywords">
+    <meta content="AbpZeroTemplate" name="author" />
+    <script src="/apiConfig.js"></script>
+    <script src="/assets/js/jquery-2.2.0.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="/Login.js"></script>
+    <link rel="stylesheet" href="/assets/plugins/fonts/fonts-open-sans.css" />
+    <link rel="stylesheet" href="/assets/plugins/libs/simple-line-icons/simple-line-icons.css" />
+    <link rel="stylesheet" href="/assets/lib/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/assets/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" />
+    <link rel="stylesheet" href="/assets/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/lib/uniform/css/uniform.default.css" />
+    <link rel="stylesheet" href="/assets/lib/toastr/toastr.css" />
+    <link rel="stylesheet" href="/assets/lib/sweetalert/dist/sweetalert.css" />
+    <link rel="stylesheet" href="/assets/plugins/metronic/global/css/components-md.css" />
+    <link rel="stylesheet" href="/assets/plugins/metronic/global/css/plugins-md.css" />
+    <link rel="stylesheet" href="/assets/plugins/metronic/admin/layout/css/layout.css" />
+    <link rel="stylesheet" href="/assets/plugins/metronic/admin/layout/css/themes/default.css" />
+    <link rel="stylesheet" href="/assets/Common/_Bundles/common-styles.css" />
+    <link rel="stylesheet" href="/assets/css/login.css " />
+
+    <script src="/assets/js/jquery.cookie.js"></script>
+    <script type="text/javascript">
+        var abp = abp || {}; abp.appPath = '/';
+    </script>
+</head>
+
+<body class="page-md login">
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+    <div class="content account-forms">
+        <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+            <span>
+                <i class="fa fa-warning"></i> Please enter login information
+            </span>
+        </div>
+
+
+        <input type="hidden" name="returnUrl" value="/AppAreaName" />
+        <input type="hidden" name="returnUrlHash" />
+        <input type="hidden" name="ss" value="" />
+        <div class="form-inline row">
+            <div class="col-xs-5">
+                <div class="form-group form-account">
+                    <i></i>
+                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                    <label class="control-label visible-ie8 visible-ie9">用户名或邮箱</label>
+                    <input class="form-control  placeholder-no-fix input-ltr account" type="text" autocomplete="off" placeholder="用户名或邮箱" name="usernameOrEmailAddress"
+                        value="" required />
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="form-group form-password">
+                    <i></i>
+                    <label class="control-label visible-ie8 visible-ie9">密码</label>
+                    <input class="form-control  placeholder-no-fix input-ltr password" type="password" autocomplete="off" placeholder="密码" name="password"
+                    />
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-actions form-group">
+                    <button type="button" class="btn btn-primary  logins">登录</button>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: red;">验证码功能区</div>
+        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8AVaklC-b39BqMy6aft5HbG5tKRk2uJ5Dh8AVpcAL_S5vGgx0MLe49BSRmiCwOhG4SA3HCqYrhSvyO8W7cN1rnHVUdflHrHMIzgvytdA9aGgkbeC2950zWuuliyxunniW7h8TRThFIimJ8qp7zjBSO0"
+        />
+        <span class="errorInfo"></span>
+    </div>
+
+    <footer class="foot">
+        <div class="text-center footposition" style="color: #fff;">
+            <p>©
+                <a href="http://www.wutos.com/" target="_blank" title="理工光科">WUTOS.COM</a>&nbsp;武汉理工光科股份有限公司&nbsp;版权所有</p>
+        </div>
+    </footer>
+    <script src="/assets/lib/json2/json2.js"></script>
+    <script src="/assets/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/assets/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="/assets/lib/blockUI/jquery.blockUI.js"></script>
+    <script src="/assets/lib/uniform/jquery.uniform.js"></script>
+    <!--<script src="/assets/lib/js-cookie/src/js.cookie.js"></script>-->
+    <script src="/assets/lib/toastr/toastr.js"></script>
+    <script src="/assets/lib/spin.js/spin.js"></script>
+    <script src="/assets/lib/spin.js/jquery.spin.js"></script>
+    <script src="/assets/lib/sweetalert/dist/sweetalert-dev.js"></script>
+    <script src="/assets/lib/abp-web-resources/Abp/Framework/scripts/abp.js"></script>
+    <script src="/assets/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js"></script>
+    <script src="/assets/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js"></script>
+    <script src="/assets/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js"></script>
+    <script src="/assets/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js"></script>
+    <script src="/assets/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js"></script>
+    <script type="text/javascript">
+        abp.localization.defaultSourceName = 'AbpZeroTemplate';
+    </script>
+    <script src="/assets/Common/Scripts/_empty.js"></script>
+    <script src="/assets/plugins/metronic/global/scripts/app.js"></script>
+    <script type="text/javascript">
+        App.setAssetsPath(abp.appPath + 'metronic/assets/');
+    </script>
+    <script src="/assets/Common/_Bundles/common-scripts.js"></script>
+    <script src="/assets/js/jquery-validation-custom.js"></script>
+    <script src="/assets/plugins/metronic/admin/layout/scripts/layout.js"></script>
+    <script>
+        var loginObject = {
+            login:function(account,password){
+                if(account==""||password==""){
+                    abp.message.error('请输入用户名和密码', '登录失败');
+                    return;
+                }
+                if ($.cookie('WeSafe.SessionId')) {
+
+                } else {
+                    $.cookie('WeSafe.SessionId', this.rand(9999999999999999), { expires: 1 })
+                }
+                abp.notify.info(app.localize('登录中请稍后...'));
+                abp.ui.block();
+                $.ajax({
+                    url: authorityHost + "api/TokenAuth/AuthenticateByKeyValue",
+                    type: "post",
+                    data: {
+                        "UserNameOrEmailAddress": account,
+                        "Password": password
+                    },
+                    dataType: "json",
+                    success: function (res) {
+                        {
+                            console.log(res);
+                            var token = 'Bearer ' + res.result.accessToken;
+                            var storage = window.localStorage;
+                            storage.setItem("applictionToken", token);
+                            setTimeout(function () {
+                                window.location.href = "/default.html";
+                            }, 100);
+                            storage.setItem("abpSessionUserId", res.result.userId);
+                            storage.setItem("abpSessionUserName", res.result.userName);
+                            storage.setItem("abpSessionUserRoles", JSON.stringify(res.result.userRoles));
+                        }
+                    },
+                    error: function (res) {
+
+                        abp.ui.unblock();
+                        var exp = undefined;
+                        if (typeof (exp) == res.responseText || res.responseText == undefined) {
+
+                            abp.message.error('用户名或密码错误，请重新输入', '登录失败');
+                        } else {
+
+                            abp.message.error(JSON.parse(res.responseText).error.details, JSON.parse(res.responseText).error.message);
+
+                        }
+                        $(".sa-button-container>.sa-confirm-button-container>.confirm").text("确认")
+                        $("input[name='password']").val("");
+                    }
+                });
+
+            },
+            rnd:function(){
+                var seed = (new Date().getTime() * 9301 + 49297) % 233280;
+
+                return  seed / (233280.0);
+            },
+            rand:function(number){
+                return Math.ceil(this.rnd() * number);
+            }
+
+        };
+        jQuery(document).ready(function () {
+            if (window.CurrentPage) {
+                CurrentPage.init();
+            }
+            //绑定快捷键
+            $(".account").keyup(function (k) {
+                if (k.keyCode == 13) {
+                    $(".password").focus();
+                }
+            })
+            //判断是否敲击了Enter键 
+            $(".password").keyup(function (k) {
+                if (k.keyCode == 13) {
+                    $(".logins").trigger("click");
+                }
+            })
+        });
+
+        $(".logins").on("click", function () {
+
+            var userAccount = $(".account").val();
+            var password = $(".password").val();
+            loginObject.login(userAccount,password);
+
+        })
+
+    </script>
+</body>
+
+</html>

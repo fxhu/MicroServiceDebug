@@ -1,0 +1,555 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>资产类型汇总</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.json.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script src="/apiConfig.js"></script>
+    <script src="/assets/plugins/libs/jstree/jstree.js"></script>
+    <link href="/assets/plugins/libs/jstree/themes/default/style.css" rel="stylesheet" />
+    <link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+    <script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <link href="/assets/plugins/libs/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" />
+    <script src="/assets/plugins/libs/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script type="text/javascript">
+        var _data=[];
+        $(function () { 
+            //样式
+            $(window).resize(ResetHeight);
+            ResetHeight();
+            //搜索框
+            $.jstree.defaults.search.show_only_matches=true;
+            $("#iptSearch").keyup(function(){
+                $("#container").jstree(true).search($(this).val());  
+            })
+            //加载树
+            $.ajax({
+                type: "get",
+                url: authorityHost+"DeviceCategory/GetList",
+                success: function (treeData) 
+                {
+                    _data=treeData;
+                   var t= $(treeData).map(function(){
+                        return {
+                            id: this.id,
+                            parent: this.parentId ? this.parentId : '#',
+                            text: this.name+"<span class='pull-right'>"+this.id+"</span>",
+                            state: {"opened" : this.level<=2}
+                        };
+                    }).get();
+                    
+                    $('#container').jstree({
+                        'core': {
+                            data: t,
+                            multiple: false,
+                            themes : { "stripes" : true }
+                        },
+                        plugins: ["wholerow","search"]
+                    }).on('changed.jstree', function (e, data) {
+                        
+                        ShowDetail(data.selected);
+                    });
+                }
+            });
+           
+        });
+        function ShowDetail(selected)
+        {
+            if(!selected || selected.length==0){return;}
+            var parentId=selected[0];
+            var dataSource=[];
+            for(var i=0;i<_data.length;i++){
+                if(_data[i].id==parentId || _data[i].parentId==parentId){
+                    dataSource.push(_data[i]);
+                }
+            }
+            $('#tabData').bootstrapTable({
+                data: [],
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: false,                   //是否显示分页（*）
+                sortable: true,                     //是否启用排序
+                sortOrder: "asc",                   //排序方式
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber: 1,                       //初始化加载第一页，默认第一页
+                pageSize: 10,                       //每页的记录行数（*）
+                pageList: [5,10],        //可供选择的每页的行数（*）
+                search: false,                       //是否显示表格搜索
+                strictSearch: false,
+                showColumns: false,                  //是否显示所有的列
+                showRefresh: false,                  //是否显示刷新按钮
+                clickToSelect: true,                //是否启用点击选中行
+                showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
+                cardView: false,                    //是否显示详细视图
+                detailView: false,                   //是否显示父子表
+                idField: "id",
+                columns: [
+                    {
+                        field: 'name',
+                        title: '名称'
+                    },
+                    {
+                        field: 'id',
+                        title: '编码'
+                    },
+                    {
+                        field: 'isPatrol',
+                        title: '巡检',
+                        formatter: function (val, row, index) {
+                            return CreateCheckBox(val);
+                        }
+                    },
+                    {
+                        field: 'patrolCycle',
+                        title: '巡检周期'
+                    },
+                    {
+                        field: 'isPatrol',
+                        title: '巡检项',
+                        formatter: function (val, row) {
+                            if(val==1){
+                                return "<a href=\"javascript:void(0)\" onclick=\"viewPatrol('"+row.id+"')\">查看</a>";
+                            }
+                        }
+                    },
+                    {
+                        field: 'isCheck',
+                        title: '检测项',
+                        formatter: function (val, row) {
+                            if(val==1){
+                                return "<a href=\"javascript:void(0)\" onclick=\"viewCheckItem('"+row.id+"',0)\">查看</a>";
+                            }
+                        }
+                    },
+                    {
+                        field: 'isMaintain',
+                        title: '维保项',
+                        formatter: function (val, row) {
+                            if(val==1){
+                                return "<a href=\"javascript:void(0)\" onclick=\"viewCheckItem('"+row.id+"',1)\">查看</a>";
+                            }
+                        }
+                    },
+                     {
+                        field: 'isVisual',
+                        title: '可视化',
+                        formatter: function (val, row, index) {
+                            return CreateCheckBox(val);
+                        }
+                    },
+                    {
+                        field: 'visualTemplate',
+                        title: '可视化图标',
+                        formatter: function (val, row, index) {
+                            return row.isVisual=="1"?GetIconByTemplate(val):null;
+                            return GetIconByTemplate(val);
+                        }
+                    },
+                    {
+                        field: 'iotAttributes',
+                        title: '物联属性'
+                    },
+                    {
+                        field: 'extra',
+                        title: '扩展属性'
+                    }]
+            });
+            $('#tabData').bootstrapTable("load",dataSource);
+            $('input[type="checkbox"]').bootstrapSwitch()
+        }
+        function viewPatrol(id)
+        {
+            var patrol=GetPatrolItemById(id);
+            //$(".modal-body").html(JSON.stringify(patrol));
+            var jf = new JsonFormater({dom : '#md-patrolbody'});
+            jf.doFormat(patrol);
+            $("#md-patrol").modal("toggle");
+        }
+        function viewCheckItem(id,type)
+        {
+            var item=GetCheckItem(id,type);
+            $("#md-checkitemtitle").html((type==0?"检测项":"维保项"));
+            //显示检测内容
+            $("#tablecheckitem").bootstrapTable({
+                cardView: true,
+                columns:[{
+                        field: 'itemName',
+                        title: '检测项'
+                    },{
+                        field: 'itemContent',
+                        title: '检测内容'
+                    },{
+                        field: 'checkCyc',
+                        title: '检测周期',
+                        formatter: function (val, row, index) {
+                            if(val==0){
+                                return "天";
+                            }
+                            else if(val==1){
+                                return "周";
+                            }
+                            else if(val==2){
+                                return "月";
+                            }
+                            else if(val==3){
+                                return "季";
+                            }
+                            else if(val==4){
+                                return "半年";
+                            }
+                            else if(val==5){
+                                return "年";
+                            }
+                        }
+                    },{
+                        field: 'isUse',
+                        title: '是否启用',
+                        formatter: function (val, row, index) {
+                            if(val==1){
+                                return "启用";
+                            }
+                            else{
+                                return "";
+                            }
+                            
+                        }
+                    }]
+            });
+            $("#tablecheckitem").bootstrapTable("load",item);
+            $("#md-checkitem").modal("toggle");
+        }
+        function GetCheckItem(cid,type)
+        {
+            var checkItem=[];
+            $.ajax({
+                type: "get",
+                async:false,
+                url: authorityHost + "DeviceCategory/GetCheckItemList?Id="+ cid + "&Type="+type,
+                success: function (data) {
+                    checkItem = data;
+                }
+            });
+            return checkItem;
+        }
+        var _cachedTemplate=null;
+        function GetIconByTemplate(templateName){
+            if(_cachedTemplate==null){
+                $.ajax({
+                    type: "get",
+                    async:false,
+                    url: "/DataVisual/VisualTemplate.json",
+                    success: function (data) {
+                        _cachedTemplate = data;
+                    }
+                });
+            }
+            //从模板中查找
+            var findUrl="";
+            for (var i = 0; i < _cachedTemplate.length; i++) {
+                if (_cachedTemplate[i].name == templateName) {
+                    findUrl= _cachedTemplate[i].icon;
+                    break;
+                }
+            }
+            if(findUrl!=""){
+                findUrl=(findUrl.toUpperCase().startsWith("/DATAVISUAL/")?"":"/DataVisual/")+findUrl;
+                return "<img src='"+findUrl+"' style='width:24px'/>";
+            }
+        }
+        var _cachePatrolItem=null;
+        function GetPatrolItemById(typeId){
+            if(_cachePatrolItem==null){
+                $.ajax({
+                    type: "get",
+                    async:false,
+                    url: authorityHost + "DeviceCategory/GetPatrolItems",
+                    success: function (data) {
+                        _cachePatrolItem = data;
+                    }
+                });
+            }
+            for(var i=0;i<_cachePatrolItem.length;i++){
+                if(_cachePatrolItem[i].typeId==typeId)
+                {
+                    return _cachePatrolItem[i];
+                }
+            }
+            return {};
+        }
+        function CreateCheckBox(checked){
+            if(checked=="1"){
+                return "<label class='label label-success'>启用</label>"
+            }
+            //return '<input type="checkbox" data-on-text="　是" data-off-text="　否" data-size="small" '+(checked=='1'?'checked':'')+' />'
+        }
+        function ResetHeight()
+        {
+            $("#treeBody").css("height",$(window).height()-35);
+        }
+    </script>
+</head>
+<body class="container-fulid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary" style="margin-bottom:0px">
+                <div class="panel-heading" style="padding:5px">
+                    设备类型<input class="pull-right" type="text" id="iptSearch" style="height:22px;color:rgb(51,122,183)"/>
+                </div>
+                <div class="panel-body" id="treeBody" style="padding:5px;overflow:auto">
+                        <div id="container"></div>
+                </div>
+            </div>
+                
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-primary" style="margin-bottom:0px">
+                <div class="panel-heading" style="padding:5px">
+                    详情
+                </div>
+                <table id="tabData"></table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="md-patrol" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">巡检项</h4>
+            </div>
+            <div class="modal-body" id="md-patrolbody">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warn" data-dismiss="modal">关闭</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="md-checkitem" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="md-checkitemtitle">检测项</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tablecheckitem"></table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warn" data-dismiss="modal">关闭</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
+<script>
+    function JsonFormater(opt) {
+    this.options = $.extend({
+        dom: '',
+        tabSize: 2,
+        singleTab: "  ",
+        quoteKeys: true,
+        imgCollapsed: "/assets/images/Collapsed.gif",
+        imgExpanded: "/assets/images/Expanded.gif",
+        isCollapsible: true
+    }, opt || {});
+    this.isFormated = false;
+    this.obj = {
+        _dateObj: new Date(),
+        _regexpObj: new RegExp()
+    };
+    this.init();
+}
+JsonFormater.prototype = {
+    init: function () {
+        this.tab = this.multiplyString(this.options.tabSize, this.options.singleTab);
+        this.bindEvent();
+    },
+    doFormat: function (json) {
+        var html;
+        var obj;
+        try {
+            if(typeof json == 'object'){
+                obj = [json];
+            }else{
+                if (json == ""){
+                    json = "\"\"";
+                }
+                obj = eval("[" + json + "]");
+            }
+            html = this.ProcessObject(obj[0], 0, false, false, false);
+            $(this.options.dom).html("<pre class='jf-CodeContainer'>" + html + "</pre>");
+            this.isFormated = true;
+        } catch (e) {
+            alert("JSON数据格式不正确:\n" + e.message);
+            $(this.options.dom).html("");
+            this.isFormated = false;
+        }
+    },
+    bindEvent: function () {
+        var that = this;
+        $(this.options.dom).off('click','.imgToggle');
+        $(this.options.dom).on('click', '.imgToggle', function () {
+            if (that.isFormated == false) {
+                return;
+            }
+            that.makeContentVisible($(this).parent().next(), !$(this).data('status'));
+        });
+    },
+    expandAll: function () {
+        if (this.isFormated == false) {
+            return;
+        }
+        var that = this;
+        this.traverseChildren($(this.options.dom), function(element){
+            if(element.hasClass('jf-collapsible')){
+                that.makeContentVisible(element, true);
+            }
+        }, 0);
+    },
+    collapseAll: function () {
+        if (this.isFormated == false) {
+            return;
+        }
+        var that = this;
+        this.traverseChildren($(this.options.dom), function(element){
+            if(element.hasClass('jf-collapsible')){
+                that.makeContentVisible(element, false);
+            }
+        }, 0);
+    },
+    collapseLevel: function(level){
+        if (this.isFormated == false) {
+            return;
+        }
+        var that = this;
+        this.traverseChildren($(this.options.dom), function(element, depth){
+            if(element.hasClass('jf-collapsible')){
+                if(depth >= level){
+                    that.makeContentVisible(element, false);
+                }else{
+                    that.makeContentVisible(element, true);
+                }
+            }
+        }, 0);
+
+    },
+    isArray: function (obj) {
+        return  obj &&
+            typeof obj === 'object' &&
+            typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'));
+    },
+    getRow: function (indent, data, isPropertyContent) {
+        var tabs = "";
+        if (!isPropertyContent) {
+            tabs = this.multiplyString(indent, this.tab);
+        }
+        if (data != null && data.length > 0 && data.charAt(data.length - 1) != "\n") {
+            data = data + "\n";
+        }
+        return tabs + data;
+    },
+    formatLiteral: function (literal, quote, comma, indent, isArray, style) {
+        if (typeof literal == 'string') {
+            literal = literal.split("<").join("&lt;").split(">").join("&gt;");
+        }
+        var str = "<span class='jf-" + style + "'>" + quote + literal + quote + comma + "</span>";
+        if (isArray) str = this.getRow(indent, str);
+        return str;
+    },
+    formatFunction: function (indent, obj) {
+        var tabs;
+        var i;
+        var funcStrArray = obj.toString().split("\n");
+        var str = "";
+        tabs = this.multiplyString(indent, this.tab);
+        for (i = 0; i < funcStrArray.length; i++) {
+            str += ((i == 0) ? "" : tabs) + funcStrArray[i] + "\n";
+        }
+        return str;
+    },
+    multiplyString: function (num, str) {
+        var result = '';
+        for (var i = 0; i < num; i++) {
+            result += str;
+        }
+        return result;
+    },
+    traverseChildren: function (element, func, depth) {
+        var length = element.children().length;
+        for (var i = 0; i < length; i++) {
+            this.traverseChildren(element.children().eq(i), func, depth + 1);
+        }
+        func(element, depth);
+    },
+    makeContentVisible : function(element, visible){
+        var img = element.prev().find('img');
+        if(visible){
+            element.show();
+            img.attr('src', this.options.imgExpanded);
+            img.data('status', 1);
+        }else{
+            element.hide();
+            img.attr('src', this.options.imgCollapsed);
+            img.data('status', 0);
+        }
+    },
+    ProcessObject: function (obj, indent, addComma, isArray, isPropertyContent) {
+        var html = "";
+        var comma = (addComma) ? "<span class='jf-Comma'>,</span> " : "";
+        var type = typeof obj;
+        var clpsHtml = "";
+        var prop;
+        if (this.isArray(obj)) {
+            if (obj.length == 0) {
+                html += this.getRow(indent, "<span class='jf-ArrayBrace'>[ ]</span>" + comma, isPropertyContent);
+            } else {
+                clpsHtml = this.options.isCollapsible ? "<span><img class='imgToggle' data-status='1' src='" + this.options.imgExpanded + "'/></span><span class='jf-collapsible'>" : "";
+                html += this.getRow(indent, "<span class='jf-ArrayBrace'>[</span>" + clpsHtml, isPropertyContent);
+                for (var i = 0; i < obj.length; i++) {
+                    html += this.ProcessObject(obj[i], indent + 1, i < (obj.length - 1), true, false);
+                }
+                clpsHtml = this.options.isCollapsible ? "</span>" : "";
+                html += this.getRow(indent, clpsHtml + "<span class='jf-ArrayBrace'>]</span>" + comma);
+            }
+        } else if (type == 'object') {
+            if (obj == null) {
+                html += this.formatLiteral("null", "", comma, indent, isArray, "Null");
+            } else {
+                var numProps = 0;
+                for (prop in obj) numProps++;
+                if (numProps == 0) {
+                    html += this.getRow(indent, "<span class='jf-ObjectBrace'>{ }</span>" + comma, isPropertyContent);
+                } else {
+                    clpsHtml = this.options.isCollapsible ? "<span><img class='imgToggle' data-status='1' src='" + this.options.imgExpanded + "'/></span><span class='jf-collapsible'>" : "";
+                    html += this.getRow(indent, "<span class='jf-ObjectBrace'>{</span>" + clpsHtml, isPropertyContent);
+                    var j = 0;
+                    for (prop in obj) {
+                        var quote = this.options.quoteKeys ? "\"" : "";
+                        html += this.getRow(indent + 1, "<span class='jf-PropertyName'>" + quote + prop + quote + "</span>: " + this.ProcessObject(obj[prop], indent + 1, ++j < numProps, false, true));
+                    }
+                    clpsHtml = this.options.isCollapsible ? "</span>" : "";
+                    html += this.getRow(indent, clpsHtml + "<span class='jf-ObjectBrace'>}</span>" + comma);
+                }
+            }
+        } else if (type == 'number') {
+            html += this.formatLiteral(obj, "", comma, indent, isArray, "Number");
+        } else if (type == 'boolean') {
+            html += this.formatLiteral(obj, "", comma, indent, isArray, "Boolean");
+        }else if (type == 'undefined') {
+            html += this.formatLiteral("undefined", "", comma, indent, isArray, "Null");
+        } else {
+            html += this.formatLiteral(obj.toString().split("\\").join("\\\\").split('"').join('\\"'), "\"", comma, indent, isArray, "String");
+        }
+        return html;
+    }
+};
+</script>

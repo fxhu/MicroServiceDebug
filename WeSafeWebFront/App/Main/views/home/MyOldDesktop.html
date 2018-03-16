@@ -1,0 +1,317 @@
+﻿<!--引用资源 -->
+<style>
+    .contentNews {
+        display: none;
+    }
+
+    .breadMenu {
+        display: none;
+    }
+
+    .page-sidebar {
+        width: 256px;
+        float: left;
+        position: fixed;
+    }
+
+    .error-page>.error-content {
+        margin-left: 256px;
+        display: block;
+    }
+
+    .ls-slide2 .ls-price {
+        font: 300 20px 'Open Sans', sans-serif;
+        color: #fff;
+        text-align: center;
+        background: rgba(230, 64, 12, 0.9);
+        border-radius: 256px !important;
+        overflow: hidden;
+        width: 177px;
+        height: 177px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .page-content-wrapper {
+        background-color: #F2F3F8;
+        position: absolute;
+        left: 256px;
+        bottom: 31px;
+        top: 81px;
+        bottom: 65px;
+        right: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li:hover>a,
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li.open>a,
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li.active>a,
+    .page-sidebar .page-sidebar-menu .sub-menu>li:hover>a,
+    .page-sidebar .page-sidebar-menu .sub-menu>li.open>a,
+    .page-sidebar .page-sidebar-menu .sub-menu>li.active>a {
+        width: 256px;
+        /* background: #337da0 !important; */
+        color: #5b9bd1 !important;
+        /* 子菜单宽度 */
+    }
+
+    .mydesktopbord {
+        height: 160px;
+    }
+</style>
+<link href="/assets/css/mydesktop.css" rel="stylesheet">
+<link href="/OneMap/css/Font/material-icons.css" rel="stylesheet" type="text/css">
+<script src="/assets/js/Common.js"></script>
+<link href="/assets/css/style-patch-mydesktop.css" rel="stylesheet" />
+<script src="/assets/plugins/jquery-knob/js/jquery.knob.js"></script>
+<script src="/assets/plugins/jquery-easypiechart/jquery.easypiechart.min.js"></script>
+<script type="text/javascript" src="/assets/js/PatrolEnum.js"></script>
+<script type="text/javascript" src="/assets/js/DeviceEnum.js"></script>
+<script type="text/javascript" src="/assets/js/AlarmEnum.js"></script>
+<script type="text/javascript" src="/assets/js/hiddenDangerEnum.js"></script>
+<div class="" ng-controller="app.views.myOldDesktop as vm">
+    <div class="page-fixed-main-content" style="width: 100%;">
+        <div class="equipmentReport" id="equipmentReport" style="overflow:hidden"></div>
+
+        <div chart="" config="vm.inspectionOption" class="inspectionReport" id="inspectionReport" style="overflow:hidden"></div>
+
+        <div chart="" config="vm.hiddenTroubleOption" class="hiddenTroubleReport" id="hiddenTroubleReport" style="overflow:hidden"></div>
+
+        <div chart="" config="vm.alarmOption" class="alarmReport" style="overflow:hidden" id="alarmReport"></div>
+
+        <!-- BEGIN PAGE BASE CONTENT -->
+        <div class="row widget-row" style="margin-bottom: 15px;">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat2 bordered mydesktopbord">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-blue-sharp">
+                                <span data-counter="counterup" data-value="{{vm.desktopData.safeStar}}">
+                                    <span>{{vm.desktopData.safeStar}}</span>
+                                </span>
+                                <small class="font-blue-sharp"></small>
+                            </h3>
+                            <small>安全评分</small>
+                            <p class="desc" style="color: rgb(1, 150, 252);width:130px;height:30px;" id="safeStar"></p>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-pie-chart"></i>
+                        </div>
+
+                    </div>
+                    <div class="progress-info">
+                        <div class="status">
+                            <div class="status-title"></div>
+                            <div class="status-number">{{vm.desktopData.safeStarprogress}}</div>
+                        </div>
+                        <div class="progress">
+                            <span style="width: {{vm.desktopData.safeStarprogress}};" class="progress-bar progress-bar-success blue-sharp">
+                                <span class="sr-only">{{vm.desktopData.safeStarprogress}} progress</span>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat2 bordered mydesktopbord">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-red-haze">
+                                <span data-counter="counterup" data-value="{{vm.desktopData.userTask}}">
+                                    <span>{{vm.desktopData.userTask}}</span>
+                                </span>
+                            </h3>
+                            <small>工作任务</small>
+                            <p class="desc red-haze" style="width:130px;height:30px;">未完成{{vm.desktopData.userTaskActiveprogress}}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-like"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="status">
+                            <div class="status-title"></div>
+                            <div class="status-number">
+                                <p class="desc" style="color: #e74f5b;">已完成{{vm.desktopData.userTaskprogress}} </p>
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <span style="width: {{vm.desktopData.userTaskprogress}};" class="progress-bar progress-bar-success red-haze">
+                                <span class="sr-only">{{vm.desktopData.userTaskprogress}} change</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat2 bordered mydesktopbord">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-green-sharp">
+                                <span data-counter="counterup" data-value="{{vm.desktopData.vsualAssest}}">
+                                    <span>{{vm.desktopData.vsualAssest}}</span>
+                                </span>
+                            </h3>
+                            <small>资产数量</small>
+                            <p class="desc red-haze" style="width:130px;height:30px;">已过期{{vm.desktopData.vsualAssestprogress}}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-basket"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="status">
+                            <div class="status-title"></div>
+                            <div class="status-number">
+                                <span class="desc" style="color: #59d4d4;">未过期{{vm.desktopData.vsualAssestUnExpireprogress}} </span>
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <span style="width: {{vm.desktopData.vsualAssestUnExpireprogress}};" class="progress-bar progress-bar-success green-sharp">
+                                <span class="sr-only">{{vm.desktopData.vsualAssestUnExpireprogress}} change</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat2 bordered mydesktopbord">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-purple-soft">
+                                <span data-counter="counterup" data-value="{{vm.desktopData.alarmEvent}}">
+                                    <span>{{vm.desktopData.alarmEvent}}</span>
+                                </span>
+                            </h3>
+                            <small>报警统计</small>
+                            <p class="desc red-haze" style="width:130px;height:30px;">其他报警{{vm.desktopData.alarmEventOtherprogress}}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-user"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="status">
+                            <div class="status-title"></div>
+                            <div class="status-number">
+                                <span class="desc" style="color: #8d44ad;">火警{{vm.desktopData.alarmEventprogress}}</span>
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <span style="width: {{vm.desktopData.alarmEventprogress}};" class="progress-bar progress-bar-success purple-soft">
+                                <span class="sr-only">{{vm.desktopData.alarmEventprogress}}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="margin-bottom:20px;">
+            <div class="col-lg-8 col-xs-12 col-sm-12">
+                <div class="portlet light bordered portlet-light-bordered-box">
+                    <div class="portlet-title tabbable-line" style="border:none;">
+                        <div class="caption">
+                            <i class="icon-share font-dark hide"></i>
+                            <span class="caption-subject font-dark bold uppercase"></span>
+                        </div>
+                        <div class="actions" style="display:none;">
+                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" data-container="false" data-placement="bottom" href="javascript:;"
+                                data-original-title="" title="全屏操作"> </a>
+                        </div>
+                        <ul class="nav nav-tabs" id="mydesktopTap">
+                            <li class="active">
+                                <a href="#Area1" data-toggle="tab" aria-expanded="true"> 全国 </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="region_statistics_loading" style="display: none;">
+                            <img src="../assets/global/img/loading.gif" alt="loading"> </div>
+                        <div id="region_statistics_content" class="display-none" style="display: block;">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane active" id="Area1">
+                                    <div id="mainmap" style="height: 560px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-xs-6 col-sm-12">
+                <!-- BEGIN BORDERED TABLE PORTLET-->
+                <div class="portlet light portlet-fit bordered">
+                    <div class="portlet-title" style="border: none;border: none !important;padding-bottom:  0px !important;margin-bottom:  0px !important;margin-top:  0ppx !important;">
+                        <div class="caption">
+                            <i class="icon-settings font-red" style="display:none;"></i>
+                            <span class="caption-subject font-red sbold uppercase" style="color:#93a2a9 !important;">重点区域</span>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group btn-group-devided" data-toggle="buttons" onclick="window.location.href='default.html#!/KeyArea'">
+                                <label class="btn grey-salsa btn-sm">
+                                    <input type="radio" name="options" class="toggle" id="option2">更多</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="border: none !important;padding-bottom: 0px !important;padding-top: 0px !important;margin-bottom: 0px !important;margin-top: 0ppx !important;min-height: 237px;">
+                        <div class="table-scrollable table-scrollable-borderless" style="margin-top: 0px !important;">
+                            <table class="table table-hover table-light" style="margin-bottom: 0px !important;margin-top: 0px !important;">
+                                <thead>
+                                    <tr class="uppercase">
+                                        <th> 重点区域 </th>
+                                        <th> 所属部门 </th>
+                                        <th> 操作 </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="keytbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- END BORDERED TABLE PORTLET-->
+            </div>
+            <div class="col-lg-4 col-xs-6 col-sm-12" style="margin-top: 30px;">
+                <!-- BEGIN BORDERED TABLE PORTLET-->
+                <div class="portlet light portlet-fit bordered">
+                    <div class="portlet-title" style="border: none;border: none !important;padding-bottom:  0px !important;margin-bottom:  0px !important;margin-top:  0ppx !important;">
+                        <div class="caption">
+                            <i class="icon-settings font-red" style="display:none;"></i>
+                            <span class="caption-subject font-red sbold uppercase" style="color:#93a2a9 !important;">待办任务</span>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group btn-group-devided" data-toggle="buttons" onclick="window.location.href='default.html#!/UserTask?curQueryType=0'">
+                                <label class="btn grey-salsa btn-sm">
+                                    <input type="radio" name="options" class="toggle" id="option2">更多</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="border: none !important;padding-bottom: 0px !important;padding-top: 0px !important;margin-bottom: 0px !important;margin-top: 0ppx !important;min-height: 237px;">
+                        <div class="table-scrollable table-scrollable-borderless" style="margin-top: 0px !important;">
+                            <table class="table table-hover table-light" style="margin-bottom: 0px !important;margin-top: 0px !important;">
+                                <thead>
+                                    <tr class="uppercase">
+                                        <th> 任务名称 </th>
+                                        <th> 时间 </th>
+                                        <th> 状态 </th>
+                                        <th> 操作 </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="todoTask"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- END BORDERED TABLE PORTLET-->
+            </div>
+        </div>
+
+        <!-- END PAGE BASE CONTENT -->
+
+    </div>
+
+</div>

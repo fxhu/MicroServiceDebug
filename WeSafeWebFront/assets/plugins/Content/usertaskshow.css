@@ -1,0 +1,16 @@
+﻿.usertaskshowstyle {
+    display: block;
+    clear: both;
+    font-weight: 300;
+    line-height: 20px;
+    white-space: normal;
+    font-size: 13px;
+    color: #fff;
+    border-bottom: 1px solid #607482 !important;
+    padding: 16px 15px 18px;
+    text-shadow: none;
+    text-decoration: none;
+    opacity: 1; 
+
+
+}

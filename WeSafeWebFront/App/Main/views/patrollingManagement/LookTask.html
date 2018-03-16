@@ -1,0 +1,109 @@
+﻿<script src="/assets/js/Common.js"></script>
+<link href="/assets/css/components-rounded.min.css" rel="stylesheet" />
+<style>
+    .myimglist {
+        width: 2000px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .myimglist li {
+        list-style: none;
+        float: left;
+        margin-left: 10px;
+        width: 100px;
+        height: 125px;
+    }
+
+    .myimglist img {
+        width: 100%;
+        height: 80%;
+    }
+
+    .fixed-table-pagination .page-list {
+        display: none
+    }
+</style>
+<!--@*<script src="/assets/plugins/horizontal-timeline/horizontal-timeline.js"></script>*@-->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/plugins/bootstrap-table/iconfont.css">
+<link rel="stylesheet" href="/assets/plugins/fonts/iconfont.css">
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.LookTask as vm">
+    <div class="col-md-12">
+        <div class="portlet light bordered" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">查看任务</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form name="addorlookhiddentrouble" role="form" novalidate class="form-horizontal">
+                    <div class="form-body">
+                        <h3 class="form-section">任务详情</h3>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">任务名称</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.task.name" disabled class="validate form-control">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">开始时间</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.task.startTime" disabled class="validate form-control">
+                            </div>
+                            <label class="control-label col-md-1">截止时间</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.task.endTime" disabled class="validate form-control">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">巡检人</label>
+                            <div class="col-md-4">
+                                <select class="validate form-control edited" disabled ng-model="vm.task.ExecuteUserId" ng-options="c.id as c.userName for c in  vm.users">
+                                    <option value="">---请选择---</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-md-1">负责人</label>
+                            <div class="col-md-4">
+                                <select class="validate form-control edited" disabled ng-model="vm.task.UserId" ng-options="c.id as c.userName for c in  vm.users">
+                                    <option value="">---请选择---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-if="vm.isshowaudit==1">
+                            <h3 class="form-section">巡检结果</h3>
+                            <div class="form-group ">
+                                <label class="control-label col-md-2">异常情况</label>
+                                <div class="col-md-4" style="margin-top:8px;">
+                                    <input auto-focus type="text" disabled ng-model="vm.task.IsHaveException" class="validate form-control">
+                                </div>
+                                <label class="control-label col-md-2" ng-if="vm.task.IsHaveException=='有'">只显示异常节点</label>
+                                <div class="col-md-4" style="margin-top:8px;" ng-if="vm.task.IsHaveException=='有'">
+                                    <input auto-focus type="checkbox" ng-model="vm.isOnlyShowExceptionPoint" ng-click="vm.showExceptionClick()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="portlet-body" novalidate>
+                <table id="tb_data" style="word-break:break-all; word-wrap:break-word;"></table>
+                <div class="row">
+                    <div class="col-md-offset-5 col-md-9">
+                        <button type="button" class="btn btn-default" onclick="cancel()">
+                            返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

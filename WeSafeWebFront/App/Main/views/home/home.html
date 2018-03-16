@@ -1,0 +1,913 @@
+﻿
+<!--引用资源 -->
+<!--@*<link href="/assets/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>*@-->
+
+<link href="/assets/plugins/fonts/roboto/roboto.css" rel="stylesheet" />
+<link href="/assets/plugins/fonts/material-icons/materialicons.css" rel="stylesheet" />
+
+<link href="/assets/lib/toastr/toastr.css" rel="stylesheet" />
+<link href="/assets/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+<link href="/assets/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" rel="stylesheet" />
+<link href="/assets/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="/assets/lib/Waves/dist/waves.css" rel="stylesheet" />
+<link href="/assets/lib/animate.css/animate.css" rel="stylesheet" />
+<link href="/assets/css/materialize.css" rel="stylesheet" />
+<link href="/assets/css/style.css" rel="stylesheet" />
+<link href="/assets/css/themes/all-themes.css" rel="stylesheet" />
+
+<link href="/App/Main/main.css" rel="stylesheet" />
+<link href="/App/Main/views/safecheck/radialindicator.css" rel="stylesheet" />
+<!--<script type="text/javascript" src="/assets/js/PatrolEnum.js"></script>
+<script type="text/javascript" src="/assets/js/DeviceEnum.js"></script>
+<script type="text/javascript" src="/assets/js/AlarmEnum.js"></script>
+<script type="text/javascript" src="/assets/js/hiddenDangerEnum.js"></script>-->
+
+<div style="{{vm.myclass}}" ng-controller="app.views.home as vm">
+
+
+
+    <div class="block-header">
+        <h2>
+            <span>
+                <a href="datavisual/buildingpanel.html?parkid=1" class="dropdown-toggle">我的园区</a>
+            </span>
+            <span>
+                <a href="datavisual/buildingpanel.html?parkid=1" class="dropdown-toggle"></a>
+            </span>
+        </h2>
+    </div>
+
+    <!-- Widgets -->
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-tongzhi hover-expand-effect" style="cursor: pointer !important;"
+                 onclick="GoToCheck()">
+                <div class="icon">
+                    <i class="material-icons">forum</i>
+                </div>
+                <script type="text/javascript">
+                    function GoToCheck() {
+                        window.location.href = '/#/syschecked';
+                        alert("1");
+                        //alert($('a[href]="/#/syschecked"'));
+                        //$('a[href]="/#/syschecked"').parent.parent.css("display", "block");
+                    }
+                </script>
+                <div class="content">
+                    <div class="number">安全评分 90</div>
+                    <div class="text">
+                        <i class="material-icons" style="color: #fd9701">grade</i><i class="material-icons" style="color: #fd9701">
+                            grade
+                        </i><i class="material-icons"
+                               style="color: #fd9701">
+                            grade
+                        </i><i class="material-icons" style="color: #fd9701">
+                            grade
+                        </i><i class="material-icons"
+                               style="color: #fd9701">
+                            grade
+                        </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" onclick="GoToTask()">
+            <script type="text/javascript">
+                function GoToTask() {
+                    window.location.href = '/#/patrolmoretaskmanagement';
+                }
+            </script>
+            <div class="info-box bg-cyan hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">playlist_add_check</i>
+                </div>
+                <div class="content">
+                    <div class="number">工作任务 20</div>
+                    <div class="text">未完成 5%</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" onclick="GoToPossession()">
+            <script type="text/javascript">
+                function GoToPossession() {
+                    window.location.href = '/#/assetstatistics';
+                }
+            </script>
+            <div class="info-box bg-orange hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">settings_input_component</i>
+                </div>
+                <div class="content">
+                    <div class="number">资产数量 90</div>
+                    <div class="text">将过期 5%</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" onclick="GoToRealtimemonitoring()">
+            <script type="text/javascript">
+                function GoToRealtimemonitoring() {
+                    window.location.href = '/#/realtimemonitoring';
+                }
+            </script>
+            <div class="info-box bg-red hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">report_problem</i>
+                </div>
+                <div class="content">
+                    <div class="number">实时报警 10</div>
+                    <div class="text">火警 0.1%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# Widgets -->
+    <!-- 地图 -->
+    <div class="row clearfix">
+        <!-- Area Chart -->
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="card">
+                <div class="body" >
+                    <div id="mainmap" style="height: 50%;"></div>
+                    <script type="text/javascript" src="/apiConfig.js"></script>
+                    <script type="text/javascript" src="/assets/js/homepark.js"></script>
+                    <div style="display: none; margin: 0 auto; z-index: 9999; width: 200px; height: 193px; position: relative; right: -180px; bottom: 200px;">
+                        <div>
+                            <div class="body">
+                                <div>
+                                    <table style="border-collapse: separate; border-spacing: 0px 10px;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <i class="material-icons" style="font-size: 12px">star</i><a onclick="GoToYuanqu('创业街园区')">
+                                                        创业街园区
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i class="material-icons" style="font-size: 12px">star</i><a onclick="GoToYuanqu('关南园区')">
+                                                        关南园区
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i class="material-icons" style="font-size: 12px">star</i><a onclick="GoToYuanqu('理工光科科技园')">
+                                                        理工光科科技园
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i class="material-icons" style="font-size: 12px">star</i><a onclick="GoToYuanqu('光迅科技园')">
+                                                        光迅科技园
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i class="material-icons" style="font-size: 12px">star</i><a onclick="GoToYuanqu('虹信通信科技园')">
+                                                        虹信通信科技园
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        function GoToYuanqu(city) {
+                            window.open("VisualData/VisualData.html" + '#' + city);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Area Chart -->
+        <!-- Donut Chart -->
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="card" style="min-height: 468px;">
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-hover dashboard-task-infos">
+                            <thead>
+                                <tr>
+                                    <th>园区名称</th>
+                                    <th>责任人</th>
+                                </tr>
+                            </thead>
+                            <tbody id="parkTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Donut Chart -->
+    </div>
+    <!-- #END# 地图-->
+    <!-- 报警统计 -->
+    <div class="row clearfix" style="display: none;">
+        <!-- Line Chart -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>LINE CHART</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:void(0);">Action</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Something else here</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div id="line_chart" class="graph"></div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Line Chart -->
+        <!-- Bar Chart -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>BAR CHART</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:void(0);">Action</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Something else here</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div id="bar_chart" class="graph"></div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Bar Chart -->
+    </div>
+    <div class="row clearfix">
+        <!-- Area Chart -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>隐患统计</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown" style="display: none;">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:void(0);">数据报警</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">人工确认</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">报警监控</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div id="area_chart" class="graph" style="display: none;"></div>
+                    <div id="tongjicontainer" style="height: 347px"></div>
+                    <script type="text/javascript">
+                        var dom = document.getElementById("tongjicontainer");
+                        var myChart = echarts.init(dom);
+                        var app = {};
+                        option = null;
+                        option = {
+                            title: {
+                                text: ''
+                            },
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'cross',
+                                    label: {
+                                        backgroundColor: '#6a7985'
+                                    }
+                                }
+                            },
+                            legend: {
+                                data: ['危险物品', '危险作业']
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            toolbox: {
+                                feature: {
+                                    //saveAsImage: {}
+                                }
+                            },
+                            xAxis: {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: ['2017-1', '2017-2', '2017-3', '2017-4', '2017-5', '2017-6', '2017-7']
+                            },
+                            yAxis: {
+                                type: 'value'
+                            },
+                            series: [
+                                {
+                                    name: '危险作业',
+                                    type: 'line',
+                                    stack: '总量',
+                                    areaStyle: { normal: {} },
+                                    data: [3, 2, 4, 4, 1, 1, 1]
+                                },
+                                {
+                                    name: '危险物品',
+                                    type: 'line',
+                                    stack: '总量',
+                                    areaStyle: { normal: {} },
+                                    data: [6, 6, 8, 7, 6, 5, 9]
+                                }
+                            ]
+                        };
+
+
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                        $("#tongjicontainer").resize(function () {
+                            myChart.resize();
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Area Chart -->
+        <!-- Donut Chart -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>资产状态</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown" style="display: none;">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:void(0);">火警</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">故障</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">反馈</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">监管</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">复位</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div id="donut_chart" class="graph" style="display: none;"></div>
+                    <div id="zhichancontainer" class="graph" style="height: 347px;"></div>
+                    <script type="text/javascript">
+                        var dom = document.getElementById("zhichancontainer");
+                        var myChart = echarts.init(dom);
+                        var app = {};
+                        option = null;
+                        option = {
+                            title: {
+                                text: '',
+                                x: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} :  ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                                data: ['正常', '故障', '停用']
+                            },
+                            series: [
+                                {
+                                    name: '',
+                                    type: 'pie',
+                                    radius: '85%',
+                                    center: ['50%', '50%'],
+                                    data: [
+                                        { value: 234, name: '停用' },
+                                        { value: 135, name: '故障' },
+                                        { value: 1548, name: '正常' }
+                                    ],
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+
+                        app.currentIndex = -1;
+
+
+                        var dataLen = option.series[0].data.length;
+                        // 取消之前高亮的图形
+                        myChart.dispatchAction({
+                            type: 'downplay',
+                            seriesIndex: 0,
+                            dataIndex: app.currentIndex
+                        });
+                        app.currentIndex = (app.currentIndex + 1) % dataLen;
+                        // 高亮当前图形
+                        myChart.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 0,
+                            dataIndex: app.currentIndex
+                        });
+                        // 显示 tooltip
+                        myChart.dispatchAction({
+                            type: 'showTip',
+                            seriesIndex: 0,
+                            dataIndex: app.currentIndex
+                        });;
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                        $("#zhichancontainer").resize(function () {
+                            myChart.resize();
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Donut Chart -->
+    </div>
+    <!-- #END3 报警统计 -->
+
+    <div class="row clearfix" style="display: none;">
+        <!-- Visitors -->
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="body bg-pink">
+                    <div class="sparkline" data-type="line" data-spot-Radius="4"
+                         data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#fff"
+                         data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)"
+                         data-spot-Color="rgb(255,255,255)"
+                         data-offset="90" data-width="100%" data-height="92px" data-line-Width="2"
+                         data-line-Color="rgba(255,255,255,0.7)"
+                         data-fill-Color="rgba(0, 188, 212, 0)">
+                        12,10,9,6,5,6,10,5,7,5,12,13,7,12,11
+                    </div>
+                    <ul class="dashboard-stat-list">
+                        <li>
+                            TODAY
+                            <span class="pull-right">
+                                <b>1 200</b> <small>USERS</small>
+                            </span>
+                        </li>
+                        <li>
+                            YESTERDAY
+                            <span class="pull-right">
+                                <b>3 872</b> <small>USERS</small>
+                            </span>
+                        </li>
+                        <li>
+                            LAST WEEK
+                            <span class="pull-right">
+                                <b>26 582</b> <small>USERS</small>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Visitors -->
+        <!-- Latest Social Trends -->
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="body bg-cyan">
+                    <div class="m-b--35 font-bold">LATEST SOCIAL TRENDS</div>
+                    <ul class="dashboard-stat-list">
+                        <li>
+                            #socialtrends
+                            <span class="pull-right">
+                                <i class="material-icons">trending_up</i>
+                            </span>
+                        </li>
+                        <li>
+                            #materialdesign
+                            <span class="pull-right">
+                                <i class="material-icons">trending_up</i>
+                            </span>
+                        </li>
+                        <li>#adminbsb</li>
+                        <li>#freeadmintemplate</li>
+                        <li>#bootstraptemplate</li>
+                        <li>
+                            #freehtmltemplate
+                            <span class="pull-right">
+                                <i class="material-icons">trending_up</i>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Latest Social Trends -->
+        <!-- Answered Tickets -->
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="body bg-teal">
+                    <div class="font-bold m-b--35">ANSWERED TICKETS</div>
+                    <ul class="dashboard-stat-list">
+                        <li>
+                            TODAY
+                            <span class="pull-right">
+                                <b>12</b> <small>TICKETS</small>
+                            </span>
+                        </li>
+                        <li>
+                            YESTERDAY
+                            <span class="pull-right">
+                                <b>15</b> <small>TICKETS</small>
+                            </span>
+                        </li>
+                        <li>
+                            LAST WEEK
+                            <span class="pull-right">
+                                <b>90</b> <small>TICKETS</small>
+                            </span>
+                        </li>
+                        <li>
+                            LAST MONTH
+                            <span class="pull-right">
+                                <b>342</b> <small>TICKETS</small>
+                            </span>
+                        </li>
+                        <li>
+                            LAST YEAR
+                            <span class="pull-right">
+                                <b>4 225</b> <small>TICKETS</small>
+                            </span>
+                        </li>
+                        <li>
+                            ALL
+                            <span class="pull-right">
+                                <b>8 752</b> <small>TICKETS</small>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Answered Tickets -->
+    </div>
+    <!-- 待办任务 -->
+    <div class="row clearfix">
+        <!-- Task Info -->
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="card">
+                <div class="header">
+                    <h2>待办任务</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown" style="display: none;">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:void(0);">进行中</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">搁置</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">待审批</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">暂停</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">已完成</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-hover dashboard-task-infos">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>任务名称</th>
+                                    <th>责任人</th>
+                                    <th>任务进度</th>
+                                    <th>开始时间</th>
+                                    <th>截止时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>2017年下半年消防演练</td>
+                                    <td>王小刚</td>
+                                    <td>
+                                        <span class="label bg-orange">已延时</span>
+
+                                    </td>
+                                    <td>
+                                        2017/7/5
+                                    </td>
+                                    <td>
+                                        2017/7/10
+                                    </td>
+                                    <td>
+                                        查看
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>2017年9月设备巡检</td>
+                                    <td>张保保</td>
+                                    <td>
+                                        <span class="label bg-green">进行中</span>
+
+                                    </td>
+                                    <td>
+                                        2017/9/1
+                                    </td>
+                                    <td>
+                                        2017/9/30
+                                    </td>
+                                    <td>
+                                        查看
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>国庆期间巡查</td>
+                                    <td>王天天</td>
+                                    <td>
+                                        <span class="label bg-green">进行中</span>
+
+                                    </td>
+                                    <td>
+                                        2017/10/1
+                                    </td>
+                                    <td>
+                                        2017/10/7
+                                    </td>
+                                    <td>
+                                        查看
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>2017年11月份安全检查</td>
+                                    <td>张果果</td>
+                                    <td>
+                                        <span class="label bg-light-blue">未开始</span>
+
+                                    </td>
+                                    <td>
+                                        2017/11/10
+                                    </td>
+                                    <td>
+                                        2017/11/15
+                                    </td>
+                                    <td>
+                                        查看
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>元旦期间巡查</td>
+                                    <td>李文静</td>
+                                    <td>
+                                        <span class="label bg-baojing">未开始</span>
+
+                                    </td>
+                                    <td>
+                                        2018/1/1
+                                    </td>
+                                    <td>
+                                        2018/1/1
+                                    </td>
+                                    <td>
+                                        查看
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Task Info -->
+        <!-- Browser Usage -->
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="header">
+                    <h2>实时风险评测</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown" style="display: none;">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:void(0);">Action</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">Something else here</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <!--<img src="images/Thermodynamic chart.jpg"/>-->
+                    <!--<div id="donut_chart" class="dashboard-donut-chart"></div>-->
+                    <div id="pingcecontainer" style="height: 260px;"></div>
+                    <script type="text/javascript">
+                        var dom = document.getElementById("pingcecontainer");
+                        var myChart = echarts.init(dom);
+                        var app = {};
+                        app.title = '实时评测';
+
+
+                        $.get(abp.appPath + 'Data/data.json',
+                            function (data) {
+
+                                var points = [].concat.apply([],
+                                    data.map(function (track) {
+                                        return track.map(function (seg) {
+                                            return seg.coord.concat([1]);
+                                        });
+                                    }));
+                                myChart.setOption(option = {
+                                    animation: false,
+                                    bmap: {
+                                        center: [120.13066322374, 30.240018034923],
+                                        zoom: 14,
+                                        roam: true
+                                    },
+                                    visualMap: {
+                                        show: false,
+                                        top: 'top',
+                                        min: 0,
+                                        max: 5,
+                                        seriesIndex: 0,
+                                        calculable: true,
+                                        inRange: {
+                                            color: ['blue', 'blue', 'green', 'yellow', 'red']
+                                        }
+                                    },
+                                    series: [
+                                        {
+                                            type: 'heatmap',
+                                            coordinateSystem: 'bmap',
+                                            data: points,
+                                            pointSize: 5,
+                                            blurSize: 6
+                                        }
+                                    ]
+                                });
+                                if (!app.inNode) {
+                                    // 添加百度地图插件
+                                    var bmap = myChart.getModel().getComponent('bmap').getBMap();
+                                    bmap.addControl(new BMap.MapTypeControl());
+                                }
+                            });
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Browser Usage -->
+    </div>
+    <!-- #END# 待办任务 -->
+    <!-- 报警信息 -->
+    <div class="row clearfix" style="display: none;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        通知
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:void(0);">火警</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">故障</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">监控</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>消息类型</th>
+                                    <th>内容</th>
+                                    <th>发出人</th>
+                                    <th>发出时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>公告</td>
+                                    <td>关于认真开展集团安全生产大检查的通知</td>
+                                    <td>李刚</td>
+                                    <td>2017/6/6</td>
+                                    <td>查看</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>公告</td>
+                                    <td>安全信息培训的通知</td>
+                                    <td>王磊</td>
+                                    <td>2017/8/10</td>
+                                    <td>查看</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>新闻</td>
+                                    <td>消防法律新规定</td>
+                                    <td>张亮</td>
+                                    <td>2017/9/20</td>
+                                    <td>查看</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# 报警信息 -->
+
+
+</div>

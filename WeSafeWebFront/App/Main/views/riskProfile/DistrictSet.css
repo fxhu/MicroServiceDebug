@@ -1,0 +1,69 @@
+.iconfont.icon-shezhi1,
+.iconfont.icon-chakan1,
+.iconfont.icon-tongyijiancha,
+.iconfont.icon-ban,
+.iconfont.icon-icon6,
+.iconfont.icon-shanchu,
+.iconfont.icon-duigou,
+.iconfont.icon-shenhe,
+.iconfont.icon-msnui-shezhi,
+.iconfont.icon-tianjia，
+.iconfont.icon-zhipaisiji
+{
+    /* color:#2ea1f8; */
+    font-size:20px;
+    letter-spacing: .5em;
+}
+a{
+    color:#2ea1f8;
+}
+.iconfont.icon-zhongzhi{
+    color:#CFD5E1;
+    font-size:20px;
+}
+.portlet.light > .portlet-title > .caption.btn.blue{
+    background-color: #3598DC;
+    padding:7px 10px;
+    box-shadow: none;
+}
+
+.portlet-title>.caption.btn.blue>.caption-subject{
+    color: #fff
+}
+
+input.form-control.input-middle{
+    border-radius: 16px;
+}
+.portlet.light .portlet-body {
+    padding:0px;
+}
+.portlet.light .portlet-body.pd20{
+    padding:17px 12px 20px 5px;
+}
+.pd20{
+    padding:17px 12px 20px 5px;
+}
+tbody>tr.bgGray,
+tbody>tr.bgWhite{
+    height: 46px;
+}
+.mr28{
+    margin-right: 28px;
+}
+button.btn-xs.bd5{
+    margin-top:4px; 
+    background-color:#E96870;
+    color: #fff;
+    
+}
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-xs.bd5{
+    padding: 3px 20px;
+    border-radius: 5px;
+}
+.discolor{
+    color: gray;
+}
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all){
+    box-shadow: none;
+    
+}

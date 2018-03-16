@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资产统计</title>
+    <link href="../../assets/css/witReportCss/CommonStyle.css" rel="stylesheet" />
+    <link href="../../assets/css/witReportCss/StyleSheetpre.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="layout">
+        <h2><span id="areaName"></span>资产统计</h2>
+        <main>
+            <div class="aside">
+                <div id="Device_pie" style="width:100%;height:40%;"></div>
+                <ul id="DevicepieItems" style="padding-top: 27px;"></ul>
+            </div>
+
+            <div class="lines">
+                <div id="line_Normal" style="width: 99.8%;height:32.73%;  border:2px solid #02a4fd"></div>
+                <div id="line_Broken" style="width: 49.5%;height:32.73%;  border:2px solid #02a4fd;margin-right:10px;"></div>
+                <div id="line_Destory" style="width: 49.4%;height:32.73%;  border:2px solid #02a4fd"></div>
+
+                <div class="mixLines  clearfix">
+                    <div class="select">
+                        <p>同环对比</p>
+                        <div>
+                            <select id="selEndYear"></select>
+                            <select id="selStartYear"></select>
+                        </div>
+                    </div>
+                    <div id="mix"></div>
+                    <div class="change">
+                        <div id="btnBox">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div>
+            <div class="bottom">
+                <a name="detailrptlink" href="ReportHome.html">返回</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../../assets/js/Baidu/echarts-all-3.js"></script>
+    <script src="../../assets/js/jquery-3.2.1.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/ReportAPI.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/WeSafeRptCommon.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/DeviceEnum.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/WeSafeEchartsHelper.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/DeviceReport.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+npm-debug.log
+.idea
+.vs/
+.vs/VSWorkspaceState.json
+App/common/views/layout/layout.html
+/DataVisual/kinetic-map/roommap-kinetic.js

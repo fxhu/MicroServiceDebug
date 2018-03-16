@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/apiConfig.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="/assets/js/Common.js"></script>
+    <script type="text/javascript" src="/DataVisual/js/public.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.json.js"></script>
+    <script src="js/fengmap.min.js"></script>
+    <link rel="stylesheet" href="css/pub.css" />
+    <title>园区可视化编辑</title>
+</head>
+<body>
+    <div class="topleft">
+        <div id="backButtonContainer">
+
+        </div>
+    </div>
+    <div class="topright">
+        <div class="btn-group" id="btn3">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                轮廓 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="startDrawOutline()">绘制</a></li>
+                <li><a href="#" onclick="clearOutline()">清除</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-success" onclick="doSave()" id="btn4">保存  <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span></button>
+    </div>
+    <div id="fengMap"></div>
+    <div class="rightbottom"></div>
+    <div class="top2right"><span class="label label-success" id="saveResult"></span></div>
+    <div class="top2right"><span class="label label-danger" id="errorResult"></span></div>
+</body>
+<script src="kinetic-map/require.js" data-main="kinetic-map/AreaEdit_Indoor_2d"></script>
+</html>

@@ -1,0 +1,19 @@
+﻿<script src="/assets/plugins/jsTree/jsTree.min.js"></script>
+<link href="/assets/plugins/jsTree/jsTree.css" rel="stylesheet" />
+<link href="/assets/plugins/jsTree/themes/default/style.css" rel="stylesheet" />
+<div class="{{vm.myclass}}" novalidate>
+    <form name="exampleForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>{{vm.area.displayName}}预案</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <div id="areaPlanTree" class="tree-demo tree-scrollbar"> </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+            <button type="submit" button-busy="vm.saving" busy-text="保存中..." class="btn btn-primary blue" ng-click="vm.save()"><i class="fa fa-save"></i> <span>保存</span></button>
+        </div>
+    </form>
+</div>

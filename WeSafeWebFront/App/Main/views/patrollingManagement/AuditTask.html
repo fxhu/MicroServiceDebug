@@ -1,0 +1,180 @@
+﻿
+<script src="/assets/js/Common.js"></script>
+<link href="/assets/css/components-rounded.min.css" rel="stylesheet" />
+<!--<script src="~/assets/plugins/horizontal-timeline/horizontal-timeline.js"></script>-->
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.AuditTask as vm">
+    <div class="col-md-12">
+        <div class="portlet light bordered" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">审核任务</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form name="addorlookhiddentrouble" role="form" novalidate class="form-horizontal">
+                    <div class="form-body">
+
+
+                        <h3 class="form-section">计划详情</h3>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">计划名称</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.plan.name" disabled class="validate form-control">
+                            </div>
+                            <label class="control-label col-md-1">巡检周期</label>
+                            <div class="col-md-4">
+                                <select class="validate form-control edited" disabled ng-model="vm.plan.period"  ng-options="p.id as p.type for p in  vm.Periods"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">开始时间</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.plan.startTime" disabled class="validate form-control">
+                            </div>
+                            <label class="control-label col-md-1">截止时间</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.plan.endTime" disabled class="validate form-control">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">是否按照路线</label>
+                            <div class="col-md-4 pull-left">
+                                <input type="checkbox" class="form-control" id="sequence" disabled ng-model="vm.plan.isSequence">
+                            </div>
+                            <label class="control-label col-md-1">是否启用</label>
+                            <div class="col-md-4 pull-left">
+                                <input type="checkbox" class="form-control" id="active" disabled ng-model="vm.plan.isActive">
+                            </div>
+                        </div>
+                        <!--<h3 class="form-section">路线详情</h3>
+                            <div class="form-group ">
+                                <label class="control-label col-md-2">路线名称</label>
+                                <div class="col-md-4">
+                                    <input auto-focus type="text" ng-model="vm.path.name" disabled maxlength="32" class="validate form-control">
+                                </div>
+                                <label class="control-label col-md-1">负责人</label>
+                                <div class="col-md-4">
+                                    <select class="validate form-control edited" disabled ng-model="vm.path.userId" ng-options="c.id as c.userName for c in  vm.users">
+                                        <option value="">---请选择---</option>
+                                    </select>
+                                </div>
+                            </div>-->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="cd-horizontal-timeline mt-timeline-horizontal" data-spacing="60">
+                                    <div class="timeline">
+                                        <div class="events-wrapper">
+                                            <div class="events">
+                                                <ol>
+                                                    <li ng-repeat="point in vm.selectpoints">
+                                                        <a href="#0" data-date="{{point.time}}" class="border-after-red bg-after-red {{point.class}}">{{point.name}}</a>
+                                                    </li>
+                                                </ol>
+                                                <span class="filling-line bg-red" aria-hidden="true"></span>
+                                            </div>
+                                            <!-- .events -->
+                                        </div>
+                                        <!-- .events-wrapper -->
+                                        <ul class="cd-timeline-navigation mt-ht-nav-icon">
+                                            <li>
+                                                <a href="#0" class="prev inactive btn btn-outline red md-skip">
+                                                    <i class="fa fa-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#0" class="next btn btn-outline red md-skip">
+                                                    <i class="fa fa-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- .cd-timeline-navigation -->
+                                    </div>
+                                    <!-- .timeline -->
+                                    <div class="events-content">
+                                        <ol>
+                                            <li class="{{detail.class}}" ng-repeat="detail in vm.details" data-date="{{detail.time}}">
+                                                <div class="mt-title">
+                                                    <h2 class="mt-content-title">{{detail.name}}</h2>
+                                                </div>
+                                                <div class="mt-author">
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="mt-content border-grey-steel">
+                                                    <p>
+                                                        {{detail.areaName}}&nbsp;&nbsp;{{detail.assestName}}
+                                                    </p>
+                                                    <a href="javascript:;" class="btn btn-circle btn-outline purple-medium">{{detail.typeName}}</a>
+                                                    <!--<div class="btn-group dropup pull-right">
+                                                        <button class="btn btn-circle green dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
+                                                            操作
+                                                            <i class="fa fa-angle-down"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu pull-right" role="menu">
+                                                            <li>
+                                                                <a href="javascript:;" ng-click="vm.deletePoint(detail.id)">删除</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>-->
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                    <!-- .events-content -->
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="form-section">执行时间</h3>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">开始时间</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.task.startTime" disabled class="validate form-control">
+                            </div>
+                            <label class="control-label col-md-1">截止时间</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.task.endTime" disabled class="validate form-control">
+                            </div>
+                        </div>
+                        <h3 class="form-section">确认任务</h3>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">确认</label>
+                            <div class="col-md-4" style="margin-top:8px;">
+                                <label>
+                                    <input id="radiopass" ng-value="0" type="radio" name="Name" ng-model="vm.audit.IsActive">
+                                    需要巡检
+                                </label>
+                                <label>
+                                    <input id="radiopass" ng-value="1" type="radio" name="Name" ng-model="vm.audit.IsActive">
+                                    不需要巡检
+                                </label>
+                            </div>
+                            <label class="control-label col-md-1" ng-if="vm.audit.IsActive==0">指定巡检人</label>
+                            <div class="col-md-4" ng-if="vm.audit.IsActive==0">
+                                <select class="validate form-control edited" ng-model="vm.audit.ExecuteUserId" ng-options="user.id as user.userName for user in  vm.users"></select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">备注</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" cols="100" ng-model="vm.audit.Remark" required class="validate form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-9">
+                                <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+                                    返回
+                                </button>
+                                <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()">
+                                    保存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

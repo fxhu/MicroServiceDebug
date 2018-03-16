@@ -1,0 +1,33 @@
+﻿
+<link href="/assets/plugins/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="/assets/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+<div novalidate>
+	<form name="exampleForm" role="form" novalidate class="form-validation">
+		
+			<div class="modal-header col-xs-12" style="z-index: 50;">
+				<h4 class="modal-title col-xs-10">               
+                	<span>审核任务</span>
+            	</h4>
+            	<button type="button" class="btn btn-sm blue" ng-click="vm.cancel(0)" style="z-index:0;">返回</button>
+			</div>
+			
+		
+		<div class="modal-body">
+			<div class="form-group">
+				<!--<select class="form-control edited" ng-model="vm.selectuser" required
+                        ng-options="user.id as user.userName  for user in vm.users">
+                    <option value="">---请选择---</option>
+                </select>
+                <label style="top:0px;">负责人</label>-->
+				<label class="control-label col-md-2" style="margin-top: 10px;">巡检人</label>
+				<div class="col-md-10" style="margin-top: 10px;">
+					<select id="mselect_user" required></select>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancelTask()" style="margin-top: 10px;">取消</button>
+			<button type="submit" button-busy="vm.saving" busy-text="保存中" class="btn btn-primary blue" ng-click="vm.save()" style="margin-top: 10px;"><i class="fa fa-save"></i> <span>指派</span></button>
+		</div>
+	</form>
+</div>

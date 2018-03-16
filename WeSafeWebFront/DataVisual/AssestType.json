@@ -1,0 +1,266 @@
+﻿[
+  {
+    "Id": 82,
+    "Name": "280°防火阀",
+    "TemplateName": "280degree_damper",
+    "MappingID": "8f1859f0-72e9-4093-b707-0b6dbf968435,413c7cae-a62b-4bfc-a03b-8727d254a016,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 87,
+    "Name": "280°电动防火阀",
+    "TemplateName": "280degree_damper",
+    "MappingID": "2d21a20c-657a-41a0-86ed-1d32a84058b6,8e4ff031-7b3d-4e70-b413-796215b4963f,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 86,
+    "Name": "70°电动防火阀",
+    "TemplateName": "280degree_damper",
+    "MappingID": "3c022ba0-1bf6-47d5-941f-3215eaef462c,2738325b-388e-48d4-b74b-c7dc6a8dac4a,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 88,
+    "Name": "电梯迫降",
+    "TemplateName": "elevator_down",
+    "MappingID": "bb145930-06fa-4f16-b56f-cdfb594ea7bd,b353054f-4891-44cb-96ef-e39cbf2dc5d9,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 89,
+    "Name": "断电开关",
+    "TemplateName": "breakerswitch",
+    "MappingID": "8cae619d-90f4-4c04-b2ac-f6738bbd176a,598cc3e7-eee9-435b-90db-93bfe872d1ab,",
+    "Tag": "控制类"
+  },
+  {
+    "Id": 90,
+    "Name": "防火阀",
+    "TemplateName": "280degree_damper",
+    "MappingID": "a18e9218-dd0a-4b2d-bf5a-120a67516691,a132375d-da0f-45c2-a924-c86861e5df55,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 85,
+    "Name": "卷帘门",
+    "TemplateName": "rollingdoor",
+    "MappingID": "a15b93d4-5128-4067-9716-d6563be2a7ea,3cdc1879-21e6-4592-8400-e50f95a8d961,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 27,
+    "Name": "排烟防火阀",
+    "TemplateName": "280degree_damper",
+    "MappingID": "3ebffbfd-bbee-429d-a3e3-f56b02589f99,3ebffbfd-bbee-429d-a3e3-f56b02589f99,",
+    "Tag": "控制类"
+  },
+  {
+    "Id": 19,
+    "Name": "排烟风机",
+    "TemplateName": "exhaustfan",
+    "MappingID": "ed12234a-4fea-49b3-9fce-f74601a1d8f0,2d40abba-16f9-4132-a4f2-ca6b92ba1fc8,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 76,
+    "Name": "喷淋泵",
+    "TemplateName": "spraypump",
+    "MappingID": "f8ef65a8-c70e-4f6a-b221-88b3d048d039,63436811-b58d-453c-8027-a0ab38123385,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 78,
+    "Name": "强切开关",
+    "TemplateName": "strongswitch",
+    "MappingID": "2ea1fb65-2dbf-4466-bb82-8570cc8966c5,7a6e96e1-019b-464a-a294-ac8ec07b2758,",
+    "Tag": "控制类"
+  },
+  {
+    "Id": 74,
+    "Name": "声光报警器",
+    "TemplateName": "sondlightalarm",
+    "MappingID": "1f2c850a-5084-4afc-bf1b-aea9e0aaed3f,b4114134-04be-4dbb-b897-3685ef180fd0,",
+    "Tag": "传感类"
+  },
+  {
+    "Id": 79,
+    "Name": "湿式报警阀",
+    "TemplateName": "wetalarm",
+    "MappingID": "74991833-d3c5-4fe7-9fc1-08f0d5c6c95b,c18beab6-580d-4e7c-af69-fb214127c9b3,",
+    "Tag": "控制类"
+  },
+  {
+    "Id": 11,
+    "Name": "室内消火栓",
+    "TemplateName": "indoorhydrant",
+    "MappingID": "1af1f86b-a049-4a31-9228-f30b7067a463,1af1f86b-a049-4a31-9228-f30b7067a463,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 61,
+    "Name": "手动报警按钮",
+    "TemplateName": "manualalarm",
+    "MappingID": "ea5413b3-c5a2-4e02-bf8a-7a01bed78b04,ea5413b3-c5a2-4e02-bf8a-7a01bed78b04,",
+    "Tag": "控制类",
+    "Extra": [
+      {
+        "name": "状态",
+        "value": "0",
+        "remoteGet": true
+      },
+      {
+        "name": "联动摄像头地址",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "Id": 23,
+    "Name": "水流指示器",
+    "TemplateName": "flowindicator",
+    "MappingID": "326ab214-84ab-414e-9f86-c22d84d4916b,326ab214-84ab-414e-9f86-c22d84d4916b,",
+    "Tag": "传感类"
+  },
+  {
+    "Id": 91,
+    "Name": "水箱液位计",
+    "TemplateName": "firetanklevelgauge",
+    "MappingID": "9903c1fb-12a5-460b-9e7a-0027843476c9,abf8f38a-abf0-44c7-bc50-eb59109020cc,",
+    "Tag": "传感类"
+  },
+  {
+    "Id": 46,
+    "Name": "送风口",
+    "TemplateName": "airsupplygrille",
+    "MappingID": "93a8ecef-207f-46f9-99d5-b386964b8852,93a8ecef-207f-46f9-99d5-b386964b8852,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 71,
+    "Name": "温感",
+    "TemplateName": "warmsense",
+    "MappingID": "54705afe-6a77-4bde-9639-fd27a565d4bf,a8c0f2f0-59c3-4821-8751-daa81f3522a9,",
+    "Tag": "传感类",
+    "Extra": [
+      {
+        "name": "状态",
+        "value": "0",
+        "remoteGet": true
+      },
+      {
+        "name": "温度",
+        "value": "0",
+        "remoteGet": true
+      },
+      {
+        "name": "联动摄像头地址",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "Id": 75,
+    "Name": "消防水池液位计",
+    "TemplateName": "firetanklevelgauge",
+    "MappingID": "29bc5d39-cef2-4a1c-91e5-41af59aa0c74,fc44c40a-a7ce-4f51-9c75-7594484d2935,",
+    "Tag": "传感类"
+  },
+  {
+    "Id": 77,
+    "Name": "消火栓泵",
+    "TemplateName": "firepump",
+    "MappingID": "b298c390-13dc-4230-ad75-2cac3e376ac5,cf281bfa-4fc1-47de-9072-1e11fda3e9dd,",
+    "Tag": "设备类"
+  },
+  {
+    "Id": 81,
+    "Name": "信号蝶阀",
+    "TemplateName": "signal_butterfly",
+    "MappingID": "72aa61cc-0fae-435f-a957-7d8a2ad0062b,06d3e1ad-7a3d-4df2-8ea3-a884828d7e66,",
+    "Tag": "控制类"
+  },
+  {
+    "Id": 92,
+    "Name": "信号阀",
+    "TemplateName": "signal_butterfly",
+    "MappingID": "ba06c1c2-d484-456a-ab86-453dad82fc03,7430fb26-e1dd-42e6-ae3c-9af29882547e,",
+    "Tag": "控制类"
+  },
+  {
+    "Id": 80,
+    "Name": "压力开关",
+    "TemplateName": "pressureswitch",
+    "MappingID": "7cffa912-d878-480f-8dc2-1f357e29a876,8cd5fe1e-54e9-431e-922b-bf658abcab7e,",
+    "Tag": "控制类"
+  },
+  {
+    "Id": 70,
+    "Name": "烟感",
+    "TemplateName": "smokesense",
+    "MappingID": "044a832f-114e-4517-b454-f1fe93478368,ee43d230-be6c-4832-bfff-dde098f2594a,",
+    "Tag": "传感类",
+    "Extra": [
+      {
+        "name": "状态",
+        "value": "0",
+        "remoteGet": true
+      },
+      {
+        "name": "联动摄像头地址",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "Id": 93,
+    "Name": "正压送风机",
+    "TemplateName": "airrefresh",
+    "MappingID": "ecc635b9-01bf-4525-a6a0-5a255d479842,11193765-0325-43a2-bfdf-386e2ae4fe95,",
+    "Tag": "控制类"
+  },
+  {
+    "Id": 94,
+    "Name": "震动传感器",
+    "TemplateName": "shake",
+    "MappingID": "",
+    "Tag": "传感类",
+    "Extra": [
+      {
+        "name": "状态",
+        "value": "0",
+        "remoteGet": true
+      },
+      {
+        "name": "联动摄像头地址",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "Id": 95,
+    "Name": "摄像头",
+    "TemplateName": "camera",
+    "MappingID": "272b3aa6-3fa2-4e11-a980-c76d75059f73,11193765-0325-43a2-bfdf-386e2ae4fe94,",
+    "Tag": "传感类",
+    "Extra": [
+      {
+        "name": "状态",
+        "value": "0",
+        "remoteGet": true
+      },
+      {
+        "name": "联动摄像头地址",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "Id": 96,
+    "Name": "其它设备",
+    "TemplateName": "unknow",
+    "MappingID": "00167a22-8240-48c2-ba1f-ebfbd76533af,",
+    "Tag": "传感类",
+    "Extra": []
+  }
+]

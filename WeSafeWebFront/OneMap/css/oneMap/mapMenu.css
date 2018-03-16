@@ -1,0 +1,813 @@
+body {
+    min-width: 1080px;
+    overflow-x: auto;
+}
+
+html, body {
+    font-family: "微软雅黑";
+}
+
+div.mapMenu {
+    z-index: 1000;
+    z-index: 999;
+    position: fixed;
+    width: 900px;
+    left: 50%;
+    bottom: 35px;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+}
+
+.rm-layout-expanded li a,
+.rm-layout-expanded li li a,
+.rm-layout-expanded li li li a,
+.rm-layout-expanded .rm-menu-item a,
+.rm-layout-expanded .rm-menu-item .rm-menu-item a,
+.rm-layout-expanded .rm-menu-item .rm-menu-item .rm-menu-item a {
+    padding-left: 0em;
+    height: 60px;
+    line-height: 60px;
+}
+
+.rm-nav li li.rm-last a,
+.rm-menu-item .rm-menu-item.rm-last a {
+    padding-bottom: 0em;
+}
+
+.rm-layout-expanded li a,
+.rm-layout-expanded li li a,
+.rm-layout-expanded li li li a,
+.rm-layout-expanded .rm-menu-item a,
+.rm-layout-expanded .rm-menu-item .rm-menu-item a,
+.rm-layout-expanded .rm-menu-item .rm-menu-item .rm-menu-item a {
+    padding-left: 0em;
+}
+
+.rm-layout-expanded li ul,
+.rm-layout-expanded .rm-menu-item .rm-menu {
+    width: auto;
+    position: absolute;
+    left: 0;
+    bottom: 65px;
+}
+
+.rm-nav ul,
+.rm-menu {
+    background-color: #00243d;
+    margin-top: 0;
+}
+
+.rm-nav li a,
+.rm-menu-item a {
+    padding: 0;
+    display: block;
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    width: 180px;
+    text-align: center;
+}
+
+.rm-lighten li li a,
+.rm-lighten li a:focus,
+.rm-lighten li a:hover,
+.rm-lighten li.rm-hover a,
+.rm-lighten .rm-menu-item .rm-menu-item a,
+.rm-lighten .rm-menu-item a:focus,
+.rm-lighten .rm-menu-item a:hover,
+.rm-lighten .rm-menu-item.rm-hover > a {
+    background-color: #013b63;
+    /* fallback */
+    outline: none;
+}
+
+.rm-nav ul li > ul.rm-menu {
+    background-color: rgba(0, 36, 61, 0.7);
+    margin-top: 0;
+}
+
+.rm-layout-expanded .rm-nav > ul > li > a,
+.rm-layout-expanded .rm-top-menu > .rm-menu-item > a {
+    background: #00243d;
+    font-size: 22px;
+}
+
+    .rm-layout-expanded .rm-top-menu > .rm-menu-item > a:hover {
+        background: #013b63;
+    }
+
+nav.rm-nav ul > li:hover {
+    background: #013b63;
+}
+
+nav.rm-nav ul li a > ul li a {
+    font-size: 18px;
+}
+
+nav.rm-nav ul li a img {
+    vertical-align: text-bottom;
+    margin-right: 10px;
+}
+
+
+/*左侧菜单*/
+
+#floatDivBoxs {
+    width: 100px;
+    background: #fff;
+    position: fixed;
+    top: 100px;
+    left: -100px;
+    z-index: 999;
+    height: 380px;
+    background: rgba(0,22,35,0.7);
+}
+
+    #floatDivBoxs div.lefttop {
+        background: #00243d;
+        width: 100%;
+        height: 10px;
+    }
+
+    #floatDivBoxs ul {
+        margin-top: 10px;
+        height: 250px;
+    }
+
+        #floatDivBoxs ul li {
+            width: 50px;
+            height: 50px;
+            float: left;
+            cursor: pointer;
+        }
+
+            #floatDivBoxs ul li:hover {
+                background-color: rgba(43,78,118,0.7);
+            }
+
+            #floatDivBoxs ul li.active {
+                background-color: #00243d
+            }
+
+            #floatDivBoxs ul li img {
+                margin: 10px;
+            }
+
+div#dzhb {
+    background: #2b4e76;
+    clear: both;
+    cursor: pointer;
+    text-align: center;
+    line-height: 25px;
+    color: #fff;
+    font-size: 14px;
+    width: 80px;
+    margin: 8px auto 0;
+    height: 25px;
+}
+
+    div#dzhb.active {
+        background-color: #00243d;
+    }
+
+div#zyss {
+    background: #2b4e76;
+    clear: both;
+    cursor: pointer;
+    text-align: center;
+    line-height: 25px;
+    color: #fff;
+    font-size: 14px;
+    width: 80px;
+    margin: 8px auto 0;
+    height: 25px;
+}
+
+    div#zyss.active {
+        background-color: #00243d;
+    }
+
+div#zxgl {
+    background: #2b4e76 none repeat scroll 0 0;
+    clear: both;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    margin: 8px auto 0;
+    text-align: center;
+    width: 80px;
+}
+
+    div#zxgl.active {
+        background-color: #00243d;
+    }
+
+#leftArrow {
+    width: 50px;
+    height: 50px;
+    background: url(../img/gj.png) no-repeat rgba(0,22,35,0.7);
+    background-position: center;
+    position: fixed;
+    top: 120px;
+    border-left: 1px solid #00243d;
+    left: 0;
+    z-index: 999;
+}
+
+    #leftArrow a {
+        display: block;
+        height: 50px;
+    }
+
+
+/*div#rightArrow{width:300px; height:300px; background-color: rgba(0,36,61,0.7); position: fixed; right:-300px; top:0px; z-index: 999;}*/
+div#rightArrow {
+    width: 300px;
+    height: 480px;
+    background-color: rgba(0,36,61,0.7);
+    position: fixed;
+    right: -300px;
+    top: 0px;
+    z-index: 999;
+}
+
+div.rightTitle, div.rightTitle01 {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(0,36,61,0.9);
+}
+
+    div.rightTitle h5, div.rightTitle01 h5 {
+        font-size: 12px;
+        color: #fff;
+        float: left; /*height: 30px; line-height: 30px;*/
+        margin-left: 10px;
+    }
+
+    div.rightTitle a.rightClose, div.rightTitle01 a.rightClose {
+        float: right;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        margin-top: 5px;
+        display: block;
+        background: url(../img/close.png) no-repeat;
+        background-position: center;
+    }
+
+        div.rightTitle a.rightClose:hover, div.rightTitle01 a.rightClose:hover {
+            background-color: #000;
+        }
+
+div#rightArrow01 {
+    width: 300px;
+    height: 70px;
+    background-color: rgba(0,36,61,0.7);
+    position: fixed; /*right:-300px;*/
+    left: 50%;
+    top: -180px;
+    margin-left: -150px;
+    z-index: 999;
+}
+
+.arrow01-on li {
+    background: #013b63 none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-size: 13px;
+    margin: 5px 0 0 10px;
+    padding: 5px 38px;
+}
+
+    .arrow01-on li.on {
+        background: #00243d;
+        cursor: pointer
+    }
+
+
+#tab {
+    width: 100%;
+    padding: 0;
+    background-color: #00243d;
+    height: 40px;
+    line-height: 40px;
+}
+
+    #tab .tab_menu {
+        width: 100%;
+        float: left;
+        z-index: 1;
+    }
+
+        #tab .tab_menu li {
+            float: left;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+        }
+
+    #tab .tab_box {
+        width: 100%;
+        clear: both;
+    }
+
+    #tab .tab_menu .selected {
+        background-color: transparent;
+        cursor: pointer;
+        color: #fff;
+        background-color: #013b63;
+    }
+
+.hide {
+    display: none;
+}
+
+.tab_box > div {
+    padding: 0px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    overflow: hidden;
+}
+
+.tab_box div.iconPanel ul {
+    height: 126px;
+    width: 100%;
+    margin: 3px;
+}
+
+    .tab_box div.iconPanel ul li {
+        float: left;
+        width: 42px;
+        cursor: pointer;
+        height: 42px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+        .tab_box div.iconPanel ul li:hover {
+            background-color: rgba(43,78,118,0.7);
+        }
+
+        .tab_box div.iconPanel ul li img {
+            margin: 6px;
+        }
+
+.tab_box div.iconPanel div.padColor {
+    padding: 0 15px;
+    height: 70px;
+    color: #fff;
+    font-size: 13px;
+}
+
+    .tab_box div.iconPanel div.padColor #color_d {
+        margin-right: 10px;
+    }
+
+div.padColor div.padslider {
+    height: 30px;
+    line-height: 30px;
+}
+
+    div.padColor div.padslider div.right {
+        float: right;
+        width: 180px;
+        margin-top: 5px;
+    }
+
+.tab_box div.iconPanel div.lkColor {
+    padding: 0 15px;
+    height: 70px;
+    color: #fff;
+    font-size: 13px;
+}
+
+    .tab_box div.iconPanel div.lkColor #color_d {
+        margin-right: 10px;
+    }
+
+div.lkColor div.padslider {
+    height: 30px;
+    line-height: 30px;
+}
+
+    div.lkColor div.padslider div.right {
+        float: right;
+        width: 180px;
+        margin-top: 5px;
+    }
+
+.tab_box div.iconPanel div.lkWidth {
+    padding: 0 15px;
+    margin-top: 10px;
+    height: 30px;
+    color: #fff;
+    font-size: 13px;
+}
+
+div.lkWidth div.padslider {
+    height: 30px;
+    line-height: 30px;
+}
+
+    div.lkWidth div.padslider div.right {
+        float: right;
+        width: 180px;
+        margin-top: 5px;
+    }
+
+div.iconPanel div.font {
+    color: #fff;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+}
+
+    div.iconPanel div.font span {
+        margin: 0px 15px;
+    }
+
+div.fontPanel div.font {
+    color: #fff;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+}
+
+    div.fontPanel div.font span {
+        margin: 0px 15px;
+    }
+
+    div.fontPanel div.font div.float-l {
+        float: left;
+        width: 50%;
+    }
+
+        div.fontPanel div.font div.float-l:first-child > select {
+            width: 80px !important;
+            color: #666;
+        }
+
+        div.fontPanel div.font div.float-l:last-child > select {
+            width: 70px !important;
+            color: #666;
+        }
+
+    div.fontPanel div.font.height input, button, textarea, select, optgroup, option {
+        height: 25px !important;
+        color: #666 !important;
+        line-height: 25px !important;
+        font-size: 13px !important;
+        font-weight: inherit;
+        border: 0;
+    }
+
+div.fontColor {
+    padding: 0 15px;
+    color: #fff;
+    font-size: 13px;
+}
+
+    div.fontColor > div {
+        float: left;
+        width: 50%;
+    }
+
+.tab_box div.fontPanel div.zttm {
+    padding: 15px;
+    clear: both;
+    margin-top: 15px;
+    margin-top: 10px;
+    height: 50px;
+    color: #fff;
+    font-size: 13px;
+}
+
+div.zttm div.padslider {
+    height: 30px;
+    line-height: 30px;
+}
+
+    div.zttm div.padslider div.right {
+        float: right;
+        width: 180px;
+        margin-top: 5px;
+    }
+
+div.fontBtn {
+    height: 50px;
+}
+
+    div.fontBtn > div.float-l {
+        width: 50%;
+        float: left;
+        text-align: center;
+    }
+
+    div.fontBtn div.float-l a.bgshow {
+        background-color: #2b4e76;
+        display: inline-block;
+        color: #fff;
+        margin: 0 auto;
+        font-size: 14px;
+        width: 75px;
+        height: 25px;
+        line-height: 25px;
+    }
+
+        div.fontBtn div.float-l a.bgshow:hover {
+            background-color: #00243d;
+            text-decoration: none;
+        }
+
+        div.fontBtn div.float-l a.bgshow:visited {
+            background-color: #00243d;
+        }
+
+div.iconBtn {
+    height: 50px;
+}
+
+    div.iconBtn > div.float-l {
+        width: 100px;
+        float: left;
+        text-align: center;
+    }
+
+    div.iconBtn div.float-l a.bgshow {
+        background-color: #2b4e76;
+        display: inline-block;
+        color: #fff;
+        margin: 0 auto;
+        font-size: 14px;
+        width: 75px;
+        height: 25px;
+        line-height: 25px;
+    }
+
+        div.iconBtn div.float-l a.bgshow:hover {
+            background-color: #00243d;
+            text-decoration: none;
+        }
+
+        div.iconBtn div.float-l a.bgshow:visited {
+            background-color: #00243d;
+        }
+
+
+/*easyui的slider*/
+.slider-inner {
+    border-color: rgba(255,255,255,0.5);
+    background: transparent;
+}
+
+.slider-inner {
+    position: relative;
+    height: 6px;
+    top: 7px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+}
+/*搜索半径*/
+div.search-a {
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(0,36,61,0.7);
+    color: #ffffff;
+    font-size: 14px;
+    overflow: hidden;
+    z-index: 999;
+}
+
+div.searchTitle {
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(0,36,61,0.9);
+    padding: 0px 10px;
+}
+
+div.search-a div.searchTitle h5 {
+    float: left;
+}
+
+div.search-a div.searchTitle a.searchClose {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    display: block;
+    background: url(../img/close.png) no-repeat;
+    background-position: center;
+}
+
+    div.search-a div.searchTitle a.searchClose:hover {
+        background-color: #000;
+    }
+
+div.searchOption ul li {
+    width: 80px;
+    height: 90px;
+    text-align: center;
+    float: left;
+    margin: 0 10px;
+}
+
+    div.searchOption ul li img {
+        margin-top: 10px;
+    }
+
+    div.searchOption ul li input {
+        margin-top: 7px;
+        cursor: pointer;
+    }
+
+div.searchArea {
+    width: auto;
+    height: 40px;
+    margin-top: 10px;
+    background-color: #013b63;
+}
+
+    div.searchArea div.searchInput {
+        float: left;
+        padding-left: 10px;
+        line-height: 37px;
+    }
+
+        div.searchArea div.searchInput input {
+            width: 50px;
+            background-color: #00243d;
+            border: none;
+            outline: none;
+        }
+
+    div.searchArea div.searchButton {
+        float: right;
+        padding-right: 10px;
+        line-height: 36px;
+    }
+
+        div.searchArea div.searchButton input {
+            width: 50px;
+            border: none;
+            color: #ffffff;
+            background-color: #006bb3;
+            border-radius: 3px;
+            cursor: pointer;
+            outline: none;
+            line-height: 30px;
+        }
+
+
+
+/*书签弹出页面*/
+div#book {
+    background-color: rgba(0,36,61,0.7);
+    height: 220px;
+    width: 350px;
+    border-radius: 0;
+    border: 0;
+}
+
+    div#book div.topBut {
+        border: 0;
+        width: 350px;
+        height: 30px;
+        line-height: 30px;
+        background-color: rgba(0,36,61,0.9);
+    }
+
+        div#book div.topBut div.title {
+            line-height: 30px;
+            font-size: 12px;
+            color: #fff;
+            padding-left: 10px;
+        }
+
+        div#book div.topBut div.close {
+            width: 20px;
+            height: 20px;
+            margin-left: -30px;
+            border: 0;
+            margin-top: 5px;
+            background: url(../img/close.png) no-repeat;
+            background-position: center;
+        }
+
+            div#book div.topBut div.close:hover {
+                background-color: #000;
+            }
+
+    div#book div.inputShow {
+        padding-left: 10px;
+        color: #fff;
+        font-size: 14px;
+    }
+
+        div#book div.inputShow span {
+            color: #fff;
+            font-size: 14px;
+        }
+
+        div#book div.inputShow input#markTitle {
+            width: 150px;
+            color: #000000
+        }
+
+        div#book div.inputShow button#addBook {
+            width: 50px;
+            background-color: #2b4e76;
+            color: #fff !important;
+            height: 32px !important;
+            line-height: 32px 1;
+        }
+
+    div#book table#mytable {
+        width: 300px;
+    }
+
+        div#book table#mytable thead {
+            background: #00243d;
+            color: #fff;
+            height: 26px;
+            line-height: 26px;
+        }
+
+            div#book table#mytable thead tr th {
+                text-align: center;
+                font-size: 13px;
+            }
+
+        div#book table#mytable tbody#tBody {
+            background: #fff;
+            width: 280px;
+            height: 90px;
+            overflow: auto;
+        }
+
+            div#book table#mytable tbody#tBody tr {
+                background: #fff;
+                font-size: 13px;
+                cursor: pointer;
+            }
+
+                div#book table#mytable tbody#tBody tr:hover {
+                    background-color: rgba(43,78,118,0.7);
+                    color: #fff;
+                }
+
+                div#book table#mytable tbody#tBody tr:first-child {
+                    max-width: 100px;
+                    overflow: auto;
+                }
+
+
+/*弹框的头*/
+div.tou div.rightTitle {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #002d4d;
+}
+
+    div.tou div.rightTitle h5 {
+        font-size: 12px;
+        color: #fff;
+        float: left; /*height: 20px; line-height: 20px; */
+        margin-left: 10px;
+    }
+
+    div.tou div.rightTitle a.rightClose {
+        float: right;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        margin-top: 10px;
+        display: block;
+        background: url(../img/close.png) no-repeat;
+        background-position: center;
+    }
+
+        div.tou div.rightTitle a.rightClose:hover {
+            background-color: #000;
+        }
+
+
+
+/*20161221*/
+.mx-l-btn {
+    margin: 0 10px !important;
+    padding: 0 10px !important;
+}

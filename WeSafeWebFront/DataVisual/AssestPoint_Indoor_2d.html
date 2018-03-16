@@ -1,0 +1,46 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>资产点位标记-2d</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/pub.css" />
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/apiConfig.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.json.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script src="/DataVisual/js/public.js"></script>
+    <script src="js/controls.js"></script>
+</head>
+<body>
+    <div class="ui-loading"></div>
+    <div id="fengMap1" ></div>
+    <!--<div class="topleft2" style="top:26px">
+        <span class="label label-primary" style="font-size:20px" id="parkName"></span>
+    </div>-->
+    <div class="topright">
+        <div class="panel panel-primary" style="display:none;" id="assestTypeContainer">
+            <div class="panel-body" style="padding:5px">
+
+            </div>
+        </div>
+    </div>
+    <div class="topleft">
+        <div id="backButtonContainer">
+
+        </div>
+        <button class="btn btn-primary btn-sm hide" id="btnBack" style="margin-bottom:15px;display:block"><span class="glyphicon glyphicon-share-alt rollover" aria-hidden="true"></span>  返回</button>
+        <div class="btn-group-vertical starit" role="group">
+            <!--<button class="btn btn-primary btn-sm" onclick="SwitchMode()">2D</button>-->
+            <!--<button class="btn btn-default btn-sm" onclick="SwitchMutiFloor()" id="btnMutiFloor"><img src="images/danceng.png" /></button>-->
+
+        </div>
+    </div>
+<script src="kinetic-map/require.js" data-main="kinetic-map/AssestPoint_Indoor_2d"></script>
+</body>
+</html>
+
+

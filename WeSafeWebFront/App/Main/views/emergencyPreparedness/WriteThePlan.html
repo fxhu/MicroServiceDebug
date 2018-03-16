@@ -1,0 +1,141 @@
+﻿<link href="/Plan/plan.css" rel="stylesheet" />
+<!-- cxselect -->
+<script src="/Video/plugins/cxselect/jquery.cxselect.js"></script>
+<script src="/assets/js/Common.js"></script>
+<script src="/assets/plugins/libs/quick-nav/quick-nav.js"></script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="/ueditor/VisualAreaDesign.js"></script>
+<script src="/ueditor/jquery.form.js"></script>
+<script src="/assets/plugins/jsTree/jsTree.min.js"></script>
+<link href="/assets/plugins/jsTree/jsTree.css" rel="stylesheet" />
+<link href="/assets/plugins/jsTree/themes/default/style.css" rel="stylesheet" />
+<div class="row clearfix {{vm.myclass}}"  ng-controller="app.views.writetheplan as vm">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered portlet-light-bordered-box" style="height:100%;width:100%;margin-bottom:0;overflow:hidden;">
+
+            <div class="portlet-title portlet-custom-title text-center" style="border-bottom: 1px solid rgba(1, 172, 252, 1);" ng-mouseover="vm.ShowEditTitle()" ng-mouseleave="vm.HideEditTitle()">
+                <span>{{vm.oldPlanName}}</span>
+                <a href="javascript:;" ng-if="vm.IsShowTitleBtn" ng-click="vm.editTitle()">
+                    <i class="fa fa-edit"></i>
+                </a>&nbsp;
+                <div class="actions">
+                    <a class="btn blue btn-outline btn-circle btn-sm tooltips" href="javascript:;" data-placement="top" data-original-title="添加章节" ng-click="vm.SectionObj.Add()">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a class="btn blue btn-outline btn-circle btn-sm tooltips" href="javascript:;" data-placement="top" data-original-title="导入模板" ng-click="vm.showModal()">
+                        <i class="fa fa-level-down"></i>
+                    </a>
+                    <a class="btn blue btn-outline btn-circle btn-sm tooltips" href="javascript:;" data-placement="top" data-original-title="保存预案" ng-click="vm.save()">
+                        <i class="fa fa-check"></i>
+                    </a>                    
+                </div>
+                <ul class="demo-menu" role="menu">
+                    <li style="font-size:18px;">目录</li>
+                    <li ng-repeat="(key, val) in vm.SectionObj.Models">
+                        <a href="javascript:;" ng-click="vm.click(key)">
+                            {{val.OldSecName}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="planScroller" class="scroller" style="height: 707px;margin-top: 18px;padding-left:250px;" data-always-visible="1" data-rail-visible="0">
+                <div class="portlet-body pre-timeline pre-box" style="padding-top:0px;">
+                    <div class="scorllercontent" ng-repeat="(key, val) in vm.SectionObj.Models">
+                        <button type="button" class="btn btn-circle btn-default btnNum activing" ng-click="vm.click(key)">
+
+                            <span class="num" style="{{key>8?'margin-left:-5px':''}}" id="div{{key+1}}">{{key+1}}</span>
+                        </button>
+                        <div class="pre-content" ng-mouseover="vm.ShowEditBtn(key)" ng-mouseleave="vm.HideEditBtn(key)">
+                            <div class="row form-group" ng-if="val.IsEdit" style="margin-left:0px;">
+                                <div class="col-md-7">
+                                    <input type="text" name="secname" maxlength="32" class="form-control" ng-model="val.SecName">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary waves-effect" ng-click="vm.SectionObj.Save(key)">保存</button>
+                                    <button type="button" class="btn btn-primary waves-effect" ng-click="vm.SectionObj.Cancel(key)">取消</button>
+                                </div>
+                            </div>
+
+                            <div class="row form-group" style="margin-left:0px;display:{{val.IsEdit?'block':'none'}}">
+                                <div class="col-md-10">
+                                    <script id="editor{{key}}" type="text/plain" class="validate" style="width:100%;height:380px;">
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="pre-title" ng-if="!val.IsEdit">
+                                <span class="title-arrow"></span>
+                                <span class="title-content">{{val.SecName}}</span>
+                                <div style="float:right" ng-if="val.IsBtnShow">
+                                    <button type="button" class="btn btn-primary waves-effect" ng-click="vm.SectionObj.Edit(key)">编辑</button>
+                                    <button type="button" class="btn btn-primary waves-effect" ng-click="vm.SectionObj.MoveUp(key)" ng-if="key>0">上移</button>
+                                    <button type="button" class="btn btn-primary waves-effect" ng-click="vm.SectionObj.MoveDown(key)" ng-if="(key+1)!=vm.SectionObj.Models.length">下移</button>
+                                    <button type="button" class="btn btn-primary waves-effect" ng-click="vm.SectionObj.Del(key)">删除</button>
+                                </div>
+                            </div>
+                            <div class="content-clear"></div>
+                            <div ng-if="!val.IsEdit" ng-bind-html="val.SecContent|to_trusted"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>    
+
+    <div class="modal" id="myPlanTitle" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">创建预案</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label for="inputName" class="col-md-4 control-label">预案名称：</label>
+
+                            <div class="col-md-8">
+                                <input id="planname" type="text" name="planname" ng-model="vm.PlanName" required maxlength="32" message="请输入预案名称" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="inputName" class="col-md-4 control-label">预案类型：</label>
+
+                            <div class="col-md-8">
+                                <select class="validate form-control" required ng-model="vm.TypeID" ng-options="t.id as t.name for t in vm.Types"></select>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="vm.CreatePlan()">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal" id="myModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">请选择模板</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="treelist" class="tree-demo tree-scrollbar"> </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="vm.import()">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>

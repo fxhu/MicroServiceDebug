@@ -1,0 +1,63 @@
+﻿<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="/assets/plugins/fonts/iconfont.css">
+<link rel="stylesheet" href="\assets\css\KeyArea\PrePlanManagement.css">
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.preplanmanagement as vm" style="height:100%;">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered" style="height:100%;">
+            <div class="portlet-title">
+                
+                <div class="caption btn btn-md blue">
+                    <span class="caption-subject sbold">
+                        预案管理
+                    </span>
+                </div>
+                <!-- <div class="actions">
+                    <div class="btn-group">
+                        <button class="btn btn-lg blue" ng-click="vm.add()"><i class="fa fa-plus"></i>撰写预案</button>
+                    </div>
+                </div> -->
+            </div>
+            <div class="portlet-body">
+                <div class="col-xs-6 tabbable tabbable-tabdrop">
+                    <ul class="nav nav-pills" style="margin-left:-15px">
+                        <li class="active">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchType()">全部</a>
+                        </li>
+                        <li ng-repeat="(key, val) in list">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchType(val.id)">{{val.name}}</a>
+                        </li>
+                    </ul>                 
+                </div>
+                <div class="col-xs-6 text-right">
+                    <form class="form-inline pull-right" enter-key="vm.search(false)">
+                        <div class="form-group" style="padding-right:10px;">
+                            <div class="input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control input-middle" ng-model="vm.serchinfo" placeholder="请输入...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn blue" type="button" ng-click="vm.search(false)">搜索</button>
+                            <button id="btnReset" class="iconfont icon-zhongzhi" style="color:darkgray; font-size:20px;" type="button" ng-click="vm.reset()" title="重置"></button>
+                        </div>
+                    </form>
+                    <!-- 撰写预案 -->
+                    <div class="btn-group pull-right" style="margin-right:20px;font-size:12px;margin-top:3px;">
+                            <button id="writePlan" class="btn btn-sm " ng-click="vm.add()">撰写预案</button>
+                        </div>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <table id="tb_plan"></table>
+            </div>
+        </div>
+    </div>
+</div>

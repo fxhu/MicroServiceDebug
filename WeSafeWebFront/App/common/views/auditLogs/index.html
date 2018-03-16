@@ -1,0 +1,66 @@
+<div ng-controller="common.views.auditLogs.index as vm">
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-title">
+            <div class="caption">
+                 <span class="caption-subject sbold">
+                    <span>审计日志</span>
+                </span>
+            </div>
+            <div class="actions">
+                <div class="btn-group">
+                    <button class="btn blue" ng-click="vm.exportToExcel()"><i class="fa fa-file-excel-o"></i> 导出到Excel</button>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="form">
+                <form class="horizontal-form">
+                    <div class="form-inline" enter-key="vm.getAuditLogs()">
+                        <div class="col-xs-12 text-right margin-bottom-10">
+
+                            <div class="form-group" style="padding-right:10px;">
+                                <div class="input-icon">
+                                    <i class="fa fa-search"></i>
+                                    <input type="text" class="form-control input-xlarge" ng-model="vm.requestParams.filterText" placeholder="请输入...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn blue" type="button" ng-click="vm.getAuditLogs()">搜索</button>
+                                <button class="btn blue" type="button" ng-click="vm.reset()">重置</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row margin-bottom-5">
+
+                    </div>
+                </form>
+            </div>
+            <div busy-if="vm.loading">
+                <div ui-grid="vm.gridOptions" ui-grid-pagination ui-grid-resize-columns ></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .ui-grid-pager-control-input {
+        width: 100px !important;
+    }
+
+    .ui-grid-pager-max-pages-number {
+        display: none;
+    }
+
+        .ui-grid-pager-max-pages-number abbr {
+            display: none;
+        }
+
+    .ui-grid-pager-count {
+        display: none;
+    }
+
+        .ui-grid-pager-count abbr {
+            display: none;
+        }
+</style>

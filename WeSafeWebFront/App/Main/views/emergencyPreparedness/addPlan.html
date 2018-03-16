@@ -1,0 +1,30 @@
+﻿<form class="{{vm.myclass}}" id="frm_add_plan" name="frm_add_plan" novalidate>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="vm.close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+            <span>{{vm.name==null?"添加预案":"编辑预案"}}</span>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <div class="row clearfix" style="margin-top: 10px;">
+            <div class="col-sm-12">
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <label for="name" class="form-label">预案名称</label>
+                        <input id="name" type="text" name="name" ng-model="vm.name" required maxlength="32" class="validate form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+            取消
+        </button>
+        <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()" ng-disabled="frm_add_plan.$invalid">
+            保存
+        </button>
+    </div>
+</form>

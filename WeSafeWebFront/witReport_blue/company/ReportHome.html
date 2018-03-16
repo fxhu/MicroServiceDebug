@@ -1,0 +1,133 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>报表</title>
+    <link rel="stylesheet" href="../../assets/css/witReportCss/CommonStyle.css">
+    <link rel="stylesheet" href="../../assets/css/witReportCss/ReportHome-white.css">
+    <!-- <link rel="stylesheet" href="../../assets/css/witReportCss/ReportHome-blue.css"> -->
+
+</head>
+
+<body>
+    <div class="layout">
+        <header class="clearfix">
+            <h2 class="pull-left vertical-center">
+                <span id="areaName"></span>
+            </h2>
+            <span class=" vertical-center pull-right">
+            </span>
+        </header>
+
+
+        <main>
+            <ul class="bigCharts clearfix ">
+                <!--1.0 资产报表-->
+                <li class="clearfix">
+                    <h2>
+                        <a name="detailrptlink" href="../company/AreaDeviceReport.html">资产统计</a>
+                    </h2>
+                    <div id="pieDevice" class="bigBoxPie">
+
+                    </div>
+                    <div id="lineDevice" class="bigBoxLine">
+
+                    </div>
+                </li>
+                <!--2.0 报警报表-->
+                <li class="clearfix">
+                    <h2>
+                        <a name="detailrptlink" href="../company/AlarmReport.html">报警统计</a>
+                    </h2>
+                    <div id="pieAlarm" class="bigBoxPie">
+
+                    </div>
+                    <div id="lineAlarm" class="bigBoxLine">
+
+                    </div>
+                </li>
+
+            </ul>
+            <ol class="smallCharts clearfix ">
+                <li clearfix>
+                    <h2>
+                        <a name="detailrptlink" href="../company/hiddenDanger.html">隐患</a>
+                    </h2>
+                    <div id="HiddenPieChart" clearfix></div>
+                    <div id="HiddenLineChart" clearfix>
+
+                    </div>
+
+                </li>
+                <li>
+                    <h2>
+                        <a name="detailrptlink" href="../company/PatrolReport.html">巡检</a>
+                    </h2>
+                    <div id="patrolPieChart">
+
+                    </div>
+                    <div id="patrolLineChart">
+
+                    </div>
+                </li>
+                <li>
+                    <h2>
+                        <a name="detailrptlink" href="../company/TaskRepairReport.html">维修</a>
+                    </h2>
+                    <div id="RepairPieChart">
+
+                    </div>
+                    <div id="RepairLineChart">
+
+                    </div>
+                </li>
+                <li>
+                    <h2>
+                        <a name="detailrptlink" href="../company/TaskCheckingReport.html">检测</a>
+                    </h2>
+                    <div id="CheckPieChart">
+
+                    </div>
+                    <div id="CheckLineChart">
+
+                    </div>
+                </li>
+                <li>
+                    <h2>
+                        <a name="detailrptlink" href="../company/TaskMaintainReport.html">保养</a>
+                    </h2>
+                    <div id="MaintainPieChart">
+
+                    </div>
+                    <div id="MaintainLineChart">
+
+                    </div>
+                </li>
+            </ol>
+        </main>
+        <!--       <div class="hide">
+            <div class="bottom">
+                <a id="wesafedesktopa">我的桌面</a>
+            </div>
+        </div>-->
+    </div>
+    <script>
+    </script>
+    <script src="../../assets/js/Baidu/echarts-all-3.js"></script>
+    <script src="../../assets/js/jquery-3.2.1.js"></script>
+    <!-- <script src="../../assets/js/witReportJsLib/areaJsLib/WeSafeEchartsHelper.js"></script>    -->
+    <script src="../../assets/js/witReportJsLib/areaJsLib/WeSafeEchartsWhite.js"></script>
+    <script type="text/javascript" src="../../apiConfig.js"></script>
+    <script type="text/javascript" src="../../assets/js/PatrolEnum.js"></script>
+    <script type="text/javascript" src="../../assets/js/DeviceEnum.js"></script>
+    <script type="text/javascript" src="../../assets/js/AlarmEnum.js"></script>
+    <script type="text/javascript" src="../../assets/js/hiddenDangerEnum.js"></script>
+    <script type="text/javascript" src="../../report/js/WeSafeRptCommon.js"></script>
+    <script src="../../assets/js/TaskEnum.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/ReportAPI.js"></script>
+    <script src="../../assets/js/witReportJsLib/companyJsLib/ReportHome.js"></script>
+
+</body>
+
+</html>

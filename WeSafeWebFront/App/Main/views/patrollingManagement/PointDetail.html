@@ -1,0 +1,74 @@
+﻿<style>
+	.myimglist {
+		width: 2000px;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.myimglist li {
+		list-style: none;
+		float: left;
+		margin-left: 10px;
+		width: 100px;
+		height: 125px;
+	}
+
+	.myimglist img {
+		width: 100%;
+		height: 80%;
+	}
+
+	.form-group.form-md-line-input .form-control[readonly],
+	.form-group.form-md-line-input .form-control[disabled],
+	fieldset[disabled] .form-group.form-md-line-input .form-control {
+		border-bottom: 1px solid lightseagreen !important;
+	}
+</style>
+<div novalidate>
+	<form name="exampleForm" role="form" novalidate class="form-validation">
+
+		<div class="modal-header">
+			<h4 class="modal-title">
+				<span>{{vm.point.name}}</span>
+			</h4>
+		</div>
+
+
+		<div class="modal-body">
+			<!-- <div class="form-group" ng-repeat="item in vm.point.checkItem.items">
+				<label class="control-label col-md-2" style="margin-top: 10px;">{{item.content}}</label>
+				<div class="col-md-10" style="margin-top: 10px;">
+					<select id="mselect_user" required></select>
+				</div>
+			</div> -->
+			<div class="form-group form-md-line-input form-md-floating-label no-hint" ng-repeat="item in vm.point.checkItem.items">
+				<input auto-focus class="form-control" type="text" name="DisplayName" readonly ng-model="item.value" required>
+				<label>{{item.content}}</label>
+			</div>
+			<div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="vm.point.checkItem.isNormal==false">
+				<input auto-focus class="form-control" type="text" name="DisplayName" readonly ng-model="vm.point.checkItem.exception" required>
+				<label>异常描述</label>
+			</div>
+			<div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="vm.point.checkItem.isNormal==false">
+				<input auto-focus class="form-control" type="text" name="DisplayName" readonly ng-model="vm.point.checkItem.remark" required>
+				<label>现场处理情况</label>
+			</div>
+
+			<div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="vm.point.checkItem.fileItems.length>0" style="margin-top: -25px;">
+				<label class="control-label">图片</label>
+				<ul class=" myimglist">
+					<li ng-repeat="sb in vm.point.checkItem.fileItems">
+						<img src="{{sb.url}} " ng-click="vm.clickimg(sb.url)" />
+						<div class="col-xs-12">
+							<a class="col-xs-12" href="{{vm.abpPath}}File/DownLoadFile/?FileName={{sb.url}}&other=1" target="_Blank">下载</a>
+						</div>
+					</li>
+				</ul>			
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()" style="margin-top: 10px;">返回</button>
+			<!-- <button type="submit" button-busy="vm.saving" busy-text="保存中" class="btn btn-primary blue" ng-click="vm.save()" style="margin-top: 10px;"><i class="fa fa-save"></i> <span>指派</span></button> -->
+		</div>
+	</form>
+</div>

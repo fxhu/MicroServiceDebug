@@ -1,0 +1,37 @@
+﻿.collapsed {
+    display: none; /* hide it for small displays */
+}
+
+.row-main{
+    overflow-x: hidden; /* necessary to hide collapsed sidebar */
+}
+
+.tmpContent{
+    -webkit-transition: width 0.3s ease;
+    -moz-transition: width 0.3s ease;
+    -o-transition: width 0.3s ease;
+    transition: width 0.3s ease;
+}
+
+.tmpMenu{
+    -webkit-transition: margin 0.3s ease;
+    -moz-transition: margin 0.3s ease;
+    -o-transition: margin 0.3s ease;
+    transition: margin 0.3s ease;
+}
+
+@media (min-width: 992px) {
+    .collapsed {
+        display: block;
+        margin-left: -25%; /* same width as sidebar */
+    }
+    .right-collapsed {
+        display: block;
+        margin-right: -25%; /* same width as sidebar */
+    }
+}
+
+.tree-scrollbar {
+    overflow-y: auto;
+    height: 280px;
+}

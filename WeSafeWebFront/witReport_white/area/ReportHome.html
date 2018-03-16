@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>报表</title>
+    <link rel="stylesheet" href="../../assets/css/witReportCss/CommonStyle.css">
+    <link rel="stylesheet" href="../../assets/css/witReportCss/ReportHome.css">
+</head>
+<body>
+    <div class="layout">
+        <h2>
+            <span id="areaName"></span>
+        </h2>
+
+        <main>
+            <ul class="bigCharts clearfix ">
+                <!--1.0 资产报表-->
+                <li clearfix>
+                    <h2>
+                        <a name="detailrptlink" href="../area/AreaDeviceReport.html">资产</a>
+                    </h2>
+                    <div id="pieDevice" class="bigBoxPie">
+
+                    </div>
+                    <div id="lineDevice" class="bigBoxLine">
+
+                    </div>
+                </li>
+                <!--2.0 报警报表-->
+                <li clearfix>
+                    <h2>
+                        <a name="detailrptlink" href="../area/AlarmReport.html">报警</a>
+                    </h2>
+                    <div id="pieAlarm" class="bigBoxPie">
+
+                    </div>
+                    <div id="lineAlarm" class="bigBoxLine">
+
+                    </div>
+                </li>
+
+            </ul>
+            <ol class="smallCharts clearfix ">
+                <li clearfix>
+                    <h2>
+                        <a name="detailrptlink" href="../area/hiddenDanger.html">隐患</a>
+                    </h2>
+                    <div id="HiddenPieChart" clearfix></div>
+                    <div id="HiddenLineChart" clearfix>
+
+                    </div>
+
+                </li>
+                <li>
+                    <h2>
+                        <a name="detailrptlink" href="../area/PatrolReport.html">巡检</a>
+                    </h2>
+                    <div id="patrolPieChart">
+
+                    </div>
+                    <div id="patrolLineChart">
+
+                    </div>
+                </li>
+                <li>
+                    <h2>
+                        <a name="detailrptlink" href="../area/TaskRepairReport.html">维修</a>
+                    </h2>
+                    <div id="RepairPieChart">
+
+                    </div>
+                    <div id="RepairLineChart">
+
+                    </div>
+                </li>
+                <li>
+                    <h2>
+                        <a name="detailrptlink" href="../area/TaskCheckingReport.html">检测</a>
+                    </h2>
+                    <div id="CheckPieChart">
+
+                    </div>
+                    <div id="CheckLineChart">
+
+                    </div>
+                </li>
+                <li>
+                    <h2>
+                        <a name="detailrptlink" href="../area/TaskMaintainReport.html">保养</a>
+                    </h2>
+                    <div id="MaintainPieChart">
+
+                    </div>
+                    <div id="MaintainLineChart">
+
+                    </div>
+                </li>
+            </ol>
+        </main>
+        <div>
+            <div class="bottom">
+                <a id="wesafedesktopa">我的桌面</a>
+            </div>
+        </div>
+    </div> 
+    <script src="../../assets/js/Baidu/echarts-all-3.js"></script>
+    <script src="../../assets/js/jquery-3.2.1.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/WeSafeEchartsHelper.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/WeSafeRptCommon.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/AlarmEnum.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/DeviceEnum.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/hiddenDangerEnum.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/PatrolEnum.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/TaskEnum.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/ReportAPI.js"></script>
+    <script src="../../assets/js/witReportJsLib/areaJsLib/ReportHome.js"></script>
+</body>
+
+</html>

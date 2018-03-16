@@ -1,0 +1,8 @@
+﻿<div class="{{vm.myclass}}" novalidate>
+    <div class="modal-body" style="padding:10px">
+       <iframe ng-src="{{vm.editSource}}" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+    <div class="modal-footer" style="padding:10px">
+        <button type="submit" button-busy="vm.saving" busy-text="保存中..." class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="exampleForm.$invalid"><span>关闭</span></button>
+    </div>
+</div>

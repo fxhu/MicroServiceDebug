@@ -1,0 +1,9 @@
+﻿<select name="RoleSelectionCombobox"
+        class="form-control"
+        ng-options="role.id as role.displayName for role in roles"
+        ng-model="selectedRole"
+        ui-jq="selectpicker"
+        ui-options='{ iconBase: "famfamfam-flag", tickIcon: "fa fa-check" }'
+        >
+    <option value="">选择角色</option>
+</select>

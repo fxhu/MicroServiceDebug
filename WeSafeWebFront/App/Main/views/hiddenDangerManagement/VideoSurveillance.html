@@ -1,0 +1,70 @@
+﻿
+<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<script src="/Video/js/jsmpeg.min.js"></script>
+<script src="/assets/js/areaDropdown.js"></script>
+
+<div class="row clearfix {{vm.myclass}}"   ng-controller="app.views.videosurveillance as vm" style="height:100%;">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered" style="min-height:100%;height:auto !important;height:100%;">
+            <div class="pd20 clearfix">
+            <div class="portlet-title pull-left">
+                <div class="caption btn btn-md blue" style="margin-top:15px;">
+                    <span class="caption-subject sbold">
+                        视频监管
+                    </span>
+                </div>
+            </div>
+            </div>
+            <div class="portlet-body">
+                <div class="col-xs-6 tabbable tabbable-tabdrop" style="margin-left: -15px;margin-top:11px;margin-bottom:-10px;">
+<!--                 <div class="form-group" style="padding-left: 10px;">
+                    <button class="btn blue" type="button" id="btnUnRead" ng-click="vm.UnRead()">未读</button>
+                    <button class="btn blue" type="button" id="btnIsRead" ng-click="vm.hadRead()">已读</button>
+                </div>
+ -->
+                    <ul class="nav nav-pills" id="switchNav">
+                        <li class="active">
+                            <!--  -->
+                            <a id="allCamera" data-toggle="tab" ng-click="vm.allCamera()">全部区域</a>
+                        </li>
+                        <li>
+                            <!--   -->
+                            <a id="imPortantAreaCamera" data-toggle="tab" ng-click="vm.imPortantAreaCamera()">重点区域</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-6" style="margin-left: -20px;">
+                    <div class="text-left">
+                        <div class="btn-group" style="margin-left:5px" ng-repeat="area in vm.areasObj.areas">
+                            <button id="videoSurv_{{area.level}}" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{area.btnName}}<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="child in area.childAreas">
+                                    <a ng-click="vm.areasObj.LoadArea(child.id,child.nextlevel,true,child.displayName)">{{child.displayName}}</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a ng-click="vm.areasObj.LoadArea(area.pid,area.level,false,area.levelName)">
+                                        {{area.levelName}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div id="videolist" class="list-unstyled row clearfix">
+                    <table id="tb_video"></table>                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

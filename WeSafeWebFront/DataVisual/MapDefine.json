@@ -1,0 +1,136 @@
+﻿[
+    {
+        "id":"FengMap",
+        "name":"蜂鸟地图",
+        "maps":
+        [
+            {
+                "id":"wutos001",
+                "name":"烽火大楼"
+            },
+            {
+                "id":"wutos002",
+                "name":"西部管道"
+            }
+        ],
+        "areaediturl_2":"/dataVisual/AreaEdit_Indoor.html?id={id}",
+        "pointediturl_2":"/dataVisual/AssestPoint_Indoor.html?id={id}",
+        "viewurl":"/datavisual/roommap.html?BuildingId={id}&disableBuildingSwitch=1"
+    }
+    ,{
+        "id":"2D",
+        "name":"平面地图",
+        "maps":
+        [
+            {
+                "id":"lggk_2d",
+                "name":"理工光科"
+            }
+        ],
+        "areaediturl_2":"/dataVisual/AreaEdit_Indoor_2d.html?id={id}&use=areaedit",
+        "pointediturl_2":"/dataVisual/AssestPoint_Indoor_2d.html?id={id}&use=pointedit",
+        "viewurl":"/datavisual/roommap1.html?BuildingId={id}&disableBuildingSwitch=1%use=view"
+    },
+    {
+        "id":"3D",
+        "name":"三维地图",
+        "maps":
+        [
+            {
+                "id":"fiberhome",
+                "name":"烽火科技园",
+                "models":[
+                    {
+                        "id": "f1",
+                        "name": "一号楼",
+                        "markerCoor": {
+                            "x": 9.27,
+                            "y": 8.53,
+                            "z": -20.53
+                        }
+                    },
+                    {
+                        "id": "f2",
+                        "name": "二号楼",
+                        "markerCoor": {
+                            "x": 15.28,
+                            "y": 8.53,
+                            "z": -10.65
+                        }
+                    },
+                    {
+                        "id": "f3",
+                        "name": "三号楼",
+                        "markerCoor": {
+                            "x": 16.31,
+                            "y": 8.53,
+                            "z": 0.75
+                        }
+                    },
+                    {
+                        "id": "f4",
+                        "name": "四号楼",
+                        "markerCoor": {
+                            "x": 18.24,
+                            "y": 8.53,
+                            "z": 13.83
+                        }
+                    },
+                    {
+                        "id": "f5",
+                        "name": "五号楼",
+                        "markerCoor": {
+                            "x": 3.61,
+                            "y": 8.53,
+                            "z": 17.60
+                        }
+                    },
+                    {
+                        "id": "f6",
+                        "name": "六号楼",
+                        "markerCoor": {
+                            "x": 1.25,
+                            "y": 8.53,
+                            "z": 6.77
+                        }
+                    },
+                    {
+                        "id": "f7",
+                        "name": "七号楼",
+                        "markerCoor": {
+                            "x": 1.45,
+                            "y": 8.53,
+                            "z": -6.11
+                        }
+                    },
+                    {
+                        "id": "f8",
+                        "name": "八号楼",
+                        "markerCoor": {
+                            "x": -5.33,
+                            "y": 8.53,
+                            "z": -7.68
+                        }
+                    }
+                ]
+            }
+        ],
+        "areaediturl":"/dataVisual/bim.html?id={id}&use=areaedit",
+        "pointediturl":"",
+        "viewurl":"/dataVisual/bim.html?id={id}&use=view"
+    },
+    {
+        "id":"GIS",
+        "name":"GIS",
+        "maps":
+        [
+            {
+                "id":"Baidu",
+                "name":"百度地图"
+            }
+        ],
+        "areaediturl":"/DataVisual/AreaEdit_GIS.html?id={id}",
+        "pointediturl":"/dataVisual/AssestPoint_Park.html?id={id}",
+        "viewurl":"/DataVisual/BuildingMap.html?ParkId={id}"
+    }
+]

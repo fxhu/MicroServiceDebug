@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!--网站编码格式，UTF-8 国际编码，GBK或 gb2312 中文编码-->
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="Keywords" content="关键词一，关键词二">
+    <meta name="Description" content="网站描述内容">
+    <meta name="Author" content="Yvette Lau">
+    <title>Document</title>
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="../apiConfig.js"></script>
+    <script src="js/unslider.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/WeSafeRptCommon.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            font-family: "Microsoft Yahei", Verdana, sans-serif;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        address, cite, dfn, em, var {
+            font-style: normal;
+        }
+
+        .banner {
+            position: relative;
+            overflow: auto;
+            text-align: center;
+            width: 640px;
+            margin: 0 auto
+        }
+
+            .banner .dots {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 70px;
+                z-index: 3;
+            }
+
+                .banner .dots li {
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    margin: 0 4px;
+                    text-indent: -999em;
+                    border: 2px solid #fff;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    opacity: .4;
+                    -webkit-transition: background .5s,opacity .5s;
+                    -moz-transition: background .5s,opacity .5s;
+                    transition: background .5s,opacity .5s
+                }
+
+                    .banner .dots li.active {
+                        background: #fff;
+                        opacity: 1
+                    }
+
+            .banner .arrow {
+                position: absolute;
+                width: 20px;
+                height: 37px;
+                top: 50%;
+                margin-top: -18px;
+                overflow: hidden;
+                z-index: 2;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                -ms-transition: all 0.5s;
+                -o-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+
+            .banner #al {
+                left: 0px;
+            }
+
+            .banner #ar {
+                right: 0px;
+            }
+
+            .banner ul {
+                z-index: 1;
+                width: 600%;
+                overflow: hidden;
+            }
+
+                .banner ul .slider-item {
+                    width: 640px;
+                    float: left;
+                    height: 480px;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                    .banner ul .slider-item .slider-title {
+                        position: absolute;
+                        left: 0;
+                        bottom: 0px;
+                        width: 610px;
+                        max-height: 56px;
+                        padding: 15px;
+                        text-align: left;
+                        line-height: 28px;
+                        color: #fff;
+                        font-size: 18px;
+                        font-weight: bold;
+                        background: -webkit-linear-gradient(top, transparent, rgba(0,0,0,0.9));
+                        background: url(../images/slider-info-bg.png) \9;
+                    }
+
+            .banner .progress {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 15%;
+                min-height: 3px;
+                overflow: hidden;
+                z-index: 2;
+                background: #f60
+            }
+
+        .red {
+            background-color: green;
+        }
+    </style>
+
+</head>
+
+
+<body>
+<div class="banner" id="b04">
+
+          <!--<div style="width:640px;height:480px;"><div style="float:left;width:400px;height:480px;" id="linecontainer2"></div><div style="float:right;width:240px;height:480px;" id="piecontainer2"></div></div>
+    --><div style="float:left;width:640px;height:480px;" id="linecontainer2"></div>
+</div>
+
+<script>
+    $(document).ready(function (e) {
+
+
+
+
+
+        //业务代码
+        function getLineData(echartsInstance, reportType, subStatus, url, chartType) {
+            $.getJSON(url, function (data) {
+
+                data = data.items;
+
+                var temp = [];
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    temp.push(data[i].rate);
+
+                }
+                //debugger;
+                echartsInstance.setOption({
+
+                    series: [
+                        {
+                            name: subStatus,
+                            type: chartType,
+                            data: temp
+                        }
+                    ]
+                });
+            });
+        }
+        function genData(data, flag) {
+
+            var seriesData = [];
+            for (var i = 0; i < data.length; i++) {
+                if (flag == 1) {
+                    if (data[i].name == 1) {
+                        seriesData.push({ "name": "故障:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 2) {
+                        seriesData.push({ "name": "销毁:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 3) {
+                        seriesData.push({ "name": "完好:" + data[i].value, "value": data[i].value });
+                    }
+                }
+                if (flag == 2) {
+                    if (data[i].name == 1) {
+                        seriesData.push({ "name": "火警:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 2) {
+                        seriesData.push({ "name": "故障:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 3) {
+                        seriesData.push({ "name": "误报:" + data[i].value, "value": data[i].value });
+                    }
+                }
+                if (flag == 3) {
+                    if (data[i].name == 1) {
+                        seriesData.push({ "name": "待审核:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 2) {
+                        seriesData.push({ "name": "待指派:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 3) {
+                        seriesData.push({ "name": "待整改:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 4) {
+                        seriesData.push({ "name": "待复查:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 6) {
+                        seriesData.push({ "name": "已闭环:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 7) {
+                        seriesData.push({ "name": "已逾期:" + data[i].value, "value": data[i].value });
+                    }
+
+                }
+                if (flag == 4) {
+                    if (data[i].name == 1) {
+                        seriesData.push({ "name": "待审核:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 2) {
+                        seriesData.push({ "name": "未开始:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 3) {
+                        seriesData.push({ "name": "进行中:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 4) {
+                        seriesData.push({ "name": "已完成:" + data[i].value, "value": data[i].value });
+                    }
+                    if (data[i].name == 5) {
+                        seriesData.push({ "name": "已逾期:" + data[i].value, "value": data[i].value });
+                    }
+
+                }
+
+            }
+            return {
+                seriesData: seriesData
+            };
+
+        }
+
+        //告警实例
+       /* var dom2 = document.getElementById("piecontainer2");
+        var pieChart2 = echarts.init(dom2);*/
+        var linedom2 = document.getElementById("linecontainer2");
+        var lineChart2 = echarts.init(linedom2);
+        ////告警里面的所有内容    开始
+
+       /* var pieChart2Option = {
+
+            tooltip: {
+                trigger: 'item',
+                formatter: " {c} 占({d}%)"
+            },
+            series: [
+                {
+                    name: '告警',
+                    type: 'pie',
+                    radius: '70%',
+                    center: ['50%', '50%'],
+                    data: [],//data.seriesData
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+
+        $.getJSON(RptCommon.Host + "api/company/WarningReport/FindLatestWarningCount/13", function (data) {
+            var data = genData(data.items, 2);
+            pieChart2Option.series[0].data = data.seriesData;
+            pieChart2.setOption(pieChart2Option);
+
+        });*/
+
+        $.getJSON(RptCommon.Host + "api/company/WarningReport/FindDailyRate/[13]/5", function (data) {
+            data = data.items;
+            var arr2 = [];
+            for (var i = 0; i < data.length; i++) {
+                var temp = RptCommon.formatData(data[i].timestamp);
+                arr2.push(temp);
+            }
+
+            var arr1 = [];
+
+
+            for (var i = 0; i < data.length; i++) {
+
+                arr1.push(data[i].rate);
+
+            }
+
+            var lineChart2Option = {
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        var relVal = params[0].name;
+                        for (var i = 0, l = params.length; i < l; i++) {
+                            relVal += '<br/>' + params[i].seriesName + ' : ' + (params[i].value * 100).toFixed(2) + "%";
+                        }
+                        return relVal;
+                    }
+                },
+                legend: {
+                    data: ['火警已处理', '火警未处理', '故障已处理', '故障未处理']
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: arr2
+                },
+                yAxis:
+                    {
+                        type: 'value',
+                        axisLabel: {
+                            formatter: function (value, index) {
+                                return parseFloat((value * 100).toFixed(2)) + "%";
+                            }
+                        }
+                    },
+                dataZoom: [{
+                    type: 'inside',
+                    start: 0,
+                    end: 10
+                }, {
+                    start: 0,
+                    end: 10,
+                    handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                    handleSize: '80%',
+                    handleStyle: {
+                        color: '#fff',
+                        shadowBlur: 3,
+                        shadowColor: 'rgba(0, 0, 0, 0.6)',
+                        shadowOffsetX: 2,
+                        shadowOffsetY: 2
+                    }
+                }],
+                series: [
+                    {
+                        name: '火警已处理',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        lineStyle: {
+                            normal: {
+                                opacity: 0
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: 'blue'
+                            }
+                        }
+                    },
+                    {
+                        name: '火警未处理',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        lineStyle: {
+                            normal: {
+                                opacity: 0
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: 'yellow'
+                            }
+                        }
+                    }, {
+                        name: '故障已处理',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        lineStyle: {
+                            normal: {
+                                opacity: 0
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: 'pink'
+                            }
+                        }
+                    }, {
+                        name: '故障未处理',
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'none',
+                        sampling: 'average',
+                        lineStyle: {
+                            normal: {
+                                opacity: 0
+                            }
+                        },
+                        areaStyle: {
+                            normal: {
+                                color: 'orange'
+                            }
+                        }
+                    }
+                ]
+            };
+            lineChart2.setOption(lineChart2Option);
+            getLineData(lineChart2, null, "火警已处理", RptCommon.Host + "api/company/WarningReport/FindDailyRate/[13]/5", 'line');
+            getLineData(lineChart2, null, "火警未处理", RptCommon.Host + "api/company/WarningReport/FindDailyRate/[13]/4", 'line');
+            getLineData(lineChart2, null, "故障未处理", RptCommon.Host + "api/company/WarningReport/FindDailyRate/[13]/6", 'line');
+            getLineData(lineChart2, null, "故障已处理", RptCommon.Host + "api/company/WarningReport/FindDailyRate/[13]/7", 'line');
+
+        });
+
+        ////告警里面的所有内容    结束
+
+
+    });
+</script>
+</body>
+</html>

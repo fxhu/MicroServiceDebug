@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=IT8ydiFlplstEB7aL0A4HxdFEBo5Uor8"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/apiConfig.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script type="text/javascript" src="/DataVisual/js/public.js"></script>    
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+    <script src="/assets/js/jquery.json.js"></script>
+    <link rel="stylesheet" href="css/pub.css" />
+    <title>标记区域</title>
+</head>
+<body>
+    <div class="topright" style="top:50px;">
+        <div class="btn-group" id="btn2">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                中心点 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="drawOverlay('marker')">设置</a></li>
+                <li><a href="#" onclick="clearOverlay('marker')">清除</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-success" onclick="doSave()" id="btn4">保存  <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span></button>
+    </div>
+    <div class="top2right"><span class="label label-success" id="saveResult"></span></div>
+    <div class="rightbottom"></div>
+    <div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    function doSave()
+    {
+        if (lastMarker == null) {
+            alert("请先标记一个中心点！");
+            return;
+        }
+        $.ajax({
+            type: "post",
+            url: authorityHost+"visualarea/SaveAreaInfo",
+            data: {
+                Latitude: lastMarker == null ?"0":lastMarker.point.lat,
+                Longitude: lastMarker == null ? "0" :lastMarker.point.lng,
+                Outline: "",
+                AreaId: Common.getQueryString("id")
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.result) {
+                    drawingManager.close();
+                    $("#saveResult").html("保存成功");
+                    setTimeout('$("#saveResult").html("")', 1000);
+                }
+                else {
+
+                }
+            }
+
+        });
+
+    }
+    //清除中心点
+    function clearOverlay(type)
+    {
+        if (type == "marker") {
+            map.removeOverlay(lastMarker);
+            lastMarker = null;
+        }
+    }
+    //绘制图形
+    function drawOverlay(type)
+    {
+        drawingManager.open();
+        drawingManager.setDrawingMode(type);
+    }
+    
+    var map, drawingManager;
+    $(function () {
+        
+        //2 加载已有的数据
+        $.getJSON(authorityHost+"visualarea/GetAreaInfo?id=" + Common.getQueryString("id"), function (data) {
+            if(data.areaType<4){
+                window.location.href="/DataVisual/AreaEdit_Building.html?id="+Common.getQueryString("id");
+                return;
+            }
+            //1 加载百度地图
+            map = new BMap.Map("allmap", { enableMapClick: false });
+            map.enableScrollWheelZoom(true);
+            map.setMapStyle({ style: 'bluish' });
+            map.centerAndZoom(new BMap.Point(114.429826, 30.45377), 5);
+            map.addControl(new BMap.MapTypeControl({
+                mapTypes: [
+                    BMAP_NORMAL_MAP,
+                    BMAP_HYBRID_MAP
+                ]
+            }));
+            LoadExtPic();
+            //园区位置
+            BMapDrawCenter(data);
+        })
+
+        //实例化鼠标绘制工具
+        drawingManager = new BMapLib.DrawingManager(map, {
+            isOpen: false, //是否开启绘制模式
+            enableDrawingTool: false, //是否显示工具栏
+            drawingMode: BMAP_DRAWING_POLYGON,
+            drawingToolOptions: {
+                anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+                offset: new BMap.Size(5, 5), //偏离值
+                drawingModes: [
+                    BMAP_DRAWING_MARKER,
+                    BMAP_DRAWING_POLYGON
+                ]
+            },
+            polygonOptions: {
+                strokeColor: "red",    //边线颜色。
+                fillColor: "red",      //填充颜色。当参数为空时，圆形将没有填充效果。
+                strokeWeight: 1,       //边线的宽度，以像素为单位。
+                strokeOpacity: 0.6,	   //边线透明度，取值范围0 - 1。
+                fillOpacity: 0.3,      //填充的透明度，取值范围0 - 1。
+                strokeStyle: 'solid' //边线的样式，solid或dashed。
+            }
+        });
+        //添加鼠标绘制工具监听事件，用于获取绘制结果
+        drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+
+    })
+    var lastMarker = null;
+    var overlaycomplete = function (e) {
+        if (e.drawingMode == "marker")
+        {
+            if (lastMarker != null)
+            {
+                map.removeOverlay(lastMarker);
+            }
+            lastMarker = e.overlay;
+        }
+    };
+</script>

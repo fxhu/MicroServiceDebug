@@ -1,0 +1,36 @@
+﻿{
+    "park": [
+        {
+            "name": "缩放级别",
+            "value": ""
+        },
+        {
+            "name": "地址",
+            "value": ""
+        }
+    ],
+    "building": [
+        {
+            "name": "缩放级别",
+            "value": ""
+        },
+        {
+            "name": "地址",
+            "value": ""
+        }
+    ],
+    "floor": [
+        {
+            "name": "层号",
+            "value": "",
+            "remoteGet": false
+        },
+        {
+            "name": "出口坐标",
+            "value": "",
+            "remoteGet": false
+        }
+    ],
+    "area": [
+    ]
+}

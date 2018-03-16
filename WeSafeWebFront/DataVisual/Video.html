@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>实时视频</title>
+	<style type="text/css">
+		html, body {
+			margin:0;
+			padding:0;
+		}
+	</style>
+	
+</head>
+<body>
+    <canvas id="video-canvas" style="width:640px;height:480px;"></canvas>
+    <script src="/apiConfig.js"></script>
+    <script type="text/javascript" src="/assets/js/jsmpeg.min.js"></script>
+    <script type="text/javascript" src="/DataVisual/js/jquery-2.1.4.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script type="text/javascript">
+        function GetUrlParam(name) {
+            if (!name) { return ""; }
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                var hash = hashes[i].split('=');
+                if (hash[0].toUpperCase() == name.toUpperCase()) {
+                    return hash[1];
+                }
+            }
+            return "";
+        }
+
+        $(function () {
+            var assestId = GetUrlParam("AssestId");
+            var canvas = document.getElementById('video-canvas');
+            if (assestId != "" && assestId != null) {
+                $.getJSON(authorityHost+"Camera/GetCameraInfoByAssestId?assestId=" + assestId, function (data) {
+                    if (data.serverAdress != null && data.serverAdress != "") {
+                        new JSMpeg.Player(data.serverAdress, { canvas: canvas });
+                    }
+                    else {
+                        document.write("请在基础数据-监控管理中设置摄像头地址！");
+                    }
+                })
+            }
+            else {
+                new JSMpeg.Player(GetUrlParam("Address"), { canvas: canvas });
+            }
+
+        })
+    </script>
+</body>
+</html>

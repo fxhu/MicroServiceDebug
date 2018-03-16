@@ -1,0 +1,687 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js" data-ng-app="app"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js" data-ng-app="app"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" data-ng-app="app">
+<!--<![endif]-->
+
+<head>
+    <title>智慧消防平台</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="bookmark" href="/favicon.ico" />
+    <!--Content-->
+    <link href="/assets/plugins/Content/fonts-open-sans.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/Content/usertaskshow.css" rel="stylesheet" />
+    <link href="/assets/plugins/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/Content/flags/famfamfam-flags.css" rel="stylesheet" />
+    <link href="/assets/css/style-patch-mydesktop.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/jquery-uniform/css/uniform.default.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/morris/morris.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/jstree/themes/default/style.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/angular-ui-grid/ui-grid.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/libs/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet" />
+
+    <link id="ng_load_plugins_before" />
+
+    <link href="/assets/plugins/metronic/global/css/components-md.css" rel="stylesheet" />
+    <link href="/assets/plugins/metronic/global/css/plugins-md.css" rel="stylesheet" />
+    <link href="/assets/plugins/metronic/admin/layout4/css/layout.css" rel="stylesheet" />
+    <link href="/assets/plugins/metronic/admin/layout4/css/themes/light.css" rel="stylesheet" />
+
+    <link href="/assets/Common/Styles/core.css" rel="stylesheet" />
+
+    <link href="/App/app.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/common.css">
+    <link href="/App/common/views/auditLogs/detailModal.css" rel="stylesheet" />
+    <link href="/App/common/views/layout/chatbar.css" rel="stylesheet" />
+    <link href="/App/common/views/layout/header.css" rel="stylesheet" />
+    <link href="/App/common/views/layout/sidebar.css" rel="stylesheet" />
+    <link href="/App/common/views/notifications/index.css" rel="stylesheet" />
+    <link href="/App/common/views/organizationUnits/index.css" rel="stylesheet" />
+    <link href="/App/common/views/profile/changePicture.css" rel="stylesheet" />
+    <link href="/App/common/views/users/createOrEditModal.css" rel="stylesheet" />
+    <link href="/App/common/views/users/index.css" rel="stylesheet" />
+    <link href="/App/common/views/users/loginAttemptsModal.css" rel="stylesheet" />
+    <link href="/App/host/directives/featureTree.css" rel="stylesheet" />
+    <link href="/App/host/views/maintenance/index.css" rel="stylesheet" />
+    <link href="/App/Main/main.css" rel="stylesheet" />
+    <link href="/App/Main/views/safecheck/radialindicator.css" rel="stylesheet" />
+
+    <script src="/apiConfig.js"></script>
+    <script src="/assets/plugins/libs/jquery/jquery.min.js"></script>
+    <script src="/assets/plugins/libs/jquery/jquery-migrate.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="/assets/js/LinkStarHelper.js"></script>
+    <script type="text/javascript">
+        //This is used to get the application's root path from javascript.
+        //It's useful if you're running application in a virtual directory under IIS.
+        //var abp = abp || {}; abp.appPath = '/';
+        var abp = abp || {};
+        abp.appPath = authorityHost;
+    </script>
+    <script>
+        abp.authVerification = false;
+
+        function openWindow(url) {
+            window.location.href = url;
+
+        }
+
+        function AuthVerification() {
+            $.ajax({
+                url: authorityHost + "api/TokenAuth/TokenAuthVerification",
+                type: "post",
+                async: false,
+                success: function (res) {
+                    console.log("AuthVerification 请求成功" + res);
+                    console.log(res);
+                    var state = res.result.state;
+                    console.log(state);
+                    if (state == 500) {
+                        abp.authVerification = false;
+                        window.location.href = "/index.html";
+                    } else if (state == 200) {
+                        abp.authVerification = true;
+                    }
+                },
+                error: function () {
+                    abp.authVerification = false;
+                    window.location.href = "/index.html";
+                    console.log("AuthVerification 请求失败");
+                },
+                complete: function () {
+                    console.log("AuthVerification 请求完成");
+                }
+            })
+        };
+        AuthVerification();
+    </script>
+    <script type="text/javascript">
+        var current = new Array();
+
+        function checkAlarmObj(Id, vid) {
+            var returnUrl = window.location.href;
+            openWindow("/DataVisual/AlarmMonitor.html?id=" + vid + "&alarmid=" + Id + "&returnUrl=" + returnUrl);
+        };
+    </script>
+    <link href="/assets/css/style-patch.css" rel="stylesheet" />
+</head>
+
+<body ng-controller="common.views.layout as vm" class="page-md page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo page-on-load"
+    ng-class="{'page-sidebar-closed': settings.layout.pageSidebarClosed}">
+    <div ng-spinner-bar class="page-spinner-bar">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+    <div data-ng-include="'/App/common/views/layout/header.html'" data-ng-controller="common.views.layout.header as vm" class="page-header navbar navbar-fixed-top md-shadow-zero-light">
+    </div>
+    <div class="clearfix">
+    </div>
+
+    <div class="page-sidebar-wrapper">
+        <div id="menusLeft" data-ng-include="'/App/common/views/layout/sidebar.html'" data-ng-controller="common.views.layout.sidebar as vm"
+            class="page-sidebar-wrapper" style="background-color: #005d89;"></div>
+    </div>
+    <div class="page-content-wrapper">
+        <div class="page-content aaa" td="111" style="height:100%;background-color:#F2F3F8!important;position: relative;">
+            <div  style="display:inline-block"data-ng-include="'/App/common/views/layout/breadMenu.html'" data-ng-controller="common.views.layout.breadMenu as vm"
+                class="">
+            </div>
+           
+            <div ui-view class="fade-in-up" style="height:100%;">
+            </div>
+        </div>
+    </div>
+
+    <div data-ng-if="AbpSession.MultiTenancySide == 2 || true " data-ng-include="'/App/common/views/layout/chatbar.html'" data-ng-controller="common.views.layout.chatbar as vm">
+    </div>
+
+    <div style="display:none;" ng-if="false" data-ng-include="'/App/common/views/layout/footer.html'" data-ng-controller="common.views.layout.footer as vm"
+        class="page-footer" style="background-color: rgb(183, 226, 236);">
+    </div>
+
+    <!--[if lt IE 9]>
+        <script src="/assets/plugins/libs/respond/respond.min.js"></script>
+        <script src="/assets/plugins/libs/html5shiv/html5shiv.js"></script>
+        <script src="/assets/plugins/libs/excanvas/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="/assets/plugins/libs/json2/json2.min.js"></script>
+    <script src="/assets/plugins/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/plugins/libs/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="/assets/plugins/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/assets/plugins/libs/jquery-blockui/jquery.blockui.min.js"></script>
+    <script src="/assets/plugins/libs/js-cookie/js.cookie.min.js"></script>
+    <script src="/assets/plugins/libs/jquery-uniform/jquery.uniform.min.js"></script>
+    <!--使用预览版signal <script src="/Scripts/jquery.signalR-2.2.2.min.js"></script>-->
+    <script src="/assets/js/signalr-client.min.js"></script>
+    <script src="/assets/js/localforage/localforage.min.js"></script>
+    <script src="/assets/plugins/libs/morris/morris.min.js"></script>
+    <script src="/assets/plugins/libs/morris/raphael-min.js"></script>
+    <script src="/assets/plugins/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="/assets/plugins/libs/jcrop/js/jquery.color.js"></script>
+    <script src="/assets/plugins/libs/jcrop/js/jquery.Jcrop.min.js"></script>
+    <script src="/assets/plugins/libs/jquery-timeago/jquery.timeago.js"></script>
+    <script src="/assets/plugins/libs/jstree/jstree.js"></script>
+    <script src="/assets/plugins/libs/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="/assets/plugins/libs/spinjs/spin.js"></script>
+    <script src="/assets/plugins/libs/spinjs/jquery.spin.js"></script>
+    <script src="/assets/plugins/libs/sweetalert/sweet-alert.min.js"></script>
+    <script src="/assets/plugins/libs/push-js/push.min.js"></script>
+    <script src="/assets/plugins/libs/toastr/toastr.min.js"></script>
+    <script src="/assets/js/moment-with-locales.min.js"></script>
+    <script src="/assets/js/moment-timezone-with-data.min.js"></script>
+    <script src="/assets/plugins/libs/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="/assets/plugins/libs/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="/assets/js/underscore.min.js"></script>
+    <script src="/assets/js/angular.js"></script>
+    <script src="/assets/js/angular-sanitize.min.js"></script>
+    <script src="/assets/js/angular-touch.min.js"></script>
+    <script src="/assets/js/angular-ui-router.min.js"></script>
+    <script src="/assets/js/angular-ui/ui-utils.min.js"></script>
+    <script src="/assets/js/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="/assets/plugins/libs/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="/assets/plugins/libs/angular-ocLazyLoad/ocLazyLoad.min.js"></script>
+    <script src="/assets/plugins/libs/angular-file-upload/angular-file-upload.min.js"></script>
+    <script src="/assets/plugins/libs/angular-daterangepicker/angular-daterangepicker.min.js"></script>
+    <script src="/assets/plugins/libs/angular-moment/angular-moment.min.js"></script>
+    <script src="/assets/plugins/libs/angular-bootstrap-switch/angular-bootstrap-switch.min.js"></script>
+    <script src="/Abp/Framework/scripts/abp.js"></script>
+    <script src="/Abp/Framework/scripts/libs/abp.jquery.js"></script>
+    <script src="/Abp/Framework/scripts/libs/abp.toastr.js"></script>
+    <script src="/Abp/Framework/scripts/libs/abp.blockUI.js"></script>
+    <script src="/Abp/Framework/scripts/libs/abp.spin.js"></script>
+    <script src="/Abp/Framework/scripts/libs/abp.sweet-alert.js"></script>
+    <script src="/Abp/Framework/scripts/libs/abp.moment.js"></script>
+    <script src="/Abp/Framework/scripts/libs/angularjs/abp.ng.js"></script>
+
+    <script>
+        abp.localization.defaultSourceName = 'AbpZeroTemplate';
+        moment.locale('en'); //Localizing moment.js
+    </script>
+    <script>
+        document.write("<script type='text/javascript' src='/assets/js/i18n/angular-locale_en.js?v=" + Date.now() +
+            "'><\/script>");
+        document.write(
+            "<script type='text/javascript' src='/assets/plugins/libs/bootstrap-select/i18n/defaults-en_US.js?v=" +
+            Date.now() + "'><\/script>");
+        document.write(
+            "<script type='text/javascript' src='/assets/plugins/libs/jquery-timeago/locales/jquery.timeago.en.js?v=" +
+            Date.now() + "'><\/script>");
+    </script>
+
+    <script>
+        document.write("<script type='text/javascript' src='/assets/api/getAllAngular.js?v=" + Date.now() +
+            "'><\/script>");
+        document.write("<script type='text/javascript' src='/assets/api/getAll.js?v=" + Date.now() + "'><\/script>");
+        document.write("<script type='text/javascript' src='/assets/api/AbpScripts.js?v=" + Date.now() + "'><\/script>");
+    </script>
+    <!--<script src='/assets/api/getAllAngular.js?v="+(Date.now()).getTime()+"'></script>
+    <script src='/assets/api/getAll.js?v="+(Date.now()).getTime()+"'></script>-->
+    <!--获取权限列表与当前用户所拥有的权限-->
+    <!--<script src='/assets/api/AbpScripts.js?v="+(Date.now()).getTime()+"' type="text/javascript">-->
+    <!-- SignalR scripts -->
+    <!-- <script src="/signalr/hubs"></script> -->
+
+    <script>
+        document.write("<script type='text/javascript' src='/Abp/Framework/scripts/libs/abp.signalr.js?v=" + Date.now() +
+            "'><\/script>");
+    </script>
+
+    <script src="/assets/plugins/metronic/global/scripts/app.js"></script>
+    <script src="/assets/plugins/metronic/admin/layout4/scripts/layout.js"></script>
+    <script src="/assets/plugins/metronic/layouts/global/scripts/quick-sidebar.js"></script>
+
+    <script src="/assets/Common/Scripts/appUserNotificationHelper.js"></script>
+    <script src="/assets/Common/Scripts/consts.js"></script>
+    <script src="/assets/Common/Scripts/helpers.js"></script>
+    <script src="/assets/Common/Scripts/jquery-custom.js"></script>
+    <script src="/assets/Common/Scripts/jquery-validation-custom.js"></script>
+    <script src="/assets/Common/Scripts/librarySettings.js"></script>
+    <script src="/assets/Common/Scripts/ModalManager.js"></script>
+    <script src="/assets/Common/Scripts/passwordComplexityHelper.js"></script>
+    <script src="/assets/Common/Scripts/utils.js"></script>
+    <script src="/assets/Common/Scripts/Chat/chat.js"></script>
+    <script src="/assets/Common/Scripts/Chat/chat.signalr.js"></script>
+    <script src="/assets/Common/Scripts/LocalStorage/localStorage.js"></script>
+    <script src="/assets/Common/Scripts/LocalStorage/localStorage.localForage.js"></script>
+
+    <script src="/App/app.js"></script>
+    <script src="/App/common/directives/autoFocus.js"></script>
+    <script src="/App/common/directives/busyIf.js"></script>
+    <script src="/App/common/directives/buttonBusy.js"></script>
+    <script src="/App/common/directives/enterKey.js"></script>
+    <script src="/App/common/directives/focusIf.js"></script>
+    <script src="/App/common/directives/passwordComplexity.js"></script>
+    <script src="/App/common/directives/permissionCombo.js"></script>
+    <script src="/App/common/directives/permissionTree.js"></script>
+    <script src="/App/common/directives/roleCombo.js"></script>
+    <script src="/App/common/directives/timezoneCombo.js"></script>
+    <script src="/App/common/directives/metronic/directives.js"></script>
+    <script src="/App/common/filters/momentjs-filters.js"></script>
+    <script src="/App/common/services/appSession.js"></script>
+    <script src="/App/common/services/appUserNotificationHelper.js"></script>
+    <script src="/App/common/views/auditLogs/detailModal.js"></script>
+    <script src="/App/common/views/auditLogs/index.js"></script>
+    <script src="/App/common/views/common/lookupModal.js"></script>
+    <script src="/App/common/views/languages/createOrEditModal.js"></script>
+    <script src="/App/common/views/languages/editTextModal.js"></script>
+    <script src="/App/common/views/languages/index.js"></script>
+    <script src="/App/common/views/languages/texts.js"></script>
+    <script src="/App/common/views/layout/chatbar.js"></script>
+    <script src="/App/common/views/layout/footer.js"></script>
+    <script src="/App/common/views/layout/header.js"></script>
+    <script src="/App/common/views/layout/breadMenu.js"></script>
+    <script src="/App/common/views/layout/layout.js"></script>
+    <script src="/App/common/views/layout/sidebar.js"></script>
+    <script src="/App/common/views/notifications/index.js"></script>
+    <script src="/App/common/views/notifications/settingsModal.js"></script>
+    <script src="/App/common/views/organizationUnits/addMember.js"></script>
+    <script src="/App/common/views/organizationUnits/createOrEditUnitModal.js"></script>
+    <script src="/App/common/views/organizationUnits/index.js"></script>
+    <script src="/App/common/views/profile/changePassword.js"></script>
+    <script src="/App/common/views/profile/changePicture.js"></script>
+    <script src="/App/common/views/profile/linkAccountModal.js"></script>
+    <script src="/App/common/views/profile/linkedAccountsModal.js"></script>
+    <script src="/App/common/views/profile/mySettingsModal.js"></script>
+    <script src="/App/common/views/roles/createOrEditModal.js"></script>
+    <script src="/App/common/views/roles/index.js"></script>
+    <script src="/App/common/views/users/createOrEditModal.js"></script>
+    <script src="/App/common/views/users/index.js"></script>
+    <script src="/App/common/views/users/loginAttemptsModal.js"></script>
+    <script src="/App/common/views/users/permissionsModal.js"></script>
+    <script src="/App/common/views/welcome/dashboard.js"></script>
+    <script src="/App/common/views/welcome/dashboard2.js"></script>
+    <script src="/App/common/views/welcome/index.js"></script>
+    <script src="/App/common/views/_empty/index.js"></script>
+    <script src="/App/common/views/_empty/modal.js"></script>
+    <script src="/App/host/directives/featureTree.js"></script>
+    <script src="/App/host/views/editions/createOrEditModal.js"></script>
+    <script src="/App/host/views/editions/index.js"></script>
+    <script src="/App/host/views/maintenance/index.js"></script>
+    <script src="/App/host/views/settings/index.js"></script>
+    <script src="/App/host/views/tenants/createModal.js"></script>
+    <script src="/App/host/views/tenants/editModal.js"></script>
+    <script src="/App/host/views/tenants/featuresModal.js"></script>
+    <script src="/App/host/views/tenants/index.js"></script>
+    <script src="/App/Main/services/appSession.js"></script>
+    <script src="/App/Main/views/about/about.js"></script>
+    <script src="/App/Main/views/alarmMonitoring/AlarmAuditModal.js"></script>
+    <script src="/App/Main/views/alarmMonitoring/AlarmLogModal.js"></script>
+    <script src="/App/Main/views/alarmMonitoring/alarmRecord.js"></script>
+    <script src="/App/Main/views/alarmMonitoring/AlarmStatistics.js"></script>
+    <script src="/App/Main/views/alarmMonitoring/RealTimeData.js"></script>
+    <script src="/App/Main/views/alarmMonitoring/realtimemonitoring.js"></script>
+    <script src="/App/Main/views/assertReport/assertReport.js"></script>
+    <script src="/App/Main/views/BasicData/CameraManager.js"></script>
+    <script src="/App/Main/views/BasicData/creatOrEditChargeModal.js"></script>
+    <script src="/App/Main/views/BasicData/creatOrEditDistrictModal.js"></script>
+    <script src="/App/Main/views/BasicData/DistrictManagement2.js"></script>
+    <script src="/App/Main/views/BasicData/DistrictVisual.js"></script>
+    <script src="/App/Main/views/BasicData/EditAreaPlan.js"></script>
+    <script src="/App/Main/views/BasicData/EditAreaModal.js"></script>
+    <script src="/App/Main/views/BasicData/EditCamera.js"></script>
+    <script src="/App/Main/views/BasicData/FireMan.js"></script>
+    <script src="/App/Main/views/BasicData/FireManModal.js"></script>
+    <script src="/App/Main/views/BasicData/KeyArea.js"></script>
+    <script src="/App/Main/views/BasicData/ModalWarpper.js"></script>
+    <script src="/App/Main/views/BasicData/Notice.js"></script>
+    <script src="/App/Main/views/BasicData/NoticeList.js"></script>
+    <script src="/App/Main/views/BasicData/NoticeDetails.js"></script>
+    <script src="/App/Main/views/BasicData/NoticeListPro.js"></script>
+    <script src="/App/Main/views/BasicData/ShowVideoWithPlugin.js"></script>
+    <script src="/App/Main/views/BasicData/UserTask.js"></script>
+    <script src="/App/Main/views/BasicData/UserTaskList.js"></script>
+    <script src="/App/Main/views/BasicData/VisualAssests.js"></script>
+    <script src="/App/Main/views/ContentCoupletPerception/VideoManagement.js"></script>
+    <script src="/App/Main/views/directives/autoFocus.js"></script>
+    <script src="/App/Main/views/directives/enterKey.js"></script>
+    <script src="/App/Main/views/emergencyPreparedness/addPlan.js"></script>
+    <script src="/App/Main/views/emergencyPreparedness/addPlanTemplate.js"></script>
+    <script src="/App/Main/views/emergencyPreparedness/plansdemo.js"></script>
+    <script src="/App/Main/views/emergencyPreparedness/PlanTemplate.js"></script>
+    <script src="/App/Main/views/emergencyPreparedness/preplanmanagement.js"></script>
+    <script src="/App/Main/views/emergencyPreparedness/TemplateDemo.js"></script>
+    <script src="/App/Main/views/emergencyPreparedness/WriteTemplate.js"></script>
+    <script src="/App/Main/views/emergencyPreparedness/WriteThePlan.js"></script>
+    <script src="/App/Main/views/fireEducation/educationalTraining.js"></script>
+    <script src="/App/Main/views/fireEducation/ExaminationPaperManagement.js"></script>
+    <script src="/App/Main/views/fireEducation/firedrill.js"></script>
+    <script src="/App/Main/views/fireEducation/PaperManagement.js"></script>
+    <script src="/App/Main/views/fireEducation/safetyPropaganda.js"></script>
+    <script src="/App/Main/views/fireEducation/TestScore.js"></script>
+    <script src="/App/Main/views/fireEducation/TestStatistics.js"></script>
+    <script src="/App/Main/views/fireFightingAndRescue/commandanddispatch.js"></script>
+    <!--<script src="/App/Main/views/hiddenDangerManagement/adddangerousgood.js"></script>-->
+    <!--<script src="/App/Main/views/hiddenDangerManagement/adddangerousoperation.js"></script>-->
+    <script src="/App/Main/views/hiddenDangerManagement/AddHiddenTrouble.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/AuditHiddenTrouble.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/EditHiddenTrouble.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/HiddenDangerList.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/HiddenTroubleCheck.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/HiddenTroubleRectify.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/HiddenTroubleReport.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/HiddenTroubleReview.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/LookHiddenTrouble.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/RectifyTrouble.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/ReviewTrouble.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/SamplingInspectionRecords.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/videosurveillance.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/HiddenTroubleAssign.js"></script>
+    <script src="/App/Main/views/hiddenDangerManagement/AssignPerson.js"></script>
+    <script src="/App/Main/views/home/dashboard.js"></script>
+    <script src="/App/Main/views/home/home.js"></script>
+    <script src="/App/Main/views/home/MyDesktop.js"></script>
+    <script src="/App/Main/views/home/MyOldDesktop0310.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/AddAssets.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/AssetStatistics.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/AssetStatistics2.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/AssetType.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/AssetType_Linkstar.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/DetectionList_Linkstar.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/equipmentArchives.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/EquipmentArchivesExpire_Linkstar.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/EquipmentArchives_Linkstar.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/GansuAssets.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/JiuquanAssets.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/ledgermanagement.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/maintenanceplan.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/MaintenanceTask.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/DetectionTask.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/RepairManager.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/MaintenancePlan_Linkstar.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/MaintenanceUnits.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/ORCode.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/RemindList_Linkstar.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/TransitionManager_Linkstar.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/UrumchiAssets.js"></script>
+    <script src="/App/Main/views/maintenanceManagement/UserTask.js"></script>
+    <script src="/App/Main/views/patrollingManagement/AddPlan.js"></script>
+    <!--<script src="/App/Main/views/patrollingManagement/AddPoint.js"></script>-->
+    <script src="/App/Main/views/patrollingManagement/AddTemporaryTask.js"></script>
+    <!--<script src="/App/Main/views/patrollingManagement/AuditTask.js"></script>-->
+    <script src="/App/Main/views/patrollingManagement/BuildGroup.js"></script>
+    <script src="/App/Main/views/patrollingManagement/EditTask.js"></script>
+    <!--<script src="/App/Main/views/patrollingManagement/editpatroltask.js"></script>-->
+    <script src="/App/Main/views/patrollingManagement/EditPlan.js"></script>
+    <!--<script src="/App/Main/views/patrollingManagement/EditPoint.js"></script>-->
+    <script src="/App/Main/views/patrollingManagement/PointDetail.js"></script>
+    <script src="/App/Main/views/patrollingManagement/TaskFireManModal.js"></script>
+    <script src="/App/Main/views/patrollingManagement/inspectionpointmanagement.js"></script>
+    <script src="/App/Main/views/patrollingManagement/LookTask.js"></script>
+    <script src="/App/Main/views/patrollingManagement/PatrolGroup.js"></script>
+    <script src="/App/Main/views/patrollingManagement/PatrolPlan.js"></script>
+    <!--<script src="/App/Main/views/patrollingManagement/PatrolPoint.js"></script>-->
+    <script src="/App/Main/views/patrollingManagement/PatrolRecord.js"></script>
+    <script src="/App/Main/views/patrollingManagement/PatrolTask.js"></script>
+    <!--<script src="/App/Main/views/patrollingManagement/ReviewTask.js"></script>-->
+    <!--<script src="/App/Main/views/patrollingManagement/TaskReview.js"></script>-->
+    <script src="/App/Main/views/riskProfile/DistrictChecked.js"></script>
+    <script src="/App/Main/views/riskProfile/DistrictSet.js"></script>
+    <script src="/App/Main/views/riskProfile/districtmanagement.js"></script>
+    <script src="/App/Main/views/riskProfile/EditRatio.js"></script>
+    <script src="/App/Main/views/riskProfile/riskdistribution.js"></script>
+    <script src="/App/Main/views/riskProfile/riskmanagement.js"></script>
+    <!--<script src="/App/Main/views/roles/createModal.js"></script>
+    <script src="/App/Main/views/roles/editModal.js"></script>
+    <script src="/App/Main/views/roles/index.js"></script>-->
+    <script src="/App/Main/views/safecheck/CreatSafeAre.js"></script>
+    <script src="/App/Main/views/safecheck/EditSafeAre.js"></script>
+    <script src="/App/Main/views/safecheck/radialIndicator.js"></script>
+    <script src="/App/Main/views/safecheck/safeAreManager.js"></script>
+    <script src="/App/Main/views/safecheck/syschecked-modal.js"></script>
+    <script src="/App/Main/views/safecheck/syschecked.js"></script>
+    <!--<script src="/App/Main/views/tenants/createModal.js"></script>
+    <script src="/App/Main/views/tenants/editModal.js"></script>
+    <script src="/App/Main/views/tenants/index.js"></script>-->
+    <script src="/App/Main/views/userPassword/editUserPassword.js"></script>
+    <!--<script src="/App/Main/views/users/createModal.js"></script>
+    <script src="/App/Main/views/users/editModal.js"></script>
+    <script src="/App/Main/views/users/index.js"></script>-->
+    <script src="/App/tenant/views/dashboard/index.js"></script>
+    <script src="/App/tenant/views/settings/index.js"></script>
+
+
+    <!--ECharts3 -->
+    <script type="text/javascript" src="/assets/js/Baidu/echarts-all-3.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/Baidu/ecStat.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/Baidu/dataTool.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/Baidu/china.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/Baidu/hubei.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/Baidu/world.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/Baidu/api.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/Baidu/bmap.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="/assets/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.json.js"></script>
+    <script type="text/javascript" src="/assets/js/oidc-client.js"></script>
+    <script>
+        var isConnected = false;
+        var alarmEventPushHubUrl = "";
+
+        function createAlarmAlphaSignalR() {
+            abp.services.app.webSiteConfigService.getAlarmEventPushHubAddress({}).then(function (result) {
+                alarmEventPushHubUrl = result;
+                var connection;
+                connection = new signalR.HubConnection(alarmEventPushHubUrl);
+
+                abp.event.on('abp.signalr.connected',
+                    function () {
+                        alarmEventPushHub.server.sendAlarmEvent("故障和火警消息推送连接!");
+                    });
+                connection.on('OnAlarmEventPublished', data => {
+                    console.log(data);
+                    console.log('接收信息: ' + data);
+                    //检查后再做报警
+                    if (CheckAssestOfUserDuty(data)) {
+                        var obj = JSON.parse(data);
+                        //做一些事情
+                        AlarmeventJump(obj);
+                    }
+
+                });
+
+                connection.onClosed = e => {
+                    if (e) {
+
+                    } else {
+
+                    }
+                }
+                connection.start()
+                    .then(() => {
+                        isConnected = true;
+                    })
+                    .catch(err => {
+
+                    });
+            });
+        }
+
+        function sendAlarmAlphaSignalR(jsondata) {
+            if (!isConnected) {
+                return;
+            }
+            var hubUrl = 'http://localhost:5000/alarmEventPush';
+            var httpConnection = new signalR.HttpConnection(hubUrl);
+            var hubConnection = new signalR.HubConnection(httpConnection);
+            hubConnection.start();
+            hubConnection.invoke('SendAlarmEvent', jsondata);
+        }
+
+
+
+
+        createAlarmAlphaSignalR();
+
+        var manageEventPushHubUrl = "";
+
+        function createManageAlphaSignalR() {
+            abp.services.app.webSiteConfigService.getManageEventPushHubAddress({}).then(function (result) {
+                manageEventPushHubUrl = result;
+                var connection;
+                connection = new signalR.HubConnection(manageEventPushHubUrl);
+
+                abp.event.on('abp.signalr.connected',
+                    function () {
+                        manageEventPushHub.server.sendManageEvent("权限角色管理消息推送连接!");
+                    });
+                connection.on('OnManageEventPublished', data => {
+                    console.log(data);
+                    console.log('接收信息: ' + data);
+                    var obj = JSON.parse(data);
+                    //做一些事情
+                    ManageEventJump(obj);
+                });
+                connection.onClosed = e => {
+                    if (e) {
+
+                    } else {
+
+                    }
+                }
+                connection.start()
+                    .then(() => {
+                        isConnected = true;
+                    })
+                    .catch(err => {
+
+                    });
+            });
+        }
+
+        function ManageEventJump(data) {
+            if (data.Type == "UpdateUsers") {
+                var userid = abp.session.userId;
+                if (userid == data.Id) {
+                    console.log("弹出提示");
+
+                    ManageEventJumptips();
+                    return;
+                }
+            } else {
+                var myJson = abp.session.userRoles;
+                for (var p in myJson) {
+                    if (myJson[p].roleId == data.Id) {
+                        console.log("弹出提示");
+                        ManageEventJumptips();
+                        break;
+                    }
+                }
+            }
+            console.log(data);
+        };
+
+        function ManageEventJumptips() {
+            swal({
+                    title: "系统管理提醒",
+                    text: "账户权限已变更，请重新登录账号",
+                    type: "info",
+                    showCancelButton: false,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                },
+                function () {
+                    setTimeout(function () {
+                        swal("跳转中...请稍后");
+                        window.localStorage.removeItem("applictionToken");
+                        window.localStorage.removeItem("abpSessionUserId");
+                        window.localStorage.removeItem("abpSessionUserRoles");
+                        sessionStorage.clear();
+                        localStorage.clear();
+                        $.cookie('WeSafe.SessionId', null);
+                        $.ajax({
+                            url: authorityHost + "Account/Logout",
+                            type: "post",
+                            dataType: "json",
+                            success: function (res) {
+                                console.log(res);
+                                window.location.href = "/index.html";
+                            },
+                            error: function (res) {
+                                console.log(res);
+                                window.location.href = "/index.html";
+                            }
+                        });
+                        window.location.href = "/index.html";
+                    }, 2000);
+                });
+        }
+        //设置角色权限推送
+        createManageAlphaSignalR();
+
+        function checkNotConfirmFireAlarm(connId) {
+            $.ajax({
+                type: "get",
+                url: abp.appPath + '/AlarmEventTool/CheckAndPopupWindow?ConnectionId=' + connId,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", tokens);
+                },
+                success: function (data) {
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                },
+                complete: function () {
+
+                }
+            });
+        }
+
+        function CheckAssestOfUserDuty(message) {
+            var checkstate = false;
+            var obj = JSON.parse(message);
+            for (var i = 0; i < obj.userIds.length; i++) {
+                if (obj.userIds[i] == abp.session.userId) {
+                    return true;
+                }
+            }
+            return checkstate;
+        }
+
+        function AlarmeventJump(data) {
+            //故障进行页面提示
+            if (data.EventType == 1) {
+                var alarmeventbodyHtml = [];
+
+                alarmeventbodyHtml.push('<div class=\"portlet-body footcommoninfo\">');
+                alarmeventbodyHtml.push(
+                    '<div class=\"alert alert-block alert-warning fade in\" style=\"margin-bottom: 0px;\">');
+                alarmeventbodyHtml.push('<button type=\"button\" class=\"close\" data-dismiss=\"alert\"></button>');
+                alarmeventbodyHtml.push('<h4 class=\"alert-heading\">故障警告' + data.Id + '</h4>');
+                alarmeventbodyHtml.push('<p>' + data.AlarmMessage + '</p>');
+                alarmeventbodyHtml.push('<p>');
+                alarmeventbodyHtml.push('<a class=\"btn red\" href=\"/default.html#!/AlarmRecord?id=' + data.Id +
+                    '\">查看</a>');
+                alarmeventbodyHtml.push('<a class=\"btn blue\" data-dismiss=\"alert\"> 取消 </a>');
+                alarmeventbodyHtml.push('</p>');
+                alarmeventbodyHtml.push('</div>');
+                alarmeventbodyHtml.push('</div>');
+
+
+                $("#alarmeventbodyHtml").html('');
+                $("#alarmeventbodyHtml").html(alarmeventbodyHtml.join(""));
+            }
+            //火警进行跳转页面提示
+            if (data.EventType == 2) {
+                checkAlarmObj(data.Id, data.VisualAssestId);
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

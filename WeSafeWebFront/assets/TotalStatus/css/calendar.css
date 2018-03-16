@@ -1,0 +1,41 @@
+/* Code tidied up by ScrapBook */
+* { margin: 0px; padding: 0px; }
+body { font-family: "Microsoft Yahei"; font-size: 12px; color: rgb(136, 136, 136); }
+a, a:hover { color: rgb(136, 136, 136); text-decoration: none; }
+ul, li { list-style: outside none none; }
+.calendar {
+	display: none;
+	width: 270px;
+	margin: 0 auto 0;
+	background-color: rgb(250, 250, 250);
+	border-radius: 6px;
+}
+.calendar-title { position: relative; height: 50px; line-height: 50px; padding: 10px 0px; }
+.calendar-title a.title {
+	display: inline-block;
+	font-size: 18px;
+	text-indent: 10px;
+}
+#backToday { position: absolute; left: 70%; top: 20px; width: 30px; height: 30px; line-height: 30px; text-align: center; border-radius: 50%; color: rgb(255, 255, 255); background-color: rgb(89, 196, 230); font-size: 13px; }
+.calendar-title .arrow { position: absolute; top: 10px; right: 0px; width: 50px; }
+.calendar-title .arrow span { color: rgb(221, 221, 221); font-size: 26px; cursor: pointer; -moz-user-select: none; }
+.calendar-title .arrow span:hover { color: rgb(136, 136, 136); }
+.calendar-title .arrow-prev { float: left; }
+.calendar-title .arrow-next { float: right; }
+.calendar-week, .calendar-date { overflow: hidden; }
+.calendar-week .item, .calendar-date .item {
+	float: left;
+	width: 38px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+}
+.calendar-week { padding-bottom: 6px;padding-top: 6px; border-bottom: 1px solid rgb(89, 196, 230); font-weight: bold; font-size: 16px; }
+.calendar-date {  }
+.calendar-date .item { border-radius: 50%; cursor: pointer; font-size: 14px; }
+.calendar-date .item:hover, .calendar-date .item-curMonth:hover { background-color: rgb(220, 220, 220); }
+.calendar-date .item-curMonth { color: rgb(51, 51, 51); }
+.calendar-date .item-curDay, .calendar-date .item-curDay:hover { color: rgb(255, 255, 255); background-color: rgb(89, 196, 230); }
+.calendar-today { display: none; opacity: 0; position: absolute; right: 20px; top: 20px; width: 90px; height: 48px; padding: 6px 10px; background-color: rgb(89, 196, 230); border-radius: 5px; z-index: 99;}
+.calendar-today .triangle { position: absolute; top: 50%; left: -16px; margin-top: -8px; border-width: 8px; border-style: solid; border-color: transparent rgb(89, 196, 230) transparent transparent; }
+.calendar-today p {margin: 0; color: rgb(255, 255, 255); font-size: 12px; line-height: 12px; }

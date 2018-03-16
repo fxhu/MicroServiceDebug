@@ -1,0 +1,63 @@
+﻿<!-- Inputmask -->
+<script src="/assets/plugins/Inputmask/inputmask.js"></script>
+<script src="/assets/js/Common.js"></script>
+
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.riskProfile.editRatio as vm">
+    <div class="col-md-12">
+        <div class="portlet light bordered" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">编辑权重</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form name="EditRatioForm" role="form" validate class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">巡检任务</label>
+                            <div class="col-md-4">
+                                <input id="name" type="text" name="Name" ng-model="vm.ratio.patrolTaskPer" required maxlength="32" class="validate form-control ratioNum">
+                            </div>
+                            <label class="control-label col-md-2">考核成绩</label>
+                            <div class="col-md-4">
+                                <input id="name" type="text" name="Name" ng-model="vm.ratio.checkResultPer" required maxlength="32" class="validate form-control ratioNum">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">资产状态</label>
+                            <div class="col-md-4">
+                                <input id="name" type="text" name="Name" ng-model="vm.ratio.goodsStatusPer" required maxlength="32" class="validate form-control ratioNum">
+                            </div>
+                            <label class="control-label col-md-2">危险物品</label>
+                            <div class="col-md-4">
+                                <input id="type" type="text" name="Type" ng-model="vm.ratio.dangerousGoodsPer" required maxlength="32" class="validate form-control ratioNum">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">危险作业</label>
+                            <div class="col-md-4">
+                                <input id="name" type="text" name="Name" ng-model="vm.ratio.dangerousOperationsPer" required maxlength="32" class="validate form-control ratioNum">
+                            </div>
+                            <label class="control-label col-md-2">培训次数</label>
+                            <div class="col-md-4">
+                                <input id="name" type="text" name="Name" ng-model="vm.ratio.trainNumberPer" required maxlength="32" class="validate form-control ratioNum">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-7">
+                                <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+                                    返回
+                                </button>
+                                <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()">
+                                    保存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿<!-- Bootstrap Select Css -->
+<link href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="\assets\plugins\fonts\iconfont.css">
+<link rel="stylesheet" href="App\Main\views\riskProfile\DistrictSet.css">
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<style>
+    .row {
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+
+    .unread {
+        font-weight: bold;
+    }
+</style>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.BasicData.UserTaskList as vm" style="height:100%;">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered" style="height:100%;">
+            <div class="pd20 clearfix">
+            <div class="portlet-title pull-left">
+                <div class="caption btn btn-md blue">
+                    <span class="caption-subject sbold">
+                        用户任务
+                    </span>
+                </div>
+            </div>
+            </div>
+            <div class="col-xs-12 portlet-body pull-left">
+                <form class="form-inline" enter-key="vm.search(false)">
+
+                    <div class="col-xs-6 tabbable tabbable-tabdrop" style="margin-left: -15px;">
+                        <ul class="nav nav-pills" id="switchNav">
+                           <!--  <li class="active">
+                                <a id="allWaitingThing" data-toggle="tab" ng-click="vm.allWaitingThingBtnClick()">全部</a>
+                            </li> -->
+                            <li class="active">
+                                <a id="myWaitingThing" data-toggle="tab" ng-click="vm.myWaitingThingBtnClick()">我的待办</a>
+                            </li>
+                            <li>
+                                <a id="myDoneThing" data-toggle="tab" ng-click="vm.myDoneThingBtnClick()">我的已办</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <div class="form-group" style="padding-right:10px;">
+                            <div class="input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control input-middle" ng-model="vm.serchinfo" placeholder="请输入...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                           <!--  <button class="btn blue" type="button" id="btnSearch" ng-click="vm.search(false)">搜索</button>
+                            <button class="btn blue" type="button" id="btnReset" ng-click="vm.reset()">重置</button> -->
+                            
+                            <button class="iconfont icon-zhongzhi"  style="background-color:#fff;font-size:20px;border:none;margin-right:-35px;" type="button" id="btnReset" ng-click="vm.reset()"></button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+    <div class="portlet-body">
+        <table id="tb_task"></table>
+    </div>
+</div>
+</div>
+</div>

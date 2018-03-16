@@ -1,0 +1,17 @@
+﻿<div>
+    <form name="editUserPermissionsForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>权限- {{vm.user.userName}}</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <permission-tree edit-data="vm.permissionEditData"></permission-tree>
+        </div>
+        <div class="modal-footer">
+            <button type="button" ng-disabled="vm.saving" button-busy="vm.resettingPermissions" busy-text="保存中..." class="btn btn-default pull-left" ng-click="vm.resetPermissions()" uib-popover="重置用户权限后，用户仅拥有所属角色包含的权限，为用户直接指定的权限将取消." popover-trigger="'mouseenter'" popover-placement="top"><span>重置直接指定权限</span></button>
+            <button type="button" ng-disabled="vm.saving || vm.resettingPermissions" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+            <button type="submit" ng-disabled="vm.resettingPermissions" button-busy="vm.saving" busy-text="保存中..." class="btn btn-primary blue" ng-click="vm.save()"><i class="fa fa-save"></i> <span>保存</span></button>
+        </div>
+    </form>
+</div>

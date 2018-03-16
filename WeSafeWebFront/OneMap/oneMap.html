@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>智慧消防平台</title>
+    <link href="css/oneMap/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/oneMap/index.css" rel="stylesheet" />
+
+    <link href="plugins/jquery.liMarquee/liMarquee.css" rel="stylesheet">
+    <!-- 安全等级 -->
+    <link href="css/Font/material-icons.css" rel="stylesheet" type="text/css">
+    <script src="/apiConfig.js"></script>
+    <script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script type="text/javascript" src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--ECharts3 -->
+    <script type="text/javascript" src="js/Baidu/echarts-all-3.js"></script>
+    <script type="text/javascript" src="js/Baidu/ecStat.min.js"></script>
+    <script type="text/javascript" src="js/Baidu/dataTool.min.js"></script>
+    <script type="text/javascript" src="js/Baidu/china.js"></script>
+    <script type="text/javascript" src="js/Baidu/world.js"></script>
+    <script type="text/javascript" src="js/Baidu/api.js"></script>
+    <script type="text/javascript" src="js/Baidu/bmap.min.js"></script>
+    <script type="text/javascript" src="plugins/jquery.liMarquee/jquery.liMarquee.js"></script>
+    <script src="../js/Common.js"></script>
+    <script src="Scripts/jsmpeg.min.js"></script>
+    <script src="Scripts/oneMap.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div>
+            <div class="title">
+                <h1>烽火科技集团消防实时监控</h1>                
+            </div>
+            <div class="small-title">
+                <p class="accident-bg">连续安全生产<span id="safeDays">365</span>天</p>
+            </div>
+        </div>
+        <div id="content">
+            <div class="left-section">
+                <!-- 评分 -->
+                <div class="pane gauge margin-l">
+                    <div class="chart-row">
+                        <div class="chart-item">
+                            <p class="label-score" id="safeScore">98</p>
+                            <span class="chart-title">安全评分</span>
+                        </div>
+                        <div class="chart-item" style="height:100%;width:50%;">   
+                            <p class="label-score" id="assestNum">200</p>
+                            <span class="chart-title">资产数量</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pane pane-alarm">
+                    <div class="pane-body">
+                        <div class="pane-title">
+                            <img src="css/oneMap/img/alarm.png" alt="报警监控">
+                        </div>
+                        <table class="table" style="background-color:rgba(0,0,0,0)">
+                            <thead>
+                                <tr>
+                                    <th width="35%" align="left" style="padding-left:15px;">园区</th>
+                                    <th width="35%" align="left">
+                                        时间
+                                    </th>
+                                    <th width="30%" align="left">故障类型</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <table class="table table-yellow" id="alarmList">
+                                <tr class="box-yellow">
+                                    <td width="35%" class="box-left fade">虹信通信科技园</td>
+                                    <td width="35%" class="fade">2017-01-15 14:00</td>
+                                    <td width="30%" class="fade">设备故障</td>
+                                </tr>
+                                <tr class="box-yellow">
+                                    <td class="box-left fade">理工光科科技园</td>
+                                    <td class="fade">2017-01-15 14:00</td>
+                                    <td class="fade">设备故障</td>
+                                </tr>
+                                <tr class="box-yellow">
+                                    <td class="box-left fade">创业街园区</td>
+                                    <td class="fade">2017-01-15 14:00</td>
+                                    <td class="fade">设备故障</td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- 传感器数量 -->
+                <div class="pane pane-alarm">
+                    <div class="pane-body">
+                        <div class="pane-title">
+                            <img src="css/oneMap/img/work.png" alt="巡检任务">
+                        </div>
+                        <table class="table" style="background-color:rgba(0,0,0,0)">
+                            <thead>
+                                <tr>
+                                    <th width="35%" align="left" style="padding-left:15px;">园区</th>
+                                    <th width="35%" align="left">任务名称</th>
+                                    <th width="30%" align="left">时间/负责人</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <table class="table" style="background-color:rgba(0,0,0,0);" id="worklist2">
+                            <tr class="box-blue">
+                                <td width="35%" class="box-left fade">虹信通信科技园</td>
+                                <td width="35%" class="fade">9月11日日常巡检</td>
+                                <td width="30%" class="fade">2017-01-15<br />李四海</td>
+                            </tr>
+                            <tr class="box-blue">
+                                <td width="35%" class="box-left fade">理工光科科技园</td>
+                                <td width="35%" class="fade">9月11日日常巡检</td>
+                                <td width="30%" class="fade">2017-01-15<br />李四海</td>
+                            </tr>
+                            <tr class="box-blue">
+                                <td width="35%" class="box-left fade">创业街园区</td>
+                                <td width="35%" class="fade">9月11日日常巡检</td>
+                                <td width="30%" class="fade">2017-01-15<br />彭继华</td>
+                            </tr>
+                            <tr class="box-blue">
+                                <td width="35%" class="box-left fade">虹信通信科技园</td>
+                                <td width="35%" class="fade">9月11日日常巡检</td>
+                                <td width="30%" class="fade">2017-01-15<br />钱华</td>
+                            </tr>
+                            <tr class="box-blue">
+                                <td width="35%" class="box-left fade">虹信通信科技园</td>
+                                <td width="35%" class="fade">9月11日日常巡检</td>
+                                <td width="30%" class="fade">2017-01-15<br />蔡一鸣</td>
+                            </tr>                            
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 中间区域地图 -->
+            <div class="center-section">
+                <div id="container" style="height: 100%;"></div>
+            </div>
+            <!-- 右侧图表 -->
+            <div class="right-section">
+                <div class="pane pane-alarm">
+                    <div class="pane-body">
+                        <div class="pane-title">
+                            <img src="css/oneMap/img/safelevel.png" alt="园区安全等级">
+                        </div>
+                        <table class="table" style="background-color:rgba(0,0,0,0)">
+                            <thead>
+                                <tr>
+                                    <th width="5%"></th>
+                                    <th width="40%" align="left" style="padding-left:15px;">企业名称</th>
+                                    <th width="35%" align="left">
+                                        安全等级
+                                    </th>
+                                    <th width="20%" align="left">责任人</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <table class="table" style="background-color:rgba(0,0,0,0);margin-bottom:50px;" id="safetyParklist">
+                            <tr class="box-material">
+                                <td width="5%" class="num">1</td>
+                                <td width="40%" class="box-left">虹信通信科技园</td>
+                                <td width="35%">
+                                <i class="material-icons" style="color: #a8ff00">grade</i>
+                                <i class="material-icons" style="color: #a8ff00">grade</i>
+                                <i class="material-icons" style="color: #a8ff00">grade</i>
+                                <i class="material-icons" style="color: #a8ff00">grade</i>
+                                <i class="material-icons" style="color: #a8ff00">grade</i>
+                                </td>
+                                <td width="20%">李四海</td>
+                            </tr>
+                            <tr class="box-material">
+                                <td width="5%" class="num">2</td>
+                                <td class="box-left">理工光科科技园</td>
+                                <td>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                </td>
+                                <td>彭继华</td>
+                            </tr>
+                            <tr class="box-material">
+                                <td width="5%" class="num">3</td>
+                                <td class="box-left">创业街园区</td>
+                                <td>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                </td>
+                                <td>钱华</td>
+                            </tr>
+                            <tr class="box-material">
+                                <td width="5%" class="num">4</td>
+                                <td class="box-left">创业街园区</td>
+                                <td>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                </td>
+                                <td>尤先发</td>
+                            </tr>
+                            <tr class="box-material">
+                                <td width="5%" class="num">5</td>
+                                <td class="box-left">创业街园区</td>
+                                <td>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                    <i class="material-icons" style="color: #a8ff00">grade</i>
+                                </td>
+                                <td>蔡一鸣</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 视频轮播 -->
+                <div class="pane pane-video-row">
+                    <div class="pane-body">
+                        <div class="pane-title">
+                            <img src="css/oneMap/img/video.png" alt="视频监控">
+                        </div>
+                        <div id="carousel-videos" class="carousel slide" data-ride="carousel">
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item active" style="height:256px;">
+                                    <div class="video-col" width="233" height="174"><canvas id="video1" style="width:100%;height:100%"></canvas></div>
+                                    <div class="video-col" width="233" height="174"><canvas id="video2" style="width:100%;height:100%"></canvas></div>
+                                    <div class="video-col" width="233" height="174"><canvas id="video3" style="width:100%;height:100%"></canvas></div>
+                                    <div class="video-col" width="233" height="174"><canvas id="video4" style="width:100%;height:100%"></canvas></div>
+                                </div>
+                                <div class="item">
+                                    <div class="video-col" width="233" height="174"><canvas id="video5" style="width:100%;height:100%"></canvas></div>
+                                    <div class="video-col" width="233" height="174"><canvas id="video6" style="width:100%;height:100%"></canvas></div>
+                                    <div class="video-col" width="233" height="174"><canvas id="video7" style="width:100%;height:100%"></canvas></div>
+                                    <div class="video-col" width="233" height="174"><canvas id="video8" style="width:100%;height:100%"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="label-count"><a href="video.html" style="color:#fff">more</a></span>
+                    </div>
+                </div>
+
+                <div class="pane">
+                    <div class="pane-body" style="position:absolute;bottom:30px;right:30px;">                        
+                        <a href="/default.html#!/mydesktop" style="color:#fff;text-decoration-line:none;font-size:30px;">
+                            进入>>
+                        </a>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <!--右上角评分圈圈-->
+    <script type="text/javascript">
+        var myChart1 = echarts.init(document.getElementById("chart1"));
+        var myChart2 = echarts.init(document.getElementById("chart2"));
+        option1 = {
+            color: ["rgb(71,163,228)"],
+            series: [
+                {
+                    name: '安全评分',
+                    type: 'pie',
+                    radius: ['100%', '80%'],
+                    hoverAnimation: false,
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'center',
+                            textStyle: {
+                                fontSize: '40',
+                                fontWeight: 'bold',
+                                color: "rgb(71,163,228)"
+                            },
+                            formatter: '{c}'
+                        }
+                    },
+                    itemStyle: {
+                        color: "red"
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: [
+                        { name: '安全评分', value: 98 }
+                    ]
+                }
+            ]
+        };
+
+        option2 = {
+            color: ["rgb(46,230,168)"],
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: ['100%', '80%'],
+                    hoverAnimation: false,
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'center',
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold',
+                                color: "rgb(46,230,168)"
+                            },
+                            formatter: '200/3'
+                        }
+                    },
+                    itemStyle: {
+                        color: "red"
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: [
+                        { name: '资产总数/故障', value: 40 }
+                    ]
+                }
+            ]
+        };
+                
+        myChart1.setOption(option1);
+        myChart2.setOption(option2);
+    </script>
+</body>
+
+</html>

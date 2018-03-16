@@ -1,0 +1,44 @@
+﻿
+<script src="/assets/js/Common.js"></script>
+<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<script src="/assets/Video/js/jsmpeg.min.js"></script>
+
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.keyregionvideosurveillance as vm" style="height:100%;">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered" style="min-height:100%;height:auto !important;height:100%;">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">
+                        重点区域视频监管
+                    </span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="col-xs-6" style="margin-left: -20px;">
+                    <div class="text-left" id="filterContainer">
+                        <div class="btn-group" style="margin-left:5px" ng-repeat="area in vm.areas">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{area.btnName}}<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="child in area.childAreas"><a ng-click="vm.LoadArea(child.id,child.nextlevel,true)">{{child.displayName}}</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a ng-click="vm.LoadArea(area.pid,area.level,true)">{{area.levelName}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <div id="videolist" class="list-unstyled row clearfix">
+                    <table id="tb_video"></table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

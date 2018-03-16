@@ -1,0 +1,272 @@
+﻿
+<style>
+	.myimglist {
+		width: 2000px;
+		overflow: hidden;
+		white-space:nowrap;
+	}
+	
+	.myimglist li {
+		list-style: none;
+		float: left; 
+		margin-left: 10px;
+		width: 100px;
+		height: 125px;
+	}
+	
+	.myimglist img {
+		width: 100%;
+		height: 80%;
+	}
+</style>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.hiddenTrouble.reviewTrouble as vm">
+    <div class="col-md-12">
+        <div class="portlet light bordered" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <!--@*<i class=" icon-layers font-green"></i>*@-->
+                    <span class="caption-subject sbold">复查隐患</span>
+                </div>
+                <!--@*<div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-cloud-upload"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-wrench"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                        <i class="icon-trash"></i>
+                    </a>
+                </div>*@-->
+            </div>
+            <div class="portlet-body">
+                <form name="addorlookhiddentrouble" role="form" validate class="form-horizontal">
+                    <div class="form-body">
+                        <h3 class="form-section">隐患详情</h3>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">隐患场所</label>
+                            <div class="col-md-4">
+                                <select class="validate form-control edited" ng-disabled="vm.islook" ng-model="vm.Trouble.AreaID" ng-change="vm.areaChanged()" ng-options="area.id as area.areaName for area in  vm.areas"></select>
+                            </div>
+                            <label class="control-label col-md-1">上报人</label>
+                            <div class="col-md-4">
+                                <select class="validate form-control edited" ng-disabled="vm.islook" ng-model="vm.Trouble.ReportUserId" ng-options="user.id as user.userName for user in  vm.users"></select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">隐患负责人</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-disabled="true" ng-model="vm.Trouble.ChargeUserName" required maxlength="32" class="validate form-control">
+                            </div>
+                            <label class="control-label col-md-1">隐患级别</label>
+                            <div class="col-md-4">
+                                <select class="validate form-control edited" ng-disabled="vm.islook" ng-model="vm.Trouble.HiddenTroubleType" ng-options="type.id as type.type for type in  vm.troubleType"></select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">隐患发现时间</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="date" ng-disabled="vm.islook" ng-model="vm.Trouble.HiddenTroubleFindTime" required maxlength="32" class="validate form-control">
+                            </div>
+                            <label class="control-label col-md-1">整改类型</label>
+                            <div class="col-md-4">
+                                <select auto-focus class="validate form-control edited" ng-disabled="vm.islook" ng-model="vm.Trouble.RectifyTroubleType" ng-options="type.id as type.type for type in  vm.rectifyType"></select>
+                            </div>
+                        </div>
+                        <div class="form-group " ng-if="vm.Trouble.RectifyTroubleType==1">
+                            <label class="control-label col-md-2">整改期限</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="date" ng-disabled="vm.islook" ng-model="vm.Trouble.RectifyEndTime" required maxlength="32" class="validate form-control">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">隐患描述</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" cols="100" ng-disabled="vm.islook" ng-model="vm.Trouble.HiddenTroubleContent" required class="validate form-control" />
+                            </div>
+
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">整改要求</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" cols="100" ng-disabled="vm.islook" ng-model="vm.Trouble.RectifyClaim" required class="validate form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2" ng-if="vm.Trouble.ReportFileInfo.length>0">上报附件</label>
+                            <div class="col-md-4">
+                                <ul class="myimglist">
+                                    <li ng-repeat="sb in vm.Trouble.ReportFileInfo">
+                                    	<img src="{{sb.url}} " ng-click="vm.clickimg(sb.url)" />
+										<div class="col-xs-12">
+											<a class="col-xs-12" href="{{vm.abpPath}}File/DownLoadFile/?FileName={{sb.url}}" target="_Blank"><span>下载</span></a>
+										</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h3 class="form-section">审核详情</h3>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">审核人</label>
+                            <div class="col-md-4">
+                                <select class="validate form-control edited" ng-disabled="true" ng-model="vm.Trouble.AuditUserId" ng-options="user.id as user.userName for user in  vm.users"></select>
+                            </div>
+                            <label class="control-label col-md-1">审核时间</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="date" ng-disabled="true" ng-model="vm.Trouble.AuditTime" required maxlength="32" class="validate form-control">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">审核</label>
+                            <div class="col-md-4">
+                                <input class="validate form-control" ng-disabled="true" type="text" value="通过">
+                            </div>
+                            <!--<label class="control-label col-md-1">指定整改人</label>
+                            <div class="col-md-4">
+                                <input class="validate form-control" ng-disabled="true" type="text" ng-model="vm.Trouble.ExecuteUserName">
+                            </div>-->
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">审核意见</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" cols="100" ng-disabled="true" ng-model="vm.Trouble.AuditContent" required class="validate form-control" />
+                            </div>
+                        </div>
+                        <h3 class="form-section">指派详情</h3>
+						<div class="form-group">
+							<label class="control-label col-md-2">指派时间</label>
+							<div class="col-md-4">
+								<input auto-focus type="text" ng-disabled="true" ng-model="vm.Trouble.AssignTime" required maxlength="32" class="validate form-control">
+							</div>
+						</div>
+                         <div class="form-group ">
+                            <label class="control-label col-md-2">整改人</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-disabled="true" ng-model="vm.Trouble.ExecuteUserName" required maxlength="32" class="validate form-control">
+                            </div>
+                            <label class="control-label col-md-1">复查人</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-disabled="true" ng-model="vm.Trouble.ReviewUserName" required maxlength="32" class="validate form-control">
+                            </div>
+                        </div>
+                        <div ng-repeat="rf in vm.Trouble.RiskFlow">
+                            <h3 class="form-section">{{rf.rec.title}}</h3>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">整改人</label>
+                                <div class="col-md-4">
+                                    <select class="validate form-control edited" ng-disabled="vm.islook" ng-model="rf.rec.rectifyUserId" ng-options="user.id as user.userName for user in  vm.users"></select>
+                                </div>
+                                <label class="control-label col-md-1">整改时间</label>
+                                <div class="col-md-4">
+                                    <input auto-focus type="date" ng-disabled="true" ng-model="rf.rec.rectifyTime" required maxlength="32" class="validate form-control">
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-md-2">整改描述</label>
+                                <div class="col-md-9">
+                                    <textarea rows="3" cols="100" ng-disabled="vm.islook" ng-model="rf.rec.rectifyContent" required class="validate form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-md-2" ng-if="rf.rec.fileInfo.length>0">整改附件</label>
+                                <div class="col-md-4">
+                                    <ul class="myimglist"> 
+                                        <li ng-repeat="sb in rf.rec.fileInfo">
+                                        	<img src="{{sb.url}} " ng-click="vm.clickimg(sb.url)" />
+										<div class="col-xs-12">
+											<a class="col-xs-12" href="{{vm.abpPath}}File/DownLoadFile/?FileName={{sb.url}}" target="_Blank"><span>下载</span></a>
+										</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3 class="form-section" ng-if="rf.rev!=null">{{rf.rev.title}}</h3>
+                            <div class="form-group " ng-if="rf.rev!=null">
+                                <label class="control-label col-md-2">复查</label>
+                                <div class="col-md-4">
+                                    <input auto-focus type="text" ng-disabled="true" ng-model="rf.rev.passStr" required maxlength="32" class="validate form-control">
+                                </div>
+                            </div>
+                            <div class="form-group " ng-if="rf.rev!=null">
+                                <label class="control-label col-md-2">复查人</label>
+                                <div class="col-md-4">
+                                    <select auto-focus class="validate form-control edited" ng-disabled="vm.islook" ng-model="rf.rev.reviewUserId" ng-options="user.id as user.userName for user in  vm.users"></select>
+                                </div>
+                                <label class="control-label col-md-1">复查时间</label>
+                                <div class="col-md-4">
+                                    <input auto-focus type="date" ng-disabled="true" ng-model="rf.rev.reviewTime" required maxlength="32" class="validate form-control">
+                                </div>
+                            </div>
+                            <div class="form-group " ng-if="rf.rev!=null">
+                                <label class="control-label col-md-2">复查描述</label>
+                                <div class="col-md-9">
+                                    <textarea rows="3" cols="100" ng-disabled="vm.islook" ng-model="rf.rev.reviewContent" required class="validate form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group " ng-if="rf.rev!=null">
+                                <label class="control-label col-md-2" ng-if="rf.rev.fileInfo.length>0">复查附件</label>
+                                <div class="col-md-4">
+                                    <ul class="myimglist">
+                                        <li ng-repeat="sb in rf.rev.fileInfo">
+                                        	<img src="{{sb.url}} " ng-click="vm.clickimg(sb.url)" />
+										<div class="col-xs-12">
+											<a class="col-xs-12" href="{{vm.abpPath}}File/DownLoadFile/?FileName={{sb.url}}" target="_Blank"><span>下载</span></a>
+										</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <h3 class="form-section">复查</h3>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">复查意见</label>
+                            <div class="col-md-4" style="margin-top:8px;">
+                                <label>
+                                    <input id="radiopass" ng-value="0" type="radio" name="Name" ng-model="vm.risk.IsPass">
+                                    通过
+                                </label>
+                                <label>
+                                    <input id="radiopass" ng-value="1" type="radio" name="Name" ng-model="vm.risk.IsPass">
+                                    不通过
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">复查人</label>
+                            <div class="col-md-4">
+                                <select auto-focus class="validate form-control edited" ng-disabled="true" ng-model="vm.risk.ReviewUserId" ng-options="user.id as user.userName for user in  vm.users"></select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">复查描述</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" cols="100" ng-model="vm.risk.ReviewContent" required class="validate form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">上传附件</label>
+                            <div class="col-md-4">
+                                <input type="file" name="image" id="txt_file" multiple accept="image/gif,image/jpeg,image/jpg,image/png,image/bmp"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-9">
+                                <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+                                    返回
+                                </button>
+                                <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()">
+                                    保存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

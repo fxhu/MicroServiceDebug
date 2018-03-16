@@ -1,0 +1,377 @@
+﻿[
+  {
+    "name": "280degree_damper",
+    "icon": "images/280防火阀绿.png",
+    "icon_broken": "images/280防火阀橙.png",
+    "icon_warn": "images/280防火阀红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/280防火阀绿.png","images/280防火阀橙.png","images/280防火阀红.png"]
+  },
+  {
+    "name": "unknow",
+    "icon": "images/unknow.png",
+    "icon_broken": "images/unknow.png",
+    "icon_warn": "images/unknow.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/unknow.png","images/unknow.png","images/unknow.png"]
+  },
+  {
+    "name": "pressureswitch",
+    "icon": "images/压力开关绿.png",
+    "icon_broken": "images/压力开关黄.png",
+    "icon_warn": "images/压力开关红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/压力开关绿.png","images/压力开关黄.png","images/压力开关红.png"]
+  },
+  {
+    "name": "elevator_down",
+    "icon": "images/电梯迫降绿.png",
+    "icon_broken": "images/电梯迫降黄.png",
+    "icon_warn": "images/电梯迫降红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/电梯迫降绿.png","images/电梯迫降黄.png","images/电梯迫降红.png"]
+  },
+  {
+    "name": "exhaustfan",
+    "icon": "images/排烟机绿.png",
+    "icon_broken": "images/排烟机橙.png",
+    "icon_warn": "images/排烟机红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/排烟机绿.png","images/排烟机橙.png","images/排烟机红.png"]
+  },
+  {
+    "name": "spraypump",
+    "icon": "images/绿喷头.png",
+    "icon_broken": "images/橙喷头.png",
+    "icon_warn": "images/红喷头.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/绿喷头.png","images/橙喷头.png","images/红喷头.png"]
+  },
+  {
+    "name": "breakerswitch",
+    "icon": "images/断电开关绿.png",
+    "icon_broken": "images/断电开关橙.png",
+    "icon_warn": "images/断电开关红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}<br/>"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/断电开关绿.png","images/断电开关橙.png","images/断电开关红.png"]
+  },
+  {
+    "name": "strongswitch",
+    "icon": "images/强切开关绿.png",
+    "icon_broken": "images/强切开关橙.png",
+    "icon_warn": "images/强切开关红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}<br/>"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/强切开关绿.png","images/强切开关橙.png","images/强切开关红.png"]
+  },
+  {
+    "name": "wetalarm",
+    "icon": "images/湿式报警阀绿.png",
+    "icon_broken": "images/湿式报警阀橙.png",
+    "icon_warn": "images/湿式报警阀红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/湿式报警阀绿.png","images/湿式报警阀橙.png","images/湿式报警阀红.png"]
+  },
+  {
+    "name": "sondlightalarm",
+    "icon": "images/声光报警器绿.png",
+    "icon_broken": "images/声光报警器橙.png",
+    "icon_warn": "images/声光报警器红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/声光报警器绿.png","images/声光报警器橙.png","images/声光报警器红.png"]
+  },
+  {
+    "name": "firetanklevelgauge",
+    "icon": "images/消防水池液位计绿.png",
+    "icon_broken": "images/消防水池液位计橙.png",
+    "icon_warn": "images/消防水池液位计红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/消防水池液位计绿.png","images/消防水池液位计橙.png","images/消防水池液位计红.png"]
+  },
+  {
+    "name": "airsupplygrille",
+    "icon": "images/送风口绿.png",
+    "icon_broken": "images/送风口橙.png",
+    "icon_warn": "images/送风口红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/送风口绿.png","images/送风口橙.png","images/送风口红.png"]
+  },
+  {
+    "name": "firepump",
+    "icon": "images/消防水泵接合器绿.png",
+    "icon_broken": "images/消防水泵接合器橙.png",
+    "icon_warn": "images/消防水泵接合器红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/消防水泵接合器绿.png","images/消防水泵接合器橙.png","images/消防水泵接合器红.png"]
+  },
+  {
+    "name": "rollingdoor",
+    "icon": "images/绿防火门.png",
+    "icon_broken": "images/橙防火门.png",
+    "icon_warn": "images/红防火门.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/绿防火门.png","images/橙防火门.png","images/红防火门.png"]
+  },
+  {
+    "name": "indoorhydrant",
+    "icon": "images/室内消火栓绿.png",
+    "icon_broken": "images/室内消火栓橙.png",
+    "icon_warn": "images/室内消火栓红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/室内消火栓绿.png","images/室内消火栓橙.png","images/室内消火栓红.png"]
+  },
+  {
+    "name": "manualalarm",
+    "icon": "images/手报绿.png",
+    "icon_broken": "images/手报橙.png",
+    "icon_warn": "images/手报红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}<br>物联编码：@{物联编码}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr><tr><td>资产编号</td><td>#{code}</td></tr><tr><td>状态</td><td>#{stateName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/手报绿.png","images/手报红.png","images/手报橙.png"]
+  },
+  {
+    "name": "flowindicator",
+    "icon": "images/水流指示器绿.png",
+    "icon_broken": "images/水流指示器橙.png",
+    "icon_warn": "images/水流指示器红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/水流指示器绿.png","images/水流指示器橙.png","images/水流指示器红.png"]
+  },
+  {
+    "name": "warmsense",
+    "icon": "images/绿温感.png",
+    "icon_broken": "images/橙温感.png",
+    "icon_warn": "images/红温感.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}<br>实时温度：@{温度}°C<br>物联编码：@{物联编码}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr><tr><td>资产编号</td><td>#{code}</td></tr><tr><td>状态</td><td>#{stateName}</td></tr><tr><td>温度</td><td>@{温度}°C</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/绿温感.png","images/橙温感.png","images/红温感.png"]
+  },
+  {
+    "name": "signal_butterfly",
+    "icon": "images/信号蝶阀绿.png",
+    "icon_broken": "images/信号蝶阀橙.png",
+    "icon_warn": "images/信号蝶阀红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/信号蝶阀绿.png","images/信号蝶阀橙.png","images/信号蝶阀红.png"]
+  },
+  {
+    "name": "smokesense",
+    "icon": "images/绿烟感.png",
+    "icon_broken": "images/橙烟感.png",
+    "icon_warn": "images/红烟感.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}<br>物联编码：@{物联编码}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr><tr><td>资产编号</td><td>#{code}</td></tr><tr><td>状态</td><td>#{stateName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/绿烟感.png","images/红烟感.png","images/橙烟感.png"]
+  },
+  {
+    "name": "shake",
+    "icon": "images/unknow.png",
+    "icon_broken": "images/unknow.png",
+    "icon_warn": "images/unknow.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr><tr><td>资产编号</td><td>#{code}</td></tr><tr><td>状态</td><td>#{stateName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/unknow.png","images/unknow.png","images/unknow.png"]
+  },
+  {
+    "name": "airrefresh",
+    "icon": "images/正压送风口绿.png",
+    "icon_broken": "images/正压送风口橙.png",
+    "icon_warn": "images/正压送风口红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/正压送风口绿.png","images/正压送风口橙.png","images/正压送风口红.png"]
+  },
+  {
+    "name": "smokeoutlet",
+    "icon": "images/排烟口绿.png",
+    "icon_broken": "images/排烟口橙.png",
+    "icon_warn": "images/排烟口红.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/排烟口绿.png","images/排烟口橙.png","images/排烟口红.png"]
+  },
+  {
+    "name": "camera",
+    "icon": "images/绿摄像头.png",
+    "icon_broken": "images/红摄像头.png",
+    "icon_warn": "images/橙摄像头.png",
+    "popWindow": {
+      "width": "640",
+      "height": "480",
+      "showType": "window",
+      "content": "<iframe src='/DataVisual/Video.html?AssestId=#{assestId}' width='645' height='480' scrolling='no' frameborder=0 ></iframe>"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/绿摄像头.png","images/红摄像头.png","images/橙摄像头.png"]
+  },
+  {
+    "name": "extinguisher",
+    "icon": "images/绿灭火器.png",
+    "icon_broken": "images/橙灭火器.png",
+    "icon_warn": "images/红灭火器.png",
+    "popWindow": {
+      "width": "230",
+      "height": "150",
+      "showType": "map",
+      "content": "<h4>#{assestTypeName}</h4>资产编号：#{code}"
+    },
+    "description": "<tr><td>类型</td><td>#{assestTypeName}</td></tr>",
+    "afterClick": "LoadAssertDetails('#{assestId}')",
+    "icons":["images/绿灭火器.png","images/橙灭火器.png","images/红灭火器.png"]
+  }
+]

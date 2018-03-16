@@ -1,0 +1,130 @@
+﻿
+<script src="/assets/js/Common.js"></script>
+<link href="/assets/css/components-rounded.min.css" rel="stylesheet" />
+<link href="/assets/css/bootstrap-switch.min.css" rel="stylesheet" />
+<link href="/assets/plugins/bootstrap-datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="/assets/plugins/bootstrap-datepicker/bootstrap-datetimepicker.js"></script>
+<script src="/assets/plugins/bootstrap-datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+<link href="/assets/plugins/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="/assets/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+<style>
+    input[type=checkbox] {
+        position: relative !important;
+        margin: 4px 0 4px 6px !important;
+    }
+    .dropdown-menu > li.active > a {
+        background-color: #2AB4C0;
+    }
+    .dropdown-menu > li > a:hover {
+        background-color: #4DB3A2;
+    }
+    .dropdown-menu > li.active > a:hover {
+        background-color: #4DB3A2;
+    }
+    .mydate:disabled {
+        background-color: white !important;
+    }
+</style>
+<!--<script src="~/plugins/horizontal-timeline/horizontal-timeline.js"></script>-->
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.AddTemporaryTask as vm">
+    <div class="col-md-12">
+        <div class="portlet light bordered" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">添加临时任务</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form name="addorlookhiddentrouble" role="form" novalidate class="form-horizontal">
+                    <div class="form-body">
+
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">任务名称</label>
+                            <div class="col-md-4">
+                                <input auto-focus type="text" ng-model="vm.patrol.Name" required maxlength="32" class="validate form-control">
+                            </div>
+                            <label class="control-label col-md-1">负责人</label>
+                            <div class="col-md-4">
+                                <select id="mselect_user"></select>
+                            </div>
+                        </div>
+                        <div class="form-group " id="selfsettime">
+                            <label class="control-label col-md-2">开始时间</label>
+                            <div class="col-md-4">
+                                <input type="text" id="dt_start" ng-change="vm.dateTimeChange()" class="form-control pull-right mydate" ng-model="vm.patrol.StartTime" required>
+                            </div>
+                            <label class="control-label col-md-1">截止时间</label>
+                            <div class="col-md-4">
+                                <input type="text" id="dt_end" ng-change="vm.dateTimeChange()" class="form-control pull-right mydate" ng-model="vm.patrol.EndTime" required>
+                            </div>
+                        </div>
+                      
+
+                        <!--<div class="form-group ">
+                            <label class="control-label col-md-2">巡检人</label>
+                            <div class="col-md-4">
+                                <select id="mselect_patroluser" required></select>
+                            </div>
+                            <label class="control-label col-md-2">是否启用</label>
+                            <div class="col-md-3">
+                                <input type="checkbox" class="form-control" id="active" ng-model="vm.patrol.IsActive">
+                            </div>
+                        </div>-->
+                        <h3 class="form-section">选择分组</h3>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4">巡检场所</label>
+                                    <div class="col-md-8">
+                                        <select class="validate form-control edited" required ng-model="vm.patrol.AreaId" ng-change="vm.areaChanged()" ng-options="area.id as area.areaName for area in  vm.selectareas">
+                                            <option value="">---请选择---</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-group " >
+                                    <label class="control-label col-md-4">巡检组</label>
+                                    <div class="col-md-8">
+                                        <select id="mselect0" multiple="multiple"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group " style="display:none">
+                                    <label class="control-label col-md-4">分组</label>
+                                    <div class="col-md-8">
+                                        <select id="mselect1" multiple="multiple"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="col-md-offset-7 col-md-9">
+                                        <button type="button" class="btn btn-default waves-effect" ng-click="vm.reset()">
+                                            重置
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">已选择的巡检组：</label>
+                                <ul id="selectedlist" style="max-height:350px;overflow-y:auto;">
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-9">
+                                <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+                                    返回
+                                </button>
+                                <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()">
+                                   保存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

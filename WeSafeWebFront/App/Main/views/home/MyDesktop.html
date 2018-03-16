@@ -1,0 +1,347 @@
+﻿<!--引用资源 -->
+<style>
+    .dashboard-stat2 {
+        margin-bottom: 30px;
+    }
+
+    .contentNews {
+        display: none;
+    }
+
+    .breadMenu {
+        display: none;
+    }
+
+    .page-sidebar {
+        width: 256px;
+        float: left;
+        position: fixed;
+    }
+
+    .error-page>.error-content {
+        margin-left: 256px;
+        display: block;
+    }
+
+    .ls-slide2 .ls-price {
+        font: 300 20px 'Open Sans', sans-serif;
+        color: #fff;
+        text-align: center;
+        background: rgba(230, 64, 12, 0.9);
+        border-radius: 256px !important;
+        overflow: hidden;
+        width: 177px;
+        height: 177px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .page-content-wrapper {
+        background-color: #F2F3F8;
+        position: absolute;
+        left: 256px;
+        bottom: 31px;
+        top: 72px;
+        right: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li:hover>a,
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li.open>a,
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li.active>a,
+    .page-sidebar .page-sidebar-menu .sub-menu>li:hover>a,
+    .page-sidebar .page-sidebar-menu .sub-menu>li.open>a,
+    .page-sidebar .page-sidebar-menu .sub-menu>li.active>a {
+        width: 256px;
+        /* background: #337da0 !important; */
+        color: #5b9bd1 !important;
+        /* 子菜单宽度 */
+    }
+</style>
+<link href="/assets/css/mydesktop.css" rel="stylesheet">
+<link href="/OneMap/css/Font/material-icons.css" rel="stylesheet" type="text/css">
+<script src="/assets/js/Common.js"></script>
+<link href="/assets/css/style-patch-mydesktop.css" rel="stylesheet" />
+<script src="/assets/plugins/jquery-knob/js/jquery.knob.js"></script>
+<script src="/assets/plugins/jquery-easypiechart/jquery.easypiechart.min.js"></script>
+<script type="text/javascript" src="/assets/js/PatrolEnum.js"></script>
+<script type="text/javascript" src="/assets/js/DeviceEnum.js"></script>
+<script type="text/javascript" src="/assets/js/AlarmEnum.js"></script>
+<script type="text/javascript" src="/assets/js/hiddenDangerEnum.js"></script>
+<script type="text/javascript" src="/report/js/WeSafeRptCommon.js"></script>
+<div class="fineDeskTop" ng-controller="app.views.myDesktop">
+    <div class="page-bar clearfix showPark">
+        <li class="page-toolbar pull-right dropdown dropdown-extended dropdown-notification dropdown-dark lidropdownitem2  noboder clearfix">
+            <div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height grey-salt" data-toggle="dropdown" data-hover="dropdown"
+                data-close-others="true" data-placement="left" data-original-title="切换公司">
+
+                <span ng-bind="company"></span>
+                <span class="thin uppercase visible-lg-inline-block"> </span>&nbsp;
+                <i class="fa fa-angle-down"></i>
+            </div>
+            <ul class="dropdown-menu dropdown-menu-default">
+                <li class="divider"></li>
+
+                <li ng-repeat="value in list">
+                    <a href="javascript: void(0)" ng-click="showDetil(value.parentId,value.id,value.displayName)">
+                        {{value.displayName}}</a>
+
+                </li>
+                <li class="divider"></li>
+            </ul>
+        </li>
+    </div>
+    <div class="page-fixed-main-content" style="width: 100%;">
+        <div class="row widget-row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="equipment mb30 bs clearfix">
+                    <div class="row adjust" style="height: 134px;overflow:hidden">
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height: 100%" ;>
+                            <h3>设备</h3>
+                            <div class="number" ng-bind="t1"></div>
+                        </div>
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height: 100%" ;>
+                            <img class="av4-center" style="height:80px"src="/assets/images/witReportImg/deviceEcharts.png" alt="">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="inspection mb30 bs clearfix">
+                   <div class="row adjust" style="height: 134px;overflow:hidden">
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height: 100%" ;>
+                            <h3>报警</h3>
+                            <div class="number"
+                            style="color:#ef5665" ng-bind="t2"></div>
+                        </div>
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height: 100%" ;>
+                            <img class="av4-center" style="height:80px" src="/assets/images/witReportImg/alarmEcharts.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="hiddenTrouble mb30 bs clearfix">
+                        <div class="row adjust" style="height: 134px;overflow:hidden">
+                                <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height: 100%" ;>
+                                    <h3>隐患</h3>
+                                    <div class="number" style="color:#32c5d2" ng-bind="t3"></div>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height: 100%" ;>
+                                    <img class="av4-center" style="height:80px"src="/assets/images/witReportImg/hiddenDanger.png" alt="">
+                                </div>
+                            </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="alarm  mb30 bs clearfix">
+                        <div class="row adjust" style="height: 134px;overflow:hidden">
+                                <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height: 100%" ;>
+                                    <h3>巡检</h3>
+                                    <div class="number"
+                                    style="color:#8d43ad" ng-bind="t4"></div>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height: 100%" ;>
+                                    <img class="av4-center" src="/assets/images/witReportImg/patrolEcharts.png" alt="">
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ecahrts">
+            <div class="mb30 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div>
+                    <h3></h3>
+                    <div  id="deviceReport">
+                    </div>
+                </div>
+            </div>
+            <div class="mb30 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div>
+                    <h3></h3>
+                    <div  id="brokenReport">
+                    </div>
+                </div>
+            </div>
+            <div class="mb30 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div>
+                    <h3></h3>
+                    <div  id="patrolReport">
+                    </div>
+                </div>
+            </div>
+            <div class="mb30 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div>
+                    <h3></h3>
+                    <div  id="hiddenReport">
+                    </div>
+                </div>
+            </div>
+            <div class="mb30 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div>
+                    <h3></h3>
+                    <div id="warnReport">
+                    </div>
+                </div>
+            </div>
+            <div class="mb30 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div>
+                    <h3></h3>
+                    <div id="firePaper">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row hide">
+            <div class="col-lg-8 col-xs-12 col-sm-12">
+                <div class="portlet light bordered portlet-light-bordered-box">
+                    <div class="portlet-title tabbable-line" style="border:none;">
+                        <div class="caption">
+                            <i class="icon-share font-dark hide"></i>
+                            <span class="caption-subject font-dark bold uppercase"></span>
+                        </div>
+                        <div class="actions" style="display:none;">
+                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" data-container="false" data-placement="bottom" href="javascript:;"
+                               data-original-title="" title="全屏操作"> </a>
+                        </div>
+                        <ul class="nav nav-tabs" id="mydesktopTap">
+                        </ul>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="region_statistics_loading" style="display: none;">
+                            <img src="../assets/global/img/loading.gif" alt="loading"> </div>
+                        <div id="region_statistics_content" class="display-none" style="display: block;">
+                            <div class="tab-content" id="myTabContent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject bold uppercase font-dark">隐患统计</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="height: 480px;">
+                        <iframe src="/report/report4.html" width="100%" height="100%" frameborder="1" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12" style="margin-bottom: 30px;">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject bold uppercase font-dark">告警统计</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="height: 480px;">
+                        <iframe src="/report/report3.html" width="100%" height="100%" frameborder="1" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12" style="margin-bottom: 30px;">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject bold uppercase font-dark">资产统计</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="height: 480px;">
+                        <iframe src="/report/report2.html" width="100%" height="100%" frameborder="1" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xs-12 col-sm-12" style="margin-bottom: 30px;">
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject bold uppercase font-dark">巡检统计</span>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body" style="height: 480px;">
+                        <iframe src="/report/report5.html" width="100%" height="100%" frameborder="1" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            &lt;!&ndash; 重点区域1 &ndash;&gt;
+            <div class="col-lg-4 col-xs-6 col-sm-12" style="margin-bottom:30px;">
+                &lt;!&ndash; BEGIN BORDERED TABLE PORTLET&ndash;&gt;
+                <div class="portlet light portlet-fit bordered">
+                    <div class="portlet-title" style="border: none;border: none !important;padding-bottom:  0px !important;margin-bottom:  0px !important;margin-top:  0ppx !important;">
+                        <div class="caption">
+                            <i class="icon-settings font-red" style="display:none;"></i>
+                            <span class="caption-subject font-red sbold uppercase" style="color:#93a2a9 !important;">重点区域</span>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group btn-group-devided" data-toggle="buttons" onclick="window.location.href='default.html#!/KeyArea'">
+                                <label class="btn grey-salsa btn-sm">
+                                    <input type="radio" name="options" class="toggle" id="option2">更多</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="border: none !important;padding-bottom: 0px !important;padding-top: 0px !important;margin-bottom: 0px !important;margin-top: 0ppx !important;">
+                        <div class="table-scrollable table-scrollable-borderless" style="margin-top: 0px !important;">
+                            <table class="table table-hover table-light" style="margin-bottom: 0px !important;margin-top: 0px !important;">
+                                <thead>
+                                <tr class="uppercase">
+                                    <th> 重点区域 </th>
+                                    <th> 所属部门 </th>
+                                    <th> 操作 </th>
+                                </tr>
+                                </thead>
+                                <tbody id="keytbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; END BORDERED TABLE PORTLET&ndash;&gt;
+            </div>
+
+            &lt;!&ndash; 重点区域2 &ndash;&gt;
+            <div class="col-lg-4 col-xs-6 col-sm-12">
+                &lt;!&ndash; BEGIN BORDERED TABLE PORTLET&ndash;&gt;
+                <div class="portlet light portlet-fit bordered">
+                    <div class="portlet-title" style="border: none;border: none !important;padding-bottom:  0px !important;margin-bottom:  0px !important;margin-top:  0ppx !important;">
+                        <div class="caption">
+                            <i class="icon-settings font-red" style="display:none;"></i>
+                            <span class="caption-subject font-red sbold uppercase" style="color:#93a2a9 !important;">待办任务</span>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group btn-group-devided" data-toggle="buttons" onclick="window.location.href='default.html#!/UserTask?curQueryType=0'">
+                                <label class="btn grey-salsa btn-sm">
+                                    <input type="radio" name="options" class="toggle" id="option2">更多</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="border: none !important;padding-bottom: 0px !important;padding-top: 0px !important;margin-bottom: 0px !important;margin-top: 0ppx !important;">
+                        <div class="table-scrollable table-scrollable-borderless" style="margin-top: 0px !important;">
+                            <table class="table table-hover table-light" style="margin-bottom: 0px !important;margin-top: 0px !important;">
+                                <thead>
+                                <tr class="uppercase">
+                                    <th> 任务名称 </th>
+                                    <th> 时间 </th>
+                                    <th> 状态 </th>
+                                    <th> 操作 </th>
+                                </tr>
+                                </thead>
+                                <tbody id="todoTask"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; END BORDERED TABLE PORTLET&ndash;&gt;
+            </div>
+        </div>
+-->
+
+        <!-- END PAGE BASE CONTENT -->
+
+    </div>
+
+</div>

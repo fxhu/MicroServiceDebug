@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<!--
+    作者：ymk
+    时间：2017-11-17
+    描述：用于管理员的园区可视化编辑
+-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=IAcMP39129Y9SmOoXqbGyGl2DtzV5s7G"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/apiConfig.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+    <link rel="stylesheet" href="css/pub.css" />
+    <script src="/assets/js/common.js"></script>
+    <script src="/DataVisual/js/public.js"></script>
+    <script src="js/controls.js"></script>
+    <script src="js/AssestPoint_Park.js"></script>
+    <title>园区可视化编辑</title>
+    <style type="text/css">
+        .anchorBL {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top2right"><span class="label label-success" id="saveResult"></span></div>
+    <div id="allmap"></div>
+</body>
+
+</html>

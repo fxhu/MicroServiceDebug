@@ -1,0 +1,27 @@
+<div>
+    <form name="editionCreateOrEditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="vm.edition.id">编辑版本: {{vm.edition.displayName}}</span>
+                <span ng-if="!vm.edition.id">创建新的版本</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="版本属性列表">
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input class="form-control" type="text" name="EditionDisplayName" ng-class="{'edited':vm.edition.displayName}" ng-model="vm.edition.displayName" required maxlength="64">
+                        <label>版本名称</label>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="特性参数列表">
+                    <feature-tree edit-data="vm.featureEditData"></feature-tree>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+            <button type="submit" button-busy="vm.saving" busy-text="保存中..." class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="editionCreateOrEditForm.$invalid"><i class="fa fa-save"></i> <span>保存</span></button>
+        </div>
+    </form>
+</div>

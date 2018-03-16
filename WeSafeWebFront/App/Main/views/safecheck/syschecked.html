@@ -1,0 +1,149 @@
+﻿
+
+<!--安全评估-->
+<link rel="stylesheet" href="/assets/plugins/radialindicator/radialindicator.css">
+
+<!--安全评估-->
+<script src="/assets/plugins/radialindicator/radialindicator.js"></script>
+<script src="/assets/js/SysChecked.js"></script>
+
+<div class="{{vm.myclass}}" ng-controller="app.views.syschecked as vm">
+
+
+
+
+    <div class="block-header">
+        <span>
+            <a href="datavisual/buildingpanel.html?parkid=1" class="dropdown-toggle">我的园区</a>
+        </span>
+    </div>
+
+
+    <div class="row clearfix">
+        <div class="col-md-2">
+            <div class="prg-cont rad-prg" id="prgTotal"></div>
+            <!-- /.box -->
+        </div>
+
+        <div class="col-md-6" style="line-height: 205px;">
+            <div class="header" id="checkList">
+                <h4>危险品处置:&nbsp;&nbsp;<small>正在就绪</small></h4>
+            </div>
+            <div class="header">
+                <h2 id="ResultScore">
+                </h2>
+            </div>
+        </div>
+        <div class="col-md-4" style="line-height: 205px;">
+            <div class="btn-group-vertical">
+                <button type="button" id="btnSysChecked" class="btn btn-primary waves-effect vertical-center btn-circle" style="height:50px;width:200px;font-size:20px;">重新评估</button>
+            </div>
+        </div>
+    </div>
+    <!-- #END# Widgets -->
+    <div class="row clearfix" id="progRow">
+        <div class="col-md-12">
+            <div class="panel-title progress progress-striped active">
+                <div id="prog" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+                    <span id="proglabel">正在启动，请稍后......</span>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="body">
+                    <div class="panel-group full-body" role="tablist" aria-multiselectable="true">
+                        <div class="panel">
+                            <div class="panel-heading" role="tab" id="headingOne_9">
+
+                            </div>
+                            <div id="collapseOne_9" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne_9">
+                                <div class="panel-body" id="ItemList">
+                                    <div class="col-md-3">
+                                        <div class="preloader">
+                                            <div class="spinner-layer pl-light-blue">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>危险品处置</p>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="preloader">
+                                            <div class="spinner-layer pl-light-blue">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>危险作业处置</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="preloader">
+                                            <div class="spinner-layer pl-light-blue">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>培训次数</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="preloader">
+                                            <div class="spinner-layer pl-light-blue">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>考核成绩</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="preloader">
+                                            <div class="spinner-layer pl-light-blue">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>资产状态</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-info btn-circle-lg waves-effect waves-circle waves-float">
+                                            <i class="material-icons">extension</i>
+                                            <span class="label-count">7</span>
+                                        </button>
+                                        <p style="padding:5px 0 0 10px;">任务执行</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

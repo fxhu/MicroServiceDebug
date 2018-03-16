@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/apiConfig.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script type="text/javascript" src="/DataVisual/js/public.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.json.js"></script>
+    <script src="js/fengmap.min.js"></script>
+    <link rel="stylesheet" href="css/pub.css" />
+    <title>园区可视化编辑</title>
+</head>
+<body>
+    <div class="top2left">
+        <div class="btn-group-vertical starit" role="group">
+            <button class="btn btn-primary btn-sm" onclick="SwitchMode()">3D</button>
+            <button class="btn btn-default btn-sm" onclick="SwitchMutiFloor()" id="btnMutiFloor"><img src="images/danceng.png" /></button>
+        </div>
+    </div>
+    <div class="topright">
+        <div class="btn-group" id="btn3">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                轮廓 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="startDrawOutline()">绘制</a></li>
+                <li><a href="#" onclick="clearOutline()">清除</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-success" onclick="doSave()" id="btn4">保存  <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span></button>
+    </div>
+    <div id="fengMap"></div>
+    <div class="rightbottom"></div>
+    <div class="top2right">
+        <span class="label label-success" id="saveResult"></span>
+        <span class="label label-danger" id="errorResult"></span>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var map, Last_EventID, polygonMarkerLayer;
+    var coords = [];
+    $(function () {
+        $.ajax({
+            type: "get",
+            url: authorityHost+"visualarea/GetParentAreaInfo?id=" + GetCurBuildingId(),
+            async: false,
+            success: function (data) {
+                LoadMap(data.id);
+            }
+        });
+        
+    })
+    var areaMNG;
+    function LoadMap(areaId)
+    {
+        areaMNG = new AreaMNG(areaId);
+        if(!areaMNG.IsFloorMaped()){
+            document.write("请在属性设置中设置层号！");
+            return;
+        }
+        
+        var fmapID = areaMNG.GetMapID();
+        map = new fengmap.FMMap({
+            container: $("#fengMap")[0],
+            mapServerURL: "./data/" + fmapID,
+            mapThemeURL: "data/theme",
+            focusAlphaMode: !0,
+            focusAnimateMode: !0,
+            modelSelectedEffect: false,
+            focusAlpha: .7,
+            viewModeAnimateMode: !0,
+            defaultViewMode: fengmap.FMViewMode.MODE_2D,
+            defaultMapScaleLevel: areaMNG.GetMapScaleLevel(),
+            defaultTiltAngle: 30,
+            defaultMinTiltAngle: 10,
+            defaultGroupSpace: DefaultGroupSpace,
+            defaultFocusGroup: areaMNG.GetShowGroups()[0],
+            defaultVisibleGroups: areaMNG.GetShowGroups(),
+            key: FengMap_Key,
+            appName: FengMap_AppName,
+            isSeparate: areaMNG.GetIsSeparate(fmapID),
+            groupLoadedCallback: function (layer) {
+                $.getJSON(authorityHost+"visualarea/GetAreaInfo?id=" + GetCurBuildingId(), function (data) {
+                    if (data && data.outline) {
+                        var points = data.outline.split(";");
+                        coords = [];
+                        for (var i = 0; i < points.length; i++) {
+                            coords.push({ x: points[i].split(",")[0], y: points[i].split(",")[1] });
+                        }
+                        //园区轮廓
+                        drawOutline();
+                    }
+                })
+            }
+        });
+        map.openMapById(fmapID);
+        map.on("loadComplete",
+            function () {
+                map.visibleGroupIDs = [areaMNG.GetFloorId()];
+                map.focusGroupID = areaMNG.GetFloorId();
+                
+            });
+        map.on("mapClickNode",
+            function (event) {
+                if (startOutline && event.eventInfo.eventID != Last_EventID) {
+                    coords.push({ x: event.eventInfo.coord.x, y: event.eventInfo.coord.y });
+                    //绘制轮廓
+                    drawOutline();
+                    Last_EventID = event.eventInfo.eventID;
+                }
+            });
+    }
+    function doSave() {
+        var outline = $(coords).map(function () { return this.x + "," + this.y; }).get().join(";");
+        //根据轮廓计算中心点
+        var center = CalcCenter(outline);
+        $.ajax({
+            type: "post",
+            url: authorityHost+"visualarea/SaveAreaInfo",
+            data: {
+                Latitude: center.y,
+                Longitude: center.x,
+                Outline: outline,
+                AreaId: Common.getQueryString("id")
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.result) {
+
+                    startOutline = false;
+                    $("#saveResult").html("保存成功");
+                    setTimeout('$("#saveResult").html("")', 1000);
+                }
+                else {
+                    startOutline = false;
+                    $("#errorResult").html("保存失败");
+                    setTimeout('$("#errorResult").html("")', 2000);
+                }
+            },
+            error: function (err) {
+
+            },
+            complete: function () {
+
+            }
+
+        });
+
+    }
+    //清除轮廓
+    function clearOutline() {
+        var group = map.getFMGroup(map.visibleGroupIDs[0]);
+        if (polygonMarkerLayer != null) {
+            group.removeLayer(polygonMarkerLayer);
+            polygonMarkerLayer = null;
+            coords = [];
+        }
+    }
+    //开始绘制轮廓
+    var startOutline = false;
+    function startDrawOutline() {
+        startOutline = true;
+        clearOutline();
+    }
+    function GetCurBuildingId()
+    {
+        return GetUrlParam("id");
+    }
+    function drawOutline()
+    {
+        var group = map.getFMGroup(map.visibleGroupIDs[0]);
+        if (polygonMarkerLayer != null) {
+            group.removeLayer(polygonMarkerLayer);
+            polygonMarkerLayer = null;
+        }
+        polygonMarkerLayer = group.getOrCreateLayer('polygonMarker');
+        var polygonMarker = new fengmap.FMPolygonMarker({
+            //设置透明度
+            alpha: .5,
+            //设置边框线的宽度
+            lineWidth: 1,
+            //设置高度
+            height: 16,
+            //设置多边形坐标点
+            points: coords
+        });
+        polygonMarkerLayer.addMarker(polygonMarker);
+    }
+    var lastMarker = null;
+</script>

@@ -1,0 +1,129 @@
+﻿<!-- Bootstrap Select Css -->
+<link href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="\assets\plugins\fonts\iconfont.css">
+<link rel="stylesheet" href="App\Main\views\riskProfile\DistrictSet.css">
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<style>
+    .row {
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+
+    .unread {
+        font-weight: bold;
+    }
+    .fixed-table-pagination .page-list {
+        display: none
+    }
+
+</style>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.BasicData.NoticeList as vm" style="height:100%;">
+<div class="col-xs-12" style="height:100%;">
+    <div class="portlet light bordered" style="height:100%;">
+        <div class="pd20 clearfix">
+        <div class="portlet-title pull-left">
+            <div class="caption btn btn-md blue">
+                <span class="caption-subject sbold">
+                    用户通知
+                </span>
+            </div>
+        </div>
+        </div>
+        <div class="col-xs-12 portlet-body pull-left">
+            <div class="col-xs-6 tabbable tabbable-tabdrop" style="margin-left: -15px;">
+<!--                 <div class="form-group" style="padding-left: 10px;">
+                    <button class="btn blue" type="button" id="btnUnRead" ng-click="vm.UnRead()">未读</button>
+                    <button class="btn blue" type="button" id="btnIsRead" ng-click="vm.hadRead()">已读</button>
+                </div>
+ -->
+                <ul class="nav nav-pills" id="switchNav">
+                    <li class="active">
+                        
+                        <a id="noread" data-toggle="tab" ng-click="vm.unRead()">未读</a>
+                    </li>
+                    <li>
+                        
+                        <a id="isread" data-toggle="tab" ng-click="vm.IsRead()">已读</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-6 text-right">
+                <form class="form-inline pull-right" style="margin-right:-35px;" enter-key="vm.search(false)">
+                    
+                    <div class="form-group" style="padding-right: 10px;">
+                        <div class="input-icon">
+                            <i class="fa fa-search"></i>
+                            <input type="text" class="form-control input-middle" ng-model="vm.serchinfo" placeholder="请输入...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <button class="btn blue" type="button" id="btnSearch" ng-click="vm.search(false)">搜索</button>
+                        <button class="btn blue" type="button" id="btnReset" ng-click="vm.reset()">重置</button> -->
+                        <button class="btn blue" type="button" id="btnSearch" style="display:none;" ng-click="vm.search(false)">搜索</button>
+                        
+                        <button class="iconfont icon-zhongzhi" style="background-color:#fff;font-size:20px;border:none;" type="button" id="btnReset" ng-click="vm.reset()"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--@*
+          <div class="row margin-bottom-5">
+                <div class="col-xs-6">
+                    <div class="page-head">
+                        <div class="page-title">
+                            <h1>
+                                通知管理
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix form-group has-info" style="background:white;margin:10px 10px 10px 10px;">
+               <div class="col-xs-12 input-group margin-bottom-5 margin-top-10">
+                         <div class="col-xs-3 text-right" >
+                             <span>通知名称&nbsp;&nbsp;</span><input type="text" style="width:275px" ng-model="vm.serchinfo.Content" />
+                         </div>
+                         <div class="col-xs-3 text-right" >
+                             <span>通知类型&nbsp;&nbsp;</span><input type="text" style="width:275px" ng-model="vm.serchinfo.RefType" />
+                         </div>
+                         <div class="col-xs-3 text-right">
+                             <span>创建时间&nbsp;&nbsp;</span><input type="date" style="width:132px;height:25px;" ng-model="vm.serchinfo.FindStart" placeholder="开始时间" /><span>至</span><input type="date" style="width:132px;height:25px;" ng-model="vm.serchinfo.FindEnd" placeholder="结束时间" />
+                         </div>
+                         <div class="col-xs-3 ">
+                             <span>通知读取状态&nbsp;&nbsp;</span>
+                             <select style="width: 150px; height: 25px;" ng-model="vm.serchinfo.State" ng-options="item.id as item.state for item  in vm.State"></select>
+                         </div>
+                     <div class="form-group margin-bottom-5 margin-top-10">
+                         <div class="col-xs-12 text-right">
+                             <button class="btn blue" type="button" id="btnSearch" ng-click="vm.search(false)">搜索</button>
+                             <button class="btn blue" type="button" id="btnReset" ng-click="vm.reset()">重置</button>
+                         </div>
+                     </div>
+             </div>
+            </div>
+             <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card main-content">
+                    <div class="portlet light">
+                        <div class="portlet-body">
+                            <table id="tb_notice"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    *@-->
+        <div class="portlet-body">
+            <table id="tb_notice"></table>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+

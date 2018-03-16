@@ -1,0 +1,98 @@
+﻿
+<script src="/assets/js/Common.js"></script>
+<link href="/assets/css/components-rounded.min.css" rel="stylesheet" />
+<link href="/assets/plugins/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="/assets/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+<style>
+    input[type=checkbox] {
+        position: relative !important;
+        margin: 4px 0 4px 6px !important;
+    }
+
+    .dropdown-menu > li.active > a {
+        background-color: #2AB4C0;
+    }
+
+    .dropdown-menu > li > a:hover {
+        background-color: #4DB3A2;
+    }
+
+    .dropdown-menu > li.active > a:hover {
+        background-color: #4DB3A2;
+    }
+</style>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.BuildGroup as vm">
+    <div class="col-md-12">
+        <div class="portlet light bordered" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">{{vm.title}}分组</span>
+                </div>
+                <div class="actions">
+                    <!--<button type="submit" ng-if="vm.isEdit == 0" class="btn btn-primary waves-effect" ng-click="vm.autoCreatTypeGroup()">
+                    一键创建分组
+                </button>-->
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form name="addorlookhiddentrouble" role="form" novalidate class="form-horizontal">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4">分组名称</label>
+                                    <div class="col-md-8">
+                                        <input auto-focus type="text" ng-model="vm.patrol.GroupName" required maxlength="32" class="validate form-control">
+                                    </div>
+                                   
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4">巡检场所</label>
+                                    <div class="col-md-8">
+                                        <select class="validate form-control edited"  required ng-model="vm.patrol.AreaId" ng-change="vm.areaChanged()" ng-options="area.id as area.areaName for area in  vm.selectareas">
+                                            <option value="">---请选择---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label col-md-4">巡检点</label>
+                                    <div class="col-md-8">
+                                        <select id="mselect0" multiple="multiple"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="col-md-offset-7 col-md-9">
+                                        <button type="button" class="btn btn-default waves-effect" ng-click="vm.reset()">
+                                            重置
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">已选择的巡检点</label>
+                                <ul id="selectedlist" style="max-height:350px;overflow-y:auto;"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-9">
+                                <button type="submit" ng-if="vm.isadd == true" class="btn btn-primary waves-effect" ng-click="vm.creatTypeGroup()">
+                                    创建
+                                </button>
+                                <button type="button" ng-if="vm.isadd == false" class="btn blue" ng-click="vm.eidtTypeGroup()">
+                                    保存
+                                </button>
+                                <button type="button" class="btn btn-default waves-effect" ng-click="vm.cancel()">
+                                    返回
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

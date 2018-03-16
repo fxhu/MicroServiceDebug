@@ -1,0 +1,140 @@
+﻿* {
+    margin: 0px auto;
+    padding: 0
+}
+
+ul li {
+    list-style: none;
+    text-decoration: none;
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.row {
+    margin: 5px 0 0 10px;
+}
+
+    .row > div {
+        font-size: 14px;
+        line-height: 29px;
+        color: #fff
+    }
+
+        .row > div span {
+            font-size: 15px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+.upbox {
+    width: 500px;
+    height: 400px
+}
+
+.upbox-title {
+    width: 480px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    background: #337ca6;
+    color: #fff;
+    font-size: 14px
+}
+
+.upbox-content {
+    border: 1px solid #787266;
+    padding: 10px;
+    width: 480px
+}
+
+.close {
+    color: #fff;
+    transition: all 0.3s ease 0s;
+}
+
+    .close:hover {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
+
+.upbox-content {
+    width: 480px;
+    padding: 10px 10px;
+    position: relative;
+}
+
+    .upbox-content .row {
+        margin: 0
+    }
+
+.green font {
+    color: #00ff33;
+    font-size: 14px
+}
+
+.red font {
+    color: red;
+    font-size: 14px
+}
+
+.upbox-content .row > div {
+    line-height: 25px;
+    font-size: 12px
+}
+
+    .upbox-content .row > div span {
+        display: inline-block;
+        width: 112px;
+        text-align: right;
+    }
+
+.show {
+    height: 400px;
+    margin-top: 10px
+}
+
+.col-lg-6 {
+    padding: 0
+}
+
+.caret {
+    color: #787266
+}
+
+.caret1 {
+    border-left: 23px solid transparent;
+    border-right: 23px solid transparent;
+    border-top: 23px dashed;
+    bottom: -23px;
+    left: 71px;
+    position: absolute;
+}
+
+.caret2 {
+    border-left: 23px solid transparent;
+    border-right: 23px solid transparent;
+    border-top: 22px dashed;
+    bottom: -22px;
+    color: #fff;
+    left: 71px;
+    position: absolute;
+}
+
+.caret3 {
+    border-left: 23px solid transparent;
+    border-right: 23px solid transparent;
+    border-top: 22px dashed;
+    bottom: -21px;
+    color: #fff;
+    left: 71px;
+    position: absolute;
+}

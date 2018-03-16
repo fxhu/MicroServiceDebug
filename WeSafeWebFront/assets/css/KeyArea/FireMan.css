@@ -1,0 +1,51 @@
+.portlet-title{
+    /* display: none */
+    
+}
+.form-inline{
+    display: none
+}
+
+.btn-group button{
+    width: 96px;
+	height: 34px;
+	background-color: #3598dc;
+    border-radius: 2px;
+    border: none;
+    margin-top: 5px;
+	font-family: MicrosoftYaHei-Bold;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;	
+	letter-spacing: 1px;
+	
+}
+.fixed-table-container{
+    margin-top: 10px;
+}
+
+
+.portlet.light > .portlet-title > .caption.btn.blue{
+    background-color: #3598DC;
+    padding:8px 14px 7px 14px;
+    box-shadow: none;
+    margin-top: 15px;
+    margin-bottom: 5px;
+   
+}
+.portlet.light > .portlet-title > .caption.btn.blue:hover{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.26);
+    background-color: #337AB7;
+}
+
+.portlet-title>.caption.btn.blue>.caption-subject{
+    color: #fff;
+    font-size: 12px;
+}
+
+.form-group button:first-child{
+    display: none
+}
+.portlet.light .portlet-body{
+    padding-top: 0px;
+}

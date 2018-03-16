@@ -1,0 +1,776 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>智慧消防平台</title>
+    <!-- Favicon-->
+    <!--<link rel="icon" href="favicon.ico" type="image/x-icon">-->
+
+    <!-- Google Fonts -->
+    <link href="css/Font/material-icons.css" rel="stylesheet" type="text/css">
+    <link href="css/Google/googleapis-roboto.css" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+    <!-- Jquery Core Js -->
+    <script src="/apiConfig.js"></script>
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <!-- cxselect -->
+    <script src="plugins/cxselect/jquery.cxselect.js"></script>
+    <script src="Scripts/Common.js"></script>
+    <script src="Scripts/video.js"></script>
+
+    <script src="Scripts/jsmpeg.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = 'ws://172.16.99.40:8082/';
+
+            var canvas1 = document.getElementById('video1');
+            var player1 = new JSMpeg.Player(url + "?1", { canvas: canvas1 });
+
+            var canvas2 = document.getElementById('video2');
+            var player2 = new JSMpeg.Player(url + "?2", { canvas: canvas2 });
+
+            var canvas3 = document.getElementById('video3');
+            var player3 = new JSMpeg.Player(url + "?1", { canvas: canvas3 });
+
+            var canvas4 = document.getElementById('video4');
+            var player4 = new JSMpeg.Player(url + "?2", { canvas: canvas4 });
+
+            var canvas5 = document.getElementById('video5');
+            var player5 = new JSMpeg.Player(url + "?1", { canvas: canvas5 });
+
+            var canvas6 = document.getElementById('video6');
+            var player6 = new JSMpeg.Player(url + "?2", { canvas: canvas6 });
+
+            var canvas7 = document.getElementById('video7');
+            var player7 = new JSMpeg.Player(url + "?1", { canvas: canvas7 });
+
+            var canvas8 = document.getElementById('video8');
+            var player8 = new JSMpeg.Player(url + "?2", { canvas: canvas8 });
+        });
+    </script>
+</head>
+
+<body class="theme-blue">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon" style="display: none;">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="搜索关键词...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+                   data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <!--<div class="logo" style="float: left;width: 390px;height: 80px;overflow: hidden;padding-left: 10px;background: url(images/logo.png) no-repeat;"></div>-->
+                <a class="navbar-brand" href="admin.html">WUTOS</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <!--首页 -->
+                    <li><a href="javascript:void(0);" data-close="true"><i class="material-icons">1</i></a></li>
+                    <!-- #END# 首页 -->
+                    <!--园区地图 -->
+                    <li><a href="javascript:void(0);" data-close="true"><i class="material-icons">2</i></a></li>
+                    <!-- #END# 园区地图 -->
+                    <!--风险评估 -->
+                    <li><a href="javascript:void(0);" data-close="true"><i class="material-icons">3</i></a></li>
+                    <!-- #END# 可视化数据 -->
+                    <!--可视化数据 -->
+                    <li><a href="javascript:void(0);" data-close="true"><i class="material-icons">4</i></a></li>
+                    <!-- #END# 可视化数据 -->
+                    <!--可视化数据 -->
+                    <li><a href="javascript:void(0);" data-close="true"><i class="material-icons">5</i></a></li>
+                    <!-- #END# 可视化数据 -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+                    <li style="display: none;">
+                        <a href="javascript:void(0);" class="js-search" data-close="true">
+                            <i class="material-icons">search</i>
+                        </a>
+                    </li>
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <span class="label-count">3</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">通知</li>
+                            <li class="body">
+                                <ul class="menu" style="list-style:none;">
+                                    <li style="list-style:none;">
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-green">
+                                                <i class="material-icons">info</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>
+                                                    <b>公告</b>
+                                                    <div style="overflow: hidden; white-space: nowrap; text-overflow: clip;width:180px;"
+                                                         title="关于认真开展集团安全生产大检查的通知">
+                                                        关于认真开展集团安全生产大检查的通知
+                                                    </div>
+                                                </h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 1 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li style="list-style:none;">
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-green">
+                                                <i class="material-icons">info</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>
+                                                    <b>公告</b>
+                                                    <div style="overflow: hidden; white-space: nowrap; text-overflow: clip;width:180px;"
+                                                         title="安全信息培训的通知">
+                                                        安全信息培训的通知
+                                                    </div>
+                                                </h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li style="list-style:none;">
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue">
+                                                <i class="material-icons">info</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>
+                                                    <b>新闻</b>
+                                                    <div style="overflow: hidden; white-space: nowrap; text-overflow: clip;width:180px;"
+                                                         title="消防法律新规定">
+                                                        消防法律新规定
+                                                    </div>
+                                                </h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">查看所有通知</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">flag</i>
+                            <span class="label-count">5</span>
+                        </a>
+                        <ul class="dropdown-menu" style="list-style:none;">
+                            <li class="header">任务</li>
+                            <li class="body">
+                                <ul class="menu tasks" style="list-style:none;">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                2017年下半年消防演练
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                2017年9月设备巡检
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                国庆期间巡查
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                2017年11月份安全检查
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                元旦期间巡查
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85"
+                                                     aria-valuemin="0" aria-valuemax="100" style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">查看所有任务</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <!-- 360评测 -->
+                    <li class="dropdown" style="display: none;">
+                        <a class="dropdown-toggle" href="SysChecked.html" target="_blank" role="button">
+                            <i class="material-icons">favorite</i>
+                        </a>
+                    </li>
+
+                    <!-- #END# 360评测 -->
+                    <!-- login -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="login/login.html" target="_blank" role="button">
+                            <i class="material-icons">person_add</i>
+                        </a>
+                    </li>
+                    <!-- #END# login -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header"></li>
+                    <li>
+                        <a href="admin.html">
+                            <i class="material-icons">home</i>
+                            <span>我的桌面</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>消防教育</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="###">安全宣传</a>
+                            </li>
+                            <li>
+                                <a href="###">教育培训</a>
+                            </li>
+                            <li>
+                                <a href="###">消防演练</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">info</i>
+                            <span>隐患管理</span>
+                        </a>
+                        <ul class="ml-menu active">
+                            <li class="active">
+                                <a href="###">视频监控</a>
+                            </li>
+                            <li>
+                                <a href="###">危险物品</a>
+                            </li>
+                            <li>
+                                <a href="###">危险作业</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">text_fields</i>
+                            <span>巡检管理</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="###">巡检点管理</a>
+                            </li>
+                            <li>
+                                <a href="###">巡检任务管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">layers</i>
+                            <span>维保管理</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="###">设备档案</a>
+                            </li>
+                            <li>
+                                <a href="###">维保计划</a>
+                            </li>
+                            <li>
+                                <a href="###">台账管理</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment</i>
+                            <span>风险预测</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="###">区域管理</a>
+                            </li>
+                            <li>
+                                <a href="###">风险分布</a>
+                            </li>
+                            <li>
+                                <a href="###">风险管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">view_list</i>
+                            <span>报警监控</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="###">实时监控</a>
+                            </li>
+                            <li>
+                                <a href="###">报警记录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">perm_media</i>
+                            <span>紧急预案</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="###">预案管理</a>
+                            </li>
+                            <li>
+                                <a href="###">预案演示</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">pie_chart</i>
+                            <span>灭火救援</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="###">指挥调度</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <!--<li class="header">其他</li>-->
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal" style="display:none;">
+                <div class="copyright">
+                    &copy; 2016 - 2037 <a href="javascript:void(0);">WUTOS</a>.
+                </div>
+                <div class="version">
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red" class="active">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="pink">
+                            <div class="pink"></div>
+                            <span>Pink</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="indigo">
+                            <div class="indigo"></div>
+                            <span>Indigo</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="light-blue">
+                            <div class="light-blue"></div>
+                            <span>Light Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="teal">
+                            <div class="teal"></div>
+                            <span>Teal</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="light-green">
+                            <div class="light-green"></div>
+                            <span>Light Green</span>
+                        </li>
+                        <li data-theme="lime">
+                            <div class="lime"></div>
+                            <span>Lime</span>
+                        </li>
+                        <li data-theme="yellow">
+                            <div class="yellow"></div>
+                            <span>Yellow</span>
+                        </li>
+                        <li data-theme="amber">
+                            <div class="amber"></div>
+                            <span>Amber</span>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="brown">
+                            <div class="brown"></div>
+                            <span>Brown</span>
+                        </li>
+                        <li data-theme="grey">
+                            <div class="grey"></div>
+                            <span>Grey</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+    
+    <section class="content">
+        <div class="container-fluid">    
+            <div class="block-header">
+                <h2>
+                    隐患管理<span> > <a href="javascript:void(0);" class="dropdown-toggle">视频监控</a>
+                    </span>
+                </h2>
+            </div>
+
+            <div class="card">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="header" id="tool">
+                            <div class="btn-group">
+                                <select class="form-control select2" id="selView" style="width: 100%;">
+                                    <option value="1">大屏</option>
+                                    <option value="2">中屏</option>
+                                    <option value="3" selected>小屏</option>
+                                </select>
+                            </div>
+                            <div class="btn-group">
+                                <select class="form-control select2 park" id="park" style="width: 100%;"></select>
+                            </div>
+                            <div class="btn-group">
+                                <select class="form-control select2 build" id="build" style="width: 100%;"></select>
+                            </div>
+                            <div class="btn-group">
+                                <select class="form-control select2 floor" id="floor" style="width: 100%;"></select>
+                            </div>
+                        </div>
+
+                        <div class="body">
+                            <div id="videolist" class="list-unstyled row clearfix">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video1" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门1</p>    
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video2" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门2</p>    
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video3" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门3</p>    
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video4" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门4</p>    
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video5" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门5</p>    
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video6" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门6</p>    
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video7" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门7</p>    
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <canvas id="video8" style="width:100%;height:100%"></canvas>
+                                    <p class="text-center" style="font-size:16px;">大门8</p>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>   
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <style>
+        /* navbar-footer ===================================== */
+        .navbar-footer {
+            font-family: "Microsoft YaHei", sans-serif;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            -ms-border-radius: 0;
+            border-radius: 0;
+            -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            -ms-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            border: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 12;
+            width: 100%;
+            background: #ffffff;
+            text-align: center;
+        }
+
+            .navbar-footer .navbar-brand {
+                white-space: nowrap;
+                -ms-text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .navbar-footer .navbar-custom-right-menu {
+                float: right;
+            }
+
+            .navbar-footer .navbar-toggle {
+                text-decoration: none;
+                color: #fff;
+                width: 20px;
+                height: 20px;
+                margin-top: -4px;
+                margin-right: 17px;
+            }
+
+                .navbar-footer .navbar-toggle:before {
+                    content: '\E8D5';
+                    font-family: 'Material Icons';
+                    font-size: 26px;
+                }
+
+            .navbar-footer .navbar-collapse.in {
+                overflow: visible;
+            }
+    </style>
+    <nav class="navbar-footer">
+        <div class="legal">
+            <div class="copyright">
+                &copy; 2016 - 2037 <a href="javascript:void(0);">WUTOS</a>.
+            </div>
+            <div class="version">
+            </div>
+        </div>
+    </nav>
+
+    <!-- #Footer -->
+    <!-- Bootstrap Core Js -->
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="plugins/jquery-countto/jquery.countTo.js"></script>
+
+    <!--<script src="js/pages/index.js"></script>-->
+
+
+</body>
+
+</html>

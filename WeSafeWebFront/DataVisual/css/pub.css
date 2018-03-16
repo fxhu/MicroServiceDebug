@@ -1,0 +1,227 @@
+﻿body, html, #allmap, #fengMap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
+    margin: 0px;
+    padding: 0px;
+}
+
+.bottomleft {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+}
+
+.topleft {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    z-index: 9999;
+}
+
+.top2left {
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    z-index: 9999;
+}
+
+.topleft2 {
+    position: absolute;
+    left: 100px;
+    top: 20px;
+    z-index: 9999;
+}
+
+.topleft3 {
+    position: absolute;
+    left: 150px;
+    top: 20px;
+    z-index: 9999;
+}
+
+.topright {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 9999;
+}
+
+.top2right {
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    z-index: 9999;
+}
+.midright {
+    position: absolute;
+    right: 20px;
+    top: 30%;
+    z-index: 9999;
+}
+
+.rightbottom {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+}
+
+.mg {
+    margin: 1px;
+    width: 90px;
+    height: 52px;
+    border-width: 0
+}
+
+.choosed {
+}
+
+.closeHold {
+    font-size: 20px;
+    margin-top: -5px;
+    cursor: pointer;
+}
+
+.infopanel {
+    bottom: 0px;
+    position: absolute;
+    width: 800px;
+    margin: auto;
+    overflow-y: auto;
+}
+
+.rollover {
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    /*IE*/
+    filter: FlipH;
+}
+
+
+
+.alarmfieldset {
+    padding: 3px 10px;
+    margin: 0;
+    border: 1px solid silver;
+    border-radius: 5px
+}
+
+    .alarmfieldset > legend {
+        padding: 3px;
+        padding-bottom: 1px;
+        border: 0;
+        width: auto;
+        margin-bottom: 0;
+    }
+
+.assertisbusyloadindication {
+    background-image: url('/DataVisual/images/load.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: white;
+    display: none;
+    text-align:center;
+}
+.nobg {
+    background-image: none;
+}
+
+.assettabledetial {
+}
+
+    .assettabledetial tbody tr:hover {
+        background-color: #b7e2ec;
+    }
+    .typebage {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: rgb(51,122,183);
+        color: white;
+        border-radius: 30%;
+        padding: 1px 2px;
+        font-size: 10px;
+        line-height: 13px;
+        font-weight: 600
+    }
+.mg{}
+.flashContainer
+{
+	width:100px;
+	height:100px;
+	background-color:rgb(191,22,30);
+	border-radius:5px;
+	position:relative;
+	cursor:pointer;
+	box-shadow:0px 0px 5px 1px #aaa;
+	zoom:0.7;
+	margin:5px;
+}
+.flashContainer:hover
+{
+	background-color:rgb(221,62,70);
+}
+.flash
+{
+	width:10px;
+	height:10px;
+	background:transparent;
+	border:solid 10px yellow;
+	animation-name:circular;
+	animation-duration:1.5s;
+	animation-iteration-count:infinite;
+	border-radius:50% 50%;
+	margin:0px;
+	position:absolute;
+	left:45px;
+	top:45px;
+}
+
+.flashTitle
+{
+	color:white;
+	position:absolute;
+	top:15px;
+	width:100%;
+	text-align:center;
+	font-size:20px;
+}
+.flashText
+{
+	color:white;
+	position:absolute;
+	top:50px;
+	width:100%;
+	text-align:center;
+	font-size:30px;
+	font-weight:600;
+}
+@keyframes circular
+{
+  from 
+  {
+	width:20px;
+	height:20px;
+	border-color:yellow;
+	left:45px;
+	top:45px;
+  }
+  to 
+  {
+	width:100px;
+	height:100px;
+	border-color:transparent;
+	left:0px;
+	top:0px;
+  }
+}

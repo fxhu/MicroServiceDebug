@@ -1,0 +1,202 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="../apiConfig.js"></script>
+    <script src="js/WeSafeRptCommon.js"></script>
+</head>
+<body> -->
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="../apiConfig.js"></script>
+<script src="js/WeSafeRptCommon.js"></script>
+<div id="piecontainer" style="width:100% ;height: 108px; "></div>
+<script>
+    function genData(data, flag) {
+
+        var seriesData = [];
+        for (var i = 0; i < data.length; i++) {
+            if (flag == 1) {
+                if (data[i].name == 1) {
+                    seriesData.push({
+                        "name": "故障:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 2) {
+                    seriesData.push({
+                        "name": "销毁:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 3) {
+                    seriesData.push({
+                        "name": "完好:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+            }
+            if (flag == 2) {
+                if (data[i].name == 1) {
+                    seriesData.push({
+                        "name": "火警:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 2) {
+                    seriesData.push({
+                        "name": "故障:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 3) {
+                    seriesData.push({
+                        "name": "误报:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+            }
+            if (flag == 3) {
+                if (data[i].name == 1) {
+                    seriesData.push({
+                        "name": "待审核:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 2) {
+                    seriesData.push({
+                        "name": "待指派:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 3) {
+                    seriesData.push({
+                        "name": "待整改:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 4) {
+                    seriesData.push({
+                        "name": "待复查:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 6) {
+                    seriesData.push({
+                        "name": "已闭环:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 7) {
+                    seriesData.push({
+                        "name": "已逾期:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+
+            }
+            if (flag == 4) {
+                if (data[i].name == 1) {
+                    seriesData.push({
+                        "name": "待审核:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 2) {
+                    seriesData.push({
+                        "name": "未开始:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 3) {
+                    seriesData.push({
+                        "name": "进行中:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 4) {
+                    seriesData.push({
+                        "name": "已完成:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+                if (data[i].name == 5) {
+                    seriesData.push({
+                        "name": "已逾期:" + data[i].value,
+                        "value": data[i].value
+                    });
+                }
+
+            }
+
+        }
+        return {
+            seriesData: seriesData
+        };
+
+    }
+
+
+
+
+    $.getJSON(RptCommon.Host + "api/company/DeviceReport/FindLatestDeviceCount/[13]", function (data) {
+        var dom = document.getElementById("piecontainer");
+        var myChart = echarts.init(dom);
+        var data = genData(data.items, 1);
+        var legendData = [];
+        for (var i = 0; i < data.seriesData.length; i++) {
+            legendData.push(data.seriesData[i].name);
+
+        }
+        var option = {
+            color: ['#e96870', '#9a5eb6', '#00a8ec', '#52cbd7', '#f7ca18'],
+            legend: {
+                icon: 'circle',
+                itemWidth: 5,
+                orient: 'vertical',
+                right: '20%',
+                top:'middle',
+                itemHeight: 10,
+                itemGap: 10,
+                textStyle: {
+                    fontSize: 14,
+                },
+                data: legendData //['直接访问:100','邮件营销:200','联盟广告:200','视频广告:200']
+            },
+            series: [{
+                name: '访问来源',
+                type: 'pie',
+                minAngle: 4,
+                center: ['30%', '50%'],
+                radius: ['50%', '75%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '10',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: data.seriesData
+            }]
+        };
+        myChart.setOption(option);
+
+    });
+</script>
+<!-- </body>
+</html> -->

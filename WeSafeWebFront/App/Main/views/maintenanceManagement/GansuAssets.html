@@ -1,0 +1,80 @@
+﻿
+<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.GansuAssets as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <!-- BEGIN PAGE TITLE -->
+                <div class="page-title">
+                    <h1>
+                        设备管理
+                        <small>甘肃输油气分公司监测设备</small>
+                    </h1>
+                </div>
+                <!-- END PAGE TITLE -->
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button class="btn btn-primary blue ng-scope" ng-click="vm.addtb()"><i class="fa fa-plus"></i>添加</button>
+            <!--@*<button class="btn btn-default ng-scope" ng-click="vm.deletegoods()"><i class="fa fa-trash-o"></i>删除</button>*@-->
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row" style="height: 180px;  float: left;">
+            <div style="width: 340px; margin-left: 55px;">
+                <div id="en_event" style="height: 180px; ">
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 180px; float: left;">
+            <div style="width: 340px; margin-left: 55px;">
+                <div id="sec_event" style="height: 180px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row margin-bottom-5">
+        <div class="col-xs-9">
+
+        </div>
+        <div class="col-xs-3 text-right">
+            <div class="form-group form-md-line-input has-info">
+                <div class="input-group">
+                    <div class="input-group-control">
+                        <input type="text" class="form-control" ng-model="vm.serchinfo" placeholder="请输入...">
+                    </div>
+                    <span class="input-group-btn btn-right">
+                        <button class="btn green-haze" type="button" id="btnSearch" ng-click="vm.serch()">检索</button>
+                    </span>
+                </div>
+            </div>
+            <!-- /input-group -->
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card main-content">
+                <div class="portlet light">
+                    <div class="portlet-body">
+                        <table id="tb_goods"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- ECHARTS -->
+<script src="~/assets/TotalStatus/Content/plugins/echarts/echarts.js"></script>
+<!-- Page script -->
+<script src="~/assets/TotalStatus/Content/scripts/totalstatus3.js"></script>
+<script>
+    drawEnEvent('en_event');
+    drawSecEvent('sec_event');
+</script>

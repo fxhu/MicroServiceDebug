@@ -1,0 +1,45 @@
+﻿<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.visualassests as vm" style="height:100%;">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered" style="height:100%;">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">
+                        可视化资产管理
+                    </span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group">
+                        <button class="btn btn-lg blue" ng-click="vm.setExtAttr()"><i class="fa fa-file-code-o"></i>设置扩展属性</button>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="col-xs-12 text-right">
+                    <form class="form-inline">
+                        <div class="form-group" style="padding-right:10px;">
+                            <div class="input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control input-xlarge" ng-model="vm.serchinfo" placeholder="请输入...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn blue" type="button" id="btnSearch" ng-click="vm.search(false)">搜索</button>
+                            <button class="btn blue" type="button" id="btnReset" ng-click="vm.reset()">重置</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <table id="tb_visualAssests"></table>
+            </div>
+        </div>
+    </div>
+</div>

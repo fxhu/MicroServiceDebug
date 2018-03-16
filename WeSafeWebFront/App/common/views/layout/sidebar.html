@@ -1,0 +1,93 @@
+<style>
+#wid {
+    width: 250px;
+}
+ 
+
+</style>
+<div class="page-sidebar navbar-collapse collapse page-sidebarpatch" style="top:67px;bottom:56px;z-index:10;">
+    <div id="sidebarleftMenu" style="background-color: #363c4c;  width: 100%; min-height: 1020px;">
+        <div class="page-header">
+            <div class="navbar">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                <!-- <div class="menu-toggler sidebar-toggler av-center"></div> -->
+                <div class="newResearch " >
+                    <input type="text" class="toSearch" placeholder="搜索..."  autofocus ng-model="searchContent" ng-change="vm.tootip($event,searchContent)">
+                    <div class="searchButton" ng-click="vm.searchMenu(searchContent)">
+                        <i class="icon-magnifier "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul  id="menuInleft" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}" ng-if="vm.menu2.items.length">
+            <!-- Menu Level 1 -->
+            <li class="nav-item menu-active-{{menuItem.isVisible}}  " ng-repeat="menuItem in vm.menu2.items" ui-sref-active="active" ng-class="{'start':$first}">
+                <!-- <a ui-sref="{{menuItem.url}}" ng-if="!menuItem.items.length" attr="{{menuItem.isVisible}}"  class="menu-active-{{menuItem.isVisible}} ">
+                    消除<span class="arrow "></span>所带的open
+                    <i class="{{menuItem.icon}}">1</i>
+                    <span class="title titlepatch">{{menuItem.displayName}}</span>
+                    <span id="oddArrow" class="arrow"></span>
+                </a> -->
+                <a href="javascript:;" class="auto appendLength menu-active-{{menuItem.isVisible}}" ng-if="menuItem.items.length" attr="{{menuItem.isVisible}} ">
+                    <i class="{{menuItem.icon}}"></i>
+                    <span class="title titlepatch">{{menuItem.displayName}}</span>
+                    <span class="arrow"></span>
+                    <!-- <span  class="newArrowIocn"><img src="/assets/images/rightArrow.png" alt=""></span> -->
+                </a>
+                <ul class="sub-menu" ng-if="menuItem.items.length">
+                    <!-- Menu Level 2 -->
+                    <li level="two"  ng-click="vm.showTitle(childMenuItem.displayName,childMenuItem.url,menuItem.displayName)" class="nav-item" ng-repeat="childMenuItem in menuItem.items" ui-sref-active="active" style="height: 28px;" ng-class="{'start':$first}">
+                        <a ui-sref="{{childMenuItem.url}}" ng-if="!childMenuItem.items.length" attr="{{childMenuItem.isVisible}}" class="menu-active-{{childMenuItem.isVisible}}">
+                            <i class="{{childMenuItem.icon}}"></i>
+                            <span class="title titlepatch2">{{childMenuItem.displayName}}</span>
+                            <span class="selected2"></span>
+                        </a>
+                        <a href="javascript:;" class="auto menu-active-{{childMenuItem.isVisible}}" ng-if="childMenuItem.items.length" attr="{{childMenuItem.isVisible}}">
+                            <i class="{{childMenuItem.icon}}"></i>
+                            <span class="title titlepatch2">{{childMenuItem.displayName}}</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu" ng-if="childMenuItem.items.length">
+                            <!-- Menu Level 3 -->
+                            <li class="nav-item" ng-repeat="childOfChildMenuItem in childMenuItem.items" ui-sref-active="active" style="height: 28px;"
+                                ng-class="{'start':$first}">
+                                <a ui-sref="{{childOfChildMenuItem.url}}" ng-if="!childOfChildMenuItem.items.length" attr="{{childOfChildMenuItem.isVisible}}"
+                                    class="menu-active-{{childOfChildMenuItem.isVisible}}">
+                                    <i class="{{childOfChildMenuItem.icon}}"></i>
+                                    <span class="title titlepatch3">{{childOfChildMenuItem.displayName}}</span>
+                                </a>
+                                <a href="javascript:;" class="auto menu-active-{{childOfChildMenuItem.isVisible}}" ng-if="childOfChildMenuItem.items.length"
+                                    attr="{{childOfChildMenuItem.isVisible}}">
+                                    <i class="{{childOfChildMenuItem.icon}}"></i>
+                                    <span class="title titlepatch3">{{childOfChildMenuItem.displayName}}</span>
+                                    <span class="arrow "></span>
+                                </a>
+                                <ul class="sub-menu menu-active-{{childOfChildMenuItem.isVisible}}" ng-if="childOfChildMenuItem.items.length" attr="{{childOfChildMenuItem.isVisible}}">
+                                    <!-- Menu Level 4 -->
+                                    <li class="nav-item" ng-repeat="childOfChildOfChildMenuItem in childOfChildMenuItem.items" ui-sref-active="active" style="height: 28px;"
+                                        ng-class="{'start':$first}">
+                                        <a ui-sref="{{childOfChildOfChildMenuItem.url}}" class="menu-active-{{childOfChildOfChildMenuItem.isVisible}}">
+                                            <i class="{{childOfChildOfChildMenuItem.icon}}"></i>
+                                            <span class="title titlepatch4">{{childOfChildOfChildMenuItem.displayName}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    function sidebarleftMenuClearUp() {
+        $("#sidebarleftMenu").height(920);
+    }
+      //单独给我的桌面添加移除 .open属性
+      $("#sdesktop").mouseleave(function(){
+
+                $("oddArrow").css("color","red");
+                $("oddArrow").removeClass('open');
+            })
+</script>

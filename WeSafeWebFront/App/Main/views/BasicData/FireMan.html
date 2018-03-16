@@ -1,0 +1,63 @@
+﻿<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+
+<!-- <link rel="stylesheet" href="\assets\css\KeyArea\FireMan.css"> -->
+<link rel="stylesheet" href="\assets\plugins\fonts\iconfont.css">
+<link rel="stylesheet" href="App\Main\views\riskProfile\DistrictSet.css">
+
+
+<!-- DataTables -->
+<script src="/Video/plugins/cxselect/jquery.cxselect.js"></script>
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.FireMan as vm" style="height:100%;">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered" style="height:100%;">
+            <div class="portlet-title" style="border:none;">
+                <div class="pd20 clearfix">
+                
+                <div class="caption btn btn-md blue" style="margin-bottom:-10px;">
+                    <span class="caption-subject sbold">
+                        职责指派
+                    </span>
+                </div>
+            </div>
+            </div>
+            <div class="portlet-body">
+                <div class="col-xs-6" style="margin-left: -20px;">
+                    <div class="text-left" id="filterContainer">
+                        <div class="btn-group" style="margin-left:5px;margin-bottom:10px;" ng-repeat="area in vm.areas">
+                            <button id="lv_{{area.level}}" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{area.btnName}}  <i class="fa fa-angle-down"></i></button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="child in area.childAreas"><a ng-click="vm.LoadArea(child.id,child.nextlevel,true,child.displayName)">{{child.displayName}}</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a ng-click="vm.LoadArea(area.pid,area.level,false,area.levelName)">{{area.levelName}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <form class="form-inline" enter-key="vm.search(false)">
+                        <div class="form-group" style="padding-right:10px;">
+                            <div class="input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control input-middle" ng-model="vm.serchinfo" placeholder="请输入...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <button class="btn blue" type="button" id="btnSearch" ng-click="vm.search(false)">搜索</button>
+                            <button class="btn blue" type="button" id="btnReset" ng-click="vm.reset()">重置</button> -->
+                            
+                            <button class="iconfont icon-zhongzhi" style="background-color:#fff;font-size:20px;border:none;margin-right:-35px;" type="button" id="btnReset" ng-click="vm.reset()"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <table id="tb_data"></table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+﻿<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<script src="/DataVisual/js/public.js"></script>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.districtvisual as vm">
+    <div class="col-xs-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">
+                        办公场所可视化
+                    </span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="col-xs-12 text-left" id="filterContainer" style="margin-left:-20px;">
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-bordered table-hover" id="areaTable"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        LoadArea("", 4);
+    })
+    function LoadArea(parentId, level, fromclick) {
+        if (!parentId) { parentId = ""; }
+        //修改按钮的文本
+        if (fromclick) {
+            $("[areatype=" + (level + 1) + "]").find("button").html($(event.srcElement).text() + ' <span class="caret"></span>')
+            //$(event.srcElement).parents("ul").prev().html($(event.srcElement).text() + ' <span class="caret"></span>')
+        }
+        //加载下拉内容
+        $.getJSON(abp.appPath+"VisualArea/AreaList?ParentId=" + parentId, function (data) {
+            //把子级下拉框干掉
+            var i = level;
+            while (i > 0) {
+                $("#filterContainer").find("[areaType='" + i + "']").remove();
+                i--;
+            }
+            //有子级，加载子级
+            if (data.length > 0) {
+                RenderAreaDropDown(data, level);
+                RenderTable(data);
+            }
+            else if (fromclick) {
+                //没有子级的话加载当前
+                $.getJSON(abp.appPath + "VisualArea/GetAreaInfo?Id=" + parentId, function (data) {
+                    RenderTable([data]);
+                })
+
+            }
+        })
+    }
+    //加载列表
+    function RenderTable(data) {
+        var html = ['<tr><th>区域名称</th><th>类型</th><th width="500">操作</th></tr>'];
+        if (data && data.length > 0) {
+            $(data).each(function () {
+                var oprHtml = [];
+                if (this.areaType!="2"){
+                    oprHtml.push('  <button class="btn btn-sm blue" onclick="SetMap(\'' + this.id + '\',\'' + this.areaType+'\')"><li class="fa fa-map-signs"></li> 标记' + GetAreaTypeName(this.areaType) + '</button>');
+                }
+                if (this.areaType == "2" || this.areaType == "4") {
+                    oprHtml.push('<button class="btn btn-sm blue" onclick="SetPoint(\'' + this.id + '\',\'' + this.areaType + '\')"><li class="fa fa-map-pin"></li> 标记点位</button>');
+                    oprHtml.push('<button class="btn btn-sm blue" onclick="SetPoint(\'' + this.id + '\',\'' + this.areaType + '\',1)"><li class="fa fa-legal"></li> 安装资产</button>');
+                }
+                oprHtml.push('  <button class="btn btn-sm blue" onclick="SetExtAttr(\'' + this.id + '\')"><li class="fa fa-gear"></li> 扩展属性</button>');
+                html.push('<tr areaId="' + this.id + '"><td><a href="javascript:void(0)" onclick="LoadArea(' + this.id + ',' + (this.areaType-1) + ',true)">' + this.name + '</a></td><td>' + GetAreaTypeName(this.areaType) + '</td><td>' + oprHtml.join("") + '</td></tr>');
+            })
+        }
+        $("#areaTable").html(html.join(""));
+    }
+    function SetExtAttr(id) {
+        vm.openEditModal("/datavisual/areaExtAttr_edit.html?id=" + id, "640px", "480px");
+    }
+    function SetMarker(id, areaType) {
+        vm.openEditModal("/datavisual/setmarker.html?areaid=" + id, $(window).width() * 0.9, $(window).height() * 0.9);
+    }
+    function SetPoint(id, areaType, entrance) {
+        var url = "";
+        switch (areaType)
+        {
+            case "2": {
+                var areaMNG = new AreaMNG(id);
+                var buildingModel=areaMNG.GetBuildModel();
+                if(GetExtAttrValue(buildingModel,"地图类型")=="kinetic"){
+                    url = "/dataVisual/AssestPoint_Indoor_2d.html?id=" + id;
+                }else{
+                    url = "/dataVisual/AssestPoint_Indoor.html?id=" + id;
+                }
+                break;
+            }
+            case "4": {
+                url = "/dataVisual/AssestPoint_Park.html?id=" + id;
+                break;
+            }
+        }
+        if (entrance) {
+            url = url + "&Entrance=" + entrance;
+        }
+        window.open(url, "_blank");
+        //vm.openEditModal(url, $(window).width() * 0.9, $(window).height() * 0.9);
+    }
+    function SetMap(id, areaType) {
+        var editUrl = "";
+        switch (areaType) {
+            case "4": { editUrl = "/DataVisual/AreaEdit_Park.html"; break; }
+            case "3": { editUrl = "/DataVisual/AreaEdit_Building.html"; break; }
+            case "2": { editUrl = "/DataVisual/AreaEdit_Indoor.html"; break; }
+            case "1": { 
+                var areaMNG = new AreaMNG(id);
+                var buildingModel=areaMNG.GetBuildModel();
+                console.log(buildingModel)
+                if(GetExtAttrValue(buildingModel,"地图类型")=="kinetic"){
+                    editUrl = "/dataVisual/AreaEdit_Indoor_2d.html";
+                }else{
+                    editUrl = "/dataVisual/AreaEdit_Indoor.html";
+                }
+            }
+        }
+        editUrl = editUrl + "?id=" + id;
+        window.open(editUrl, "_blank");
+
+        //vm.openEditModal(editUrl, $(window).width() * 0.9, $(window).height() * 0.9);
+    }
+    function GetAreaTypeName(typeId) {
+        switch (parseInt(typeId, 10)) {
+            case 4: { return "园区"; }
+            case 3: { return "建筑"; }
+            case 2: { return "楼层"; }
+            case 1: { return "科室"; }
+            default: { return ""; }
+        }
+    }
+    function RenderAreaDropDown(data, level, showClear) {
+        //后加
+        var html = ['<div class="btn-group" areaType="' + level + '" style="margin-left:5px">'];
+        html.push('<button type="button"  class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">全部' + GetAreaTypeName(level) + ' <span class="caret"></span></button>');
+        html.push('<ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;">');
+
+        $(data).each(function () {
+            html.push('<li><a onclick="LoadArea(' + this.id + ',' + (level - 1) + ',true)">' + this.name + '</a></li>');
+        });
+        html.push('<li role="separator" class="divider"></li>');
+        html.push('<li><a onclick="LoadArea(' + data[0].parentId + ',' + level + ',false)">全部' + GetAreaTypeName(level) + '</a></li>');
+
+
+        html.push('</ul></div>');
+        $("#filterContainer").append(html.join(""))
+    }
+</script>

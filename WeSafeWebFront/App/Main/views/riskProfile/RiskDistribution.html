@@ -1,0 +1,89 @@
+﻿<!--安全评估-->
+<link rel="stylesheet" href="/assets/plugins/radialIndicator/radialindicator.css">
+<!--安全评估-->
+<script src="/assets/plugins/radialIndicator/radialIndicator.js"></script>
+<script src="/assets/js/areaDropdown.js"></script>
+<script src="/assets/js/Common.js"></script>
+<div cloass="{{vm.myclass}}" ng-controller="app.views.riskdistribution as vm" style="height:100%;">
+    <div class="portlet light bordered" style="height:100%;overflow-y:auto;overflow-x:hidden;">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject sbold">
+                    安全评分
+                </span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="col-xs-6" style="margin-left: -20px;">
+                <div class="text-left">
+                    <div class="btn-group" style="margin-left:5px" ng-repeat="area in vm.areasObj.areas">
+                        <button id="riskDis_{{area.level}}" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="vm.IsRun">
+                            {{area.btnName}}<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="child in area.childAreas">
+                                <a ng-click="vm.areasObj.LoadArea(child.id,child.nextlevel,true,child.displayName)">{{child.displayName}}</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a ng-click="vm.areasObj.LoadArea(area.pid,area.level,false,area.levelName)">
+                                    {{area.levelName}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-md-2 text-right">
+                    <div class="prg-cont rad-prg" id="prgTotal"></div>
+                    <!-- /.box -->
+                </div>
+
+                <div class="col-md-6" style="line-height: 205px;">
+                    <div class="header" id="checkList">
+                        <h4>准备就绪:&nbsp;&nbsp;<small></small></h4>
+                    </div>
+                    <div class="header">
+                        <h2 id="ResultScore">
+                            <i class="fa fa-star" style="color: rgba(1, 172, 252, 1)"></i>
+                            <i class="fa fa-star" style="color: rgba(1, 172, 252, 1)"></i>
+                            <i class="fa fa-star" style="color: rgba(1, 172, 252, 1)"></i>
+                            <i class="fa fa-star" style="color: rgba(1, 172, 252, 1)"></i>
+                            <i class="fa fa-star" style="color: rgba(1, 172, 252, 1)"></i>
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center" style="line-height: 205px;">
+                    <div class="btn-group-vertical">
+                        <button type="button" id="btnRiskSysChecked" class="btn blue waves-effect vertical-center btn-circle" style="height:50px;width:200px;font-size:20px;" ng-disabled="vm.IsRun">重新评估</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="progRow">
+                <div class="col-md-12">
+                    <div class="panel-title progress progress-striped active" style="height:28px;">
+                        <div id="prog" class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+                            <span id="proglabel">正在启动，请稍后......</span>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+                    <div class="panel-body" id="ItemList">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

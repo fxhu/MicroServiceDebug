@@ -1,0 +1,287 @@
+﻿<link href="/assets/plugins/Content/usertaskshow.css" rel="stylesheet" />
+<div class="page-header-inner">
+
+    <div class="pull-left fixedWidth">
+        <h1 class="pull-left">
+            <img ng-if="!vm.tenant || !vm.tenant.logoId" src="/assets/images/wutoslogo.png" alt="logo" class="logo-default" width="150"
+                title="理工光科" />
+        </h1>
+        <span class="pull-right sidebar-toggler" style="width:60px;height:72px ;position:relative;cursor:pointer;">
+            <img class="av-center" src="/assets/images/sidebar-toggle-light.png" alt="menu">
+        </span>
+
+    </div>
+    <div class="smartStage">
+        <h2>智慧消防综合平台</h2>
+    </div>
+    <!-- <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+    </a> -->
+    <div class="pull-right  page-top">
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right topHeader">
+                <li style="display: none;" class="dropdown dropdown-language" ng-if="vm.languages.length > 1">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <i ng-class="vm.currentLanguage.icon"></i>
+                        <span class="langname">
+                            {{vm.currentLanguage.displayName}}
+                        </span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="language in vm.languages" ng-if="vm.currentLanguage.name !== language.name">
+                            <a ng-click="vm.changeLanguage(language.name)" href="#">
+                                <i ng-class="language.icon"></i> {{language.displayName}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- 1.数据报表 -->
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-dark lidropdownitem2 dataReport clearfix " id="header_notification_bar">
+                    <div class="reportIcon pull-left hide" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"></div>
+                    <span class="pull-left" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">数据报表</span>
+                    <ul class="dropdown-menu  dropdown-menu-default" id="UserNotificationDropdown">
+                        <li class="divider"></li>
+                        <!-- <li> -->
+                        <!-- <ul class="dropdown-menu-list"> -->
+                        <li ng-repeat="company in vm.reportcompany" class="usertaskshowstyle" style="padding:0; text-align:center">
+                            <a href="{{vm.reporturl+company.id}}" style="padding:0;">
+                                <div class="user-notification-item">
+                                    <span class="details" style="color:white;">
+                                        {{company.displayName}}
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- </ul> -->
+                        <li class="notification-empty-text" ng-if="!vm.reportcompany.length">
+                            没有数据
+                        </li>
+                        
+                        <!-- </li> -->
+                    </ul>
+                </li>
+                <!--2.消息通知 -->
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-dark lidropdownitem2 siteNews" id="header_notification_bar">
+                    <i class="icon-bell lidropdownitemIcon2 page-headerSpan lidropdownitempointer" data-toggle="dropdown" data-hover="dropdown"
+                        data-close-others="true" style="
+                        font-size: 18px; font-weight:400"></i>
+                    <span class="lidropdownitemSpan2" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" style="{{vm.unredStyle}}">{{vm.unreadUserNoticeCount}}</span>
+                    <ul class="dropdown-menu" id="UserNotificationDropdown">
+                        <li class="external notifications-header">
+                            <div class="text-left">
+                                <span>消息通知</span>
+                            </div>
+                        </li>
+                        <li>
+                            <ul id="noticeList" ng-repeat="notice in vm.usernotices" class="dropdown-menu-list">
+                                <li class="usertaskshowstyle">
+                                    <span class="details">
+                                        <i class="fa fa-info" style="color: #00ffff;"></i>
+                                        <a class="alink" href="" id="{{notice.id}}" value="{{notice.url}}" curObj="{{notice}}">{{notice.content}}</a>
+                                    </span>
+                                    <div>
+                                        <span class="notice-CreationTime" title="{{notice.creationTime| momentFormat:'YYYY-MM-DD HH:mm:ss'}}" am-time-ago="notice.creationTime"></span>
+                                        <!-- <a href="{{notice.url}}" class="set-as-read-text">查看</a>-->
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <div class="notification-empty-text" ng-if="!vm.usernotices.length">
+                                您没有未读通知
+                            </div>
+                        </li>
+                        <li class="external notifications-footer" ng-if="vm.curTotalnotices">
+                            <div class="text-center">
+                                <a ui-sref="Notice">查看全部通知</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="dropdown dropdown-extended dropdown-notification dropdown-dark lidropdownitem2 dataReport clearfix hide">
+                    <span class="pull-left" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <i class="icon-envelope" style="
+                        font-size: 18px"></i>
+                    </span>
+                    <span class="pull-left" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <i class="icon-bell" style="
+                        font-size: 18px"></i>
+                    </span>
+                </li> -->
+
+                <!--3.个人中心 -->
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-dark lidropdownitem2 dataReport  noboder clearfix">
+                    <span class="pull-left admin" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> {{vm.getShownUserName()}}
+                    </span>
+                    <span class="pull-left" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <i class="fa fa-angle-down" style="
+                        font-size: 18px"></i>
+                    </span>
+                    <ul class="dropdown-menu dropdown-menu-default">
+                        <li ng-if="vm.isImpersonatedLogin">
+                            <a href="" ng-click="vm.backToMyAccount()">
+                                <i class="icon-action-undo"></i>
+                                <strong>返回我的账号</strong>
+                            </a>
+                        </li>
+                        <li ng-if="vm.isImpersonatedLogin" class="divider"></li>
+                        <li style="display: none;">
+                            <a href="">
+                                <i class="icon-link"></i> 链接账户</a>
+                        </li>
+
+                        <li style="display: none;" class="submenu" ng-repeat="linkedUser in vm.recentlyUsedLinkedUsers">
+                            <a href="" ng-click="vm.switchToUser(linkedUser)">
+                                {{vm.getShownLinkedUserName(linkedUser)}}
+                            </a>
+                        </li>
+                        <li style="display: none;" ng-if="vm.recentlyUsedLinkedUsers.length > 0" class="divider"></li>
+                        <li style="display: none;" class="submenu">
+                            <a href="" ng-click="vm.manageLinkedAccounts()">
+                                <i class="icon-settings"></i> 管理账户
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+                        <!-- <li class="hide">
+                            <a id="userName" href="javascript: void(0)">
+                                <i class="icon-diamond"></i> {{vm.getShownUserName()}}</a>
+                        </li> -->
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.changePassword()">
+                                <i class="icon-key"></i> 修改密码</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.showLoginAttempts()">
+                                <i class="icon-shield"></i> 登录安全</a>
+                        </li>
+                        <!-- <li class="hide">
+                            <a href="javascript: void(0)" ng-click="vm.changePicture()">
+                                <i class="icon-user"></i> 修改头像</a>
+                        </li> -->
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.editMySettings()">
+                                <i class="icon-settings"></i> 我的设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.logoutMyAccount()">
+                                <i class="icon-logout"></i> 退出登录</a>
+                        </li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+
+                <li class="separator hide"> </li>
+                <!-- 待办任务 -->
+
+                <!-- 消息通知 old-->
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-dark lidropdownitem2 siteNews hide" id="header_notification_bar">
+                    <i class="icon-bell-new lidropdownitemIcon2 page-headerSpan lidropdownitempointer" data-toggle="dropdown" data-hover="dropdown"
+                        data-close-others="true"></i>
+                    <span class="lidropdownitemSpan2" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" style="{{vm.unredStyle}}">{{vm.unreadUserNoticeCount}}</span>
+                    <ul class="dropdown-menu" id="UserNotificationDropdown">
+                        <li class="external notifications-header">
+                            <div class="text-left">
+                                <span>消息通知</span>
+                            </div>
+                        </li>
+                        <li>
+                            <ul id="noticeList" ng-repeat="notice in vm.usernotices" class="dropdown-menu-list">
+                                <li class="usertaskshowstyle">
+                                    <span class="details">
+                                        <i class="fa fa-info" style="color: #00ffff;"></i>
+                                        <a href="{{notice.url}}">{{notice.content}}</a>
+                                    </span>
+                                    <div>
+                                        <span class="notice-CreationTime" title="{{notice.creationTime| momentFormat:'YYYY-MM-DD HH:mm:ss'}}" am-time-ago="notice.creationTime"></span>
+                                        <!-- <a href="{{notice.url}}" class="set-as-read-text">查看</a>-->
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <div class="notification-empty-text" ng-if="!vm.usernotices.length">
+                                您没有未读通知
+                            </div>
+                        </li>
+                        <li class="external notifications-footer" ng-if="vm.curTotalnotices">
+                            <div class="text-center">
+                                <a ui-sref="Notice">查看全部通知</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="separator hide"> </li>
+                <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+
+                <!-- 头像展示 -->
+                <li class="dropdown dropdown-extended dropdown-notification dropdown-dark userPho" id="header_notification_bar">
+
+                    <a class="userPic" href="javascript:;" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="{{vm.isImpersonatedLogin ? ' 回到你的账户' : ''}}">
+                        <img id="HeaderProfilePicture" alt="" class="img-circle" style="width: 30px; height: 30px;" src="" />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-default">
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.changePicture()">
+                                <i class="icon-user"></i> 修改头像</a>
+                        </li>
+                        <li class="divider"></li>
+                    </ul>
+
+                    <!-- <ul class="dropdown-menu dropdown-menu-default">
+                        <li ng-if="vm.isImpersonatedLogin">
+                            <a href="" ng-click="vm.backToMyAccount()">
+                                <i class="icon-action-undo"></i>
+                                <strong>返回我的账号</strong>
+                            </a>
+                        </li>
+                        <li ng-if="vm.isImpersonatedLogin" class="divider"></li>
+                        <li style="display: none;">
+                            <a href="">
+                                <i class="icon-link"></i> 链接账户</a>
+                        </li>
+
+                        <li style="display: none;" class="submenu" ng-repeat="linkedUser in vm.recentlyUsedLinkedUsers">
+                            <a href="" ng-click="vm.switchToUser(linkedUser)">
+                                {{vm.getShownLinkedUserName(linkedUser)}}
+                            </a>
+                        </li>
+                        <li style="display: none;" ng-if="vm.recentlyUsedLinkedUsers.length > 0" class="divider"></li>
+                        <li style="display: none;" class="submenu">
+                            <a href="" ng-click="vm.manageLinkedAccounts()">
+                                <i class="icon-settings"></i> 管理账户
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+                        <li>
+                            <a id="userName" href="javascript: void(0)">
+                                <i class="icon-diamond"></i> {{vm.getShownUserName()}}</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.changePassword()">
+                                <i class="icon-key"></i> 修改密码</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.showLoginAttempts()">
+                                <i class="icon-shield"></i> 登录安全</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.changePicture()">
+                                <i class="icon-user"></i> 修改头像</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.editMySettings()">
+                                <i class="icon-settings"></i> 我的设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript: void(0)" ng-click="vm.logoutMyAccount()">
+                                <i class="icon-logout"></i> 退出登录</a>
+                        </li>
+                    </ul> -->
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

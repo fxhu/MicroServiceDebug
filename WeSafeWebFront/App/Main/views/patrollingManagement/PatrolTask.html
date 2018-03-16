@@ -1,0 +1,104 @@
+﻿
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/plugins/bootstrap-table/iconfont.css">
+<link rel="stylesheet" href="/assets/plugins/fonts/iconfont.css">
+
+<link rel="stylesheet" href="/assets/css/Inspection_tasks/PatrolTask.css">
+
+
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<style>
+    .fixed-table-pagination .page-list {
+        display: none
+    }
+    .discolor{
+        color: gray;
+    }
+</style>
+<div class="row clearfix {{vm.myclass}}" ng-controller="app.views.PatrolTask as vm" style="height:100%;">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered" style="height:100%;">
+            <div class="portlet-title" id="portlet-title">
+                <div class="caption btn btn-md blue">
+                    <span class="caption-subject sbold">
+                        巡检任务
+                    </span>
+                </div>
+                <div class="actions">
+                    <!-- <div class="btn-group">
+                        <button id="btn-radius" class="btn btn-lg blue" ng-click="vm.assignTask()"><i class="fa fa-eye"></i>批量审核</button>
+                    </div> -->
+                    <!--<div class="btn-group">
+                        <button class="btn btn-lg blue" ng-click="vm.cancelTask()"><i class="fa fa-close"></i>取消</button>
+                    </div>-->
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="col-xs-6 tabbable tabbable-tabdrop" style="margin-left: -15px;margin-bottom:-5px;">
+                    <ul class="nav nav-pills">
+                        <li class="active" id="li1">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(-1)">全部</a>
+                        </li>
+                        <li id="li2">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(0)">待审核</a>
+                        </li>
+                        <li id="li3">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(1)">未开始</a>
+                        </li>
+                        <li id="li4">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(2)">进行中</a>
+                        </li>
+                        <!--@*<li id="li5">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(3)">待审核</a>
+                        </li>*@-->
+                        <li id="li6">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(4)">已完成</a>
+                        </li>
+                        <!--<li id="li7">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(5)">异常</a>
+                        </li>-->
+                        <li id="li8">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(6)">已逾期</a>
+                        </li>
+                        <li id="li9">
+                            <a href="javascript:void(0)" data-toggle="tab" ng-click="vm.searchstatus(7)">已取消</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 text-right">
+                    
+                    <form class="form-inline pull-right" enter-key="vm.search(false)">
+                        <div class="form-group" style="padding-right:10px;">
+                            <div class="input-icon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control searchTask ng-not-empty" id="form-control" ng-model="vm.serchinfo" placeholder="请输入...">
+                            </div>
+                        </div>
+                        <div class="form-group"style="margin-right: -30px;">
+                            <button class="btn blue" type="button" id="btnSearch" ng-click="vm.search(false)">搜索</button>
+
+                            <!--<button class="btn blue" type="button" id="btnReset" ng-click="vm.reset()">重置</button>-->
+                            <button id="btnReset" ng-click="vm.reset()"><i class="iconfont icon-zhongzhi" style="font-size:20px;" title="重置"></i></button>
+                            <button id="btnAdd" ng-click="vm.addTemporaryTask()"><i class="iconfont icon-tianjia"style="color: darkgray;font-size:20px;" title="添加临时任务"></i></button>
+
+                           <!-- <button class="btn blue" type="button" id="btnAdd" ng-click="vm.addTemporaryTask()">添加临时任务</button>-->
+                        </div>
+                    </form>
+
+                    <div class="btn-group pull-right"  style="margin-right: 20px;font-size:12px">
+                            <button id="btn-radius" class="btn btn-sm " style="background-color:#FFA71D;color:#fff;" ng-click="vm.assignTask()">批量审核</button>
+                        </div>
+
+
+                </div>
+            </div>
+
+            <div class="portlet-body">
+                <table id="table" style="word-break:break-all; word-wrap:break-word;"></table>
+            </div>
+        </div>
+    </div>
+</div>

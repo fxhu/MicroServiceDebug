@@ -1,0 +1,14 @@
+﻿[
+  {
+    "areaType": 3,
+    "url": "/DataVisual/roommap.html?BuildingId=",
+    "iframeWidth": 1200,
+    "iframeHeight": 600
+  },
+  {
+    "areaType": 4,
+    "url": "/DataVisual/BuildingMap.html?ParkId=",
+    "iframeWidth": 900,
+    "iframeHeight": 400
+  }
+]

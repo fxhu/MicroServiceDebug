@@ -1,0 +1,176 @@
+﻿html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dd,
+dl,
+dt,
+li,
+ol,
+ul,
+fieldset,
+form,
+label,
+legend {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+img {
+    border: none;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+body,
+a,
+input,
+button {
+    font-family: "Microsoft Yahei", "Droid Sans Fallback", "Arial", "Helvetica", "sans-serif", "宋体";
+    font-size: 14px;
+    outline: none;
+    color: #666;
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: #428bca;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/**border-radius兼容写法**/
+
+.br10 {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/**左圆角兼容写法**/
+
+.br-l-24 {
+    -moz-border-radius-topleft: 12px;
+    -moz-border-radius-bottomleft: 12px;
+    -webkit-border-top-left-radius: 12px;
+    -webkit-border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.br-l-36 {
+    -moz-border-radius-topleft: 18px;
+    -moz-border-radius-bottomleft: 18px;
+    -webkit-border-top-left-radius: 18px;
+    -webkit-border-bottom-left-radius: 18px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+/**右圆角兼容写法*/
+
+.br-r-24 {
+    font-family: MicrosoftYaHei;
+	font-size: 16px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 25px;
+	letter-spacing: 1px;
+	color: #fefefe;
+    text-align: center;
+    display: block;
+    width: 81px;
+	height: 25px;
+	background-color: #01acfc;
+    -moz-border-radius-topright: 12px;
+    -moz-border-radius-bottomright: 12px;
+    -webkit-border-top-right-radius: 12px;
+    -webkit-border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/**阴影*/
+
+.bs {
+    -webkit-box-shadow: 0px 4px 7px 0px rgba(51, 51, 51, 0.14);
+    -moz-box-shadow:0px 4px 7px 0px rgba(51, 51, 51, 0.14);
+    box-shadow: 0px 4px 7px 0px rgba(51, 51, 51, 0.14);
+    background-color: #fefefe;
+}
+
+.mb30 {
+    margin-bottom: 30px;
+}
+
+/**元素垂直水平居中 父元素需要定义position:relative;*/
+
+.av-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.av4-center {
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}

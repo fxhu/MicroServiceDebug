@@ -1,0 +1,158 @@
+﻿.page-header.navbar .page-logo .logo-default {
+  margin: 19px 10px 0 10px;
+}
+.page-header.navbar.navbar-fixed-top {
+    z-index: 1000;
+    background-color: rgba(25, 83, 115, 1);
+    /*background-image: url(/assets/images/topbackground.png);*/
+    height: 79px;
+}
+.page-header.navbar.navbar-static-top {
+  z-index: 1000;
+}
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-dark .submenu {
+  background-color: #404c55;
+}
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-dark .submenu a {
+  padding-left: 25px;
+}
+/* 新版头部样式 */
+.page-header-inner{
+  height: 72px;
+  display: flex;
+  box-shadow: 0px 4px 7px 0px 
+		rgba(51, 51, 51, 0.14);
+}
+.page-header-inner .fixedWidth{
+  width: 256px;
+  height: 72px;
+}
+.page-header-inner .smartStage{
+  flex:1
+}
+.page-header-inner .smartStage>h2{
+  min-width: 250px;
+  padding-left: 20px;
+  font-family: MicrosoftYaHei;
+	font-size: 22px;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 72px;
+	letter-spacing: 2px;
+  color: #fcfbfb;
+}
+.page-header-inner .fixedWidth .logo-default{
+  margin-top: 3px;
+  margin-left: 14px;
+}
+.page-header.navbar.navbar-fixed-top{
+  /* width: 1920px; */
+	height: 72px;
+	background-color: #2ea1f8;
+	box-shadow: 2px 2px 7px 0px 
+		rgba(51, 51, 51, 0.14);
+}
+
+.topHeader {
+  height: 72px;
+  position: relative; 
+   /* margin-top: 14px; */
+}
+.topHeader>li{
+ padding: 0 20px !important;
+   /* margin-top: 14px; */
+}
+.topHeader>li.noboder{
+  padding-right: 0px !important;
+  border:0 !important;
+}
+.topHeader>li>span{
+  padding-right:  10px !important;
+    /* margin-top: 14px; */
+ }
+ .topHeader>li>span.admin{
+  font-size: 14px;
+  font-weight: 400;
+	letter-spacing: 0px;
+    /* margin-top: 14px; */
+ }
+ .topHeader>li>span:last-of-type{
+  /* padding-left: 10px !important; */
+  padding-right: 0 !important;
+    /* margin-top: 14px; */
+ }
+.topHeader .dropdown {
+  position: relative;
+  top: 50%;
+  transform:  translateY(-50%);
+}
+
+#UserNotificationDropdown {
+  max-width: 320px;
+  width: 320px;
+}
+@media (max-width: 767px) {
+  #UserNotificationDropdown {
+    margin-right: -60px;
+  }
+  #UserNotificationDropdown:before,
+  #UserNotificationDropdown:after {
+    margin-right: 70px;
+  }
+}
+#UserNotificationDropdown a.user-notification-item {
+  cursor: default;
+  color: #ccc;
+}
+#UserNotificationDropdown a.user-notification-item:hover {
+  text-decoration: none;
+}
+#UserNotificationDropdown a.user-notification-item.user-notification-item-unread {
+  color: #fff;
+}
+#UserNotificationDropdown a.user-notification-item.user-notification-item-unread .notification-time {
+  color: #ccc;
+}
+#UserNotificationDropdown a.user-notification-item.user-notification-item-clickable {
+  cursor: pointer;
+}
+#UserNotificationDropdown a.user-notification-item .set-as-read-text {
+  color: #00dd00;
+  cursor: pointer;
+}
+#UserNotificationDropdown a.user-notification-item .fa-info {
+  color: #00ffff;
+}
+#UserNotificationDropdown a.user-notification-item .fa-check {
+  color: #0f0;
+}
+#UserNotificationDropdown a.user-notification-item .fa-warning {
+  color: #ffa200;
+}
+#UserNotificationDropdown a.user-notification-item .fa-bolt,
+#UserNotificationDropdown a.user-notification-item .fa-bomb {
+  color: #ff0000;
+}
+#UserNotificationDropdown a {
+  color: #fff;
+}
+#UserNotificationDropdown .notifications-header {
+  /*position: relative;*/
+  text-align: left;
+  min-height: 35px;
+  padding: 8px;
+  margin: 0;
+}
+#UserNotificationDropdown .notifications-header a:hover {
+  text-decoration: underline;
+}
+#UserNotificationDropdown .notifications-footer {
+  min-height: 35px;
+  padding: 8px;
+  margin: 0;
+}
+#UserNotificationDropdown .notification-empty-text {
+  color: #ccc;
+  padding: 10px;
+  text-align: center;
+}

@@ -1,0 +1,122 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>烽火科技集团大楼消防资产分布图</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/pub.css" />
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="/apiConfig.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.json.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script src="/DataVisual/js/public.js"></script>
+    <script src="js/fengmap.min.js"></script>
+    <script src="/assets/js/jsmpeg.min.js"></script>
+    <link href="/assets/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+    <script src="/assets/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
+    <script src="/assets/plugins/bootstrap-sweetalert/ui-sweetalert.min.js"></script>
+    <script src="js/createBubble.js"></script>
+    <script src="kinetic-map/require.js" data-main="kinetic-map/AlarmMonitor_Indoor_2d"></script>
+    <style type="text/css">
+        .handlepanel {
+            position: absolute;
+            bottom: 50px;
+            padding: 20px 150px 20px 150px;
+            border-radius: 5px;
+            box-shadow: #999 0px 0px 10px
+        }
+
+        .titlepanel {
+            position: absolute;
+            top: 20px;
+            padding: 20px 20px 20px 20px;
+            border-radius: 5px;
+            box-shadow: #999 0px 0px 10px;
+            font-size: 30px;
+            background-color: rgb(213,87,79);
+            color: white
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fengMap"></div>
+    <div class="topright">
+        <div class="panel panel-primary" id="assestDesc" style="width:355px;display:none;">
+            <div class="panel-heading" style="padding:5px">
+                资产详情<span class="pull-right closeHold" onclick="$('#assestDesc').hide(200)">×</span>
+            </div>
+            <table cellpadding="0" cellspacing="0" class="table table-condensed table-striped table-bordered"></table>
+        </div>
+
+        <div class="panel panel-primary" id="videobox" style="width:355px;display:none;">
+            <div class="panel-heading" style="padding:5px">
+                <span class="video-title">实时监控</span><span class="pull-right closeHold" onclick="$('#videobox').hide(200)">×</span>
+            </div>
+            <div class="panel-body" style="padding:5px">
+                <canvas id="videoCanvas" style="width:100%;height:100%"></canvas>
+            </div>
+            
+        </div>
+    </div>
+    <div class="topleft">
+        <div id="backButtonContainer">
+
+        </div>
+        <button class="btn btn-primary hide" id="btnBack"  style="margin-bottom:15px;" onclick="BackToMain()"><span class="glyphicon glyphicon-share-alt rollover" aria-hidden="true"></span>  返回</button>
+        <div class="panel panel-primary" id="emergency" style="width:355px;display:none;">
+            <div class="panel-heading" style="padding:5px">
+                应急预案<span class="pull-right closeHold" onclick="$('#emergency').hide(200)">×</span>
+            </div>
+            <table cellpadding="0" cellspacing="0" class="table table-condensed table-striped table-bordered">
+                <tr>
+                    <td>负责人/联系电话</td>
+                    <td id="alarmUsers">-</td>
+                </tr>
+                <tr>
+                    <td>告警时间</td>
+                    <td id="alarmTime">-</td>
+                </tr>
+                <tr>
+                    <td>应急预案</td>
+                    <td id="alarmPlan">
+                        <!--<a href="/doc/火灾应急预案.pdf" target="_blank"><span class="label label-success">查看</span></a>-->
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="titlepanel hide">
+        
+    </div>
+    <div class="handlepanel bg-primary hide">
+        <button class="btn btn-danger btn-lg hide" id="btnConfirm" onclick="confirmAlarm(2)">确认告警</button>
+        <button class="btn btn-default btn-lg hide" id="btnFalseReport" onclick="confirmAlarm(3)" style="margin-left:30px">　误报　</button>
+        <button class="btn btn-success btn-lg hide" id="btnRecure" onclick="ShowRecure()">　灭火救援　</button>
+    </div>
+
+    <audio height="1" width="1" style="display:none;" autoplay="autoplay" loop="loop">
+        <source src="/assets/others/alarm.wav" type="audio/wav" />
+        <embed height="1" width="1" src="/assets/others/alarm.wav" />
+    </audio>
+    <div class="modal fade" id="planModal" tabindex="1" role="dialog" aria-labelledby="planModalLabel" style="z-index:99999">
+        <div class="modal-dialog" role="document" style="width:90%;">
+            <div class="modal-content" style="padding:5px;">
+                <div class="modal-header" style="padding:5px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="planModalLabel">应急预案</h4>
+                </div>
+                <div class="modal-body" style="padding:5px;height:240px">
+                    <iframe id="planModalIfm" frameborder="0" width="100%" height="100%"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

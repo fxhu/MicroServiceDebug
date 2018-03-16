@@ -1,0 +1,89 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<body>
+
+
+    <div novalidate>
+        <form name="exampleForm">
+            <!--<div >
+                <h4 >
+                    <span>插件播放视频</span>
+                </h4>
+            </div>-->
+            <div >
+                <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" id="vlc"
+                        codebase=""
+                        width="590" height="480" events="True">
+                    <param name="MRL" value="" />
+                    <param name="Src" value="" />
+                    <param name="ShowDisplay" value="True" />
+                    <param name="AutoLoop" value="False" />
+                    <param name="AutoPlay" value="False" />
+                    <param name="Time" value="True" />
+                    <param name='allowfullscreen' value='false' />
+                    <embed pluginspage="http://www.videolan.org"
+                           type="application/x-vlc-plugin"
+                           version="VideoLAN.VLCPlugin.2"
+                           width="590"
+                           height="480"
+                           text="Waiting for video"
+                           name="vlc"></embed>
+                </object>
+            </div>
+        </form>
+    </div>
+    <Script type="text/javascript">
+        var itemId = 0;
+        function getVLC(name) {
+            if (window.document[name]) {
+                return window.document[name];
+            }
+            if (navigator.appName.indexOf("Microsoft Internet") == -1) {
+                if (document.embeds && document.embeds[name])
+                    return document.embeds[name];
+            }
+            else {
+                return document.getElementById(name);
+            }
+        }
+
+        function doGo() {
+            var mrl = getURLParam('Address');
+            //itemId = document.embeds.vlc.playlist.add(mrl);
+            //document.embeds.vlc.playlist.playItem(itemId);
+            var vlc = getVLC("vlc");
+            itemId = vlc.playlist.add(mrl);
+            vlc.playlist.playItem(itemId);
+           // document.getElementById("btn_stop").disabled = false;
+            setTimeout(function () {
+                window.resizeTo(622, 601);
+            }, 1000)
+        }
+        function getURLParam(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)', "ig").exec(location.href) || [, ""])[1].replace('/\+/g', '%20')) || null;
+
+        }
+        setTimeout(function () {
+            doGo();
+        },1000)
+       
+        function updateVolume(deltaVol) {
+            var vlc = getVLC("vlc");
+            vlc.audio.volume += deltaVol;
+        }
+
+        function doPlay() {
+            vlc.playlist.playItem(itemId);
+
+            document.getElementById("btn_stop").disabled = false;
+            document.getElementById("btn_play").disabled = true;
+        }
+
+        function doStop() {
+            getVLC("vlc").playlist.stop();
+            document.getElementById("btn_stop").disabled = true;
+            document.getElementById("btn_play").disabled = false;
+        }
+    </Script>   
+</body>
+
+</html>

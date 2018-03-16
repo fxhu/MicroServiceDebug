@@ -1,0 +1,77 @@
+﻿<!-- DataTables -->
+<link href="/assets/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+<!-- DataTables -->
+<script src="/assets/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assets/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script src="/assets/js/Common.js"></script>
+<!--
+  <div ng-controller="common.views.organizationUnits.addMember as vm">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                {{}}
+            </h4>
+        </div>
+        <div class="modal-body" >
+            <div>
+                <form>
+                    <div class="input-group margin-bottom-10">
+                        <input auto-focus ng-model="vm.filterText" class="form-control" placeholder="搜索..." type="text">
+                        <span class="input-group-btn">
+                            <button ng-click="vm.refreshGrid()" class="btn default" type="submit"><i class="icon-magnifier"></i></button>
+                        </span>
+                    </div>
+                </form>
+                <div>
+                    <table id="tb_data"></table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+        </div>
+    </div>
+-->
+
+
+
+<div class="row clearfix " ng-controller="common.views.organizationUnits.addMember as vm">
+    <div class="col-xs-12">
+        <div class="portlet light portlet-fit portlet-form " id="form_wizard_1">
+            <div class="portlet-title" style="height:30px">
+                <div class="caption">
+                    <i class=" icon-layers font-green"></i>
+                    {{vm.title}}
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form name="addorlookhiddentrouble" role="form" novalidate class="form-horizontal">
+                    <div class="form-body">
+                <!--
+                    <input auto-focus ng-model="vm.filterText" class="form-control" placeholder="搜索..." type="text">
+                    <span class="input-group-btn">
+                    <button ng-click="vm.refreshGrid()" class="btn default" type="submit"><i class="icon-magnifier"></i></button>
+                    </span>
+                -->
+                        <div class="input-group margin-bottom-10">
+                            <input auto-focus ng-model="vm.filterText" class="form-control" placeholder="搜索..." type="text">
+                            <span class="input-group-btn">
+                                <button ng-click="vm.refreshGrid()" class="btn default" type="submit"><i class="icon-magnifier"></i></button>
+                            </span>
+                        </div>
+
+                        <div>
+                            <table id="tb_data"></table>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-7">
+                                <button type="button" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

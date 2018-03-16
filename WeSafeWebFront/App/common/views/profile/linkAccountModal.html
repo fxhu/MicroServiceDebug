@@ -1,0 +1,31 @@
+﻿<div>
+    <form name="linkAccountForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>链接新账户</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <input type="text" name="TenancyName" class="form-control" ng-class="{'edited':vm.linkUser.tenancyName}" ng-model="vm.linkUser.tenancyName" maxlength="64">
+                <label>租户名称</label>
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <input class="form-control" type="text" name="UserName" ng-class="{'edited':vm.linkUser.usernameOrEmailAddress}" ng-model="vm.linkUser.usernameOrEmailAddress" required maxlength="256">
+                <label>用户名</label>
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label">
+                <input type="password" ng-class="{'edited':vm.linkUser.password}" name="Password" class="form-control" ng-model="vm.linkUser.password" required maxlength="128">
+                <label>密码</label>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" ng-disabled="vm.saving" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+            <button type="submit" button-busy="vm.saving" busy-text="保存中..." class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="linkAccountForm.$invalid"><i class="fa fa-save"></i> <span>保存</span></button>
+        </div>
+    </form>
+</div>

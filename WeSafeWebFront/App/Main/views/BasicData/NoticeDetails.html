@@ -1,0 +1,78 @@
+﻿<script src="/assets/js/Common.js"></script>
+<link href="/assets/js/datepicker/datepicker3.css" rel="stylesheet" />
+<script src="/assets/js/datepicker/bootstrap-datepicker.js"></script>
+<script src="/assets/js/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+
+<style>
+    input:read-only {
+        background-color: white !important;
+    }
+</style>
+<script src="/Video/plugins/cxselect/jquery.cxselect.js"></script>
+<script src="/assets/js/Common.js"></script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="/ueditor/VisualAreaDesign.js"></script>
+<script src="/ueditor/jquery.form.js"></script>
+
+<div class="row clearfix" ng-controller="app.views.BasicData.NoticeDetails as vm" style="height:100%;">
+    <div class="col-xs-12" style="height:100%;">
+        <div class="portlet light bordered" id="form_wizard_1" style="height:100%;overflow-y:auto;overflow-x:hidden;">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject sbold">管理首页公告</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form name="addorlookNotice" role="form" novalidate class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">公告标题</label>
+                            <div class="col-md-9">
+                                <input ng-disabled="vm.islook" ng-model="vm.noticeDetails.Content" required class="validate form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">公告描述</label>
+                            <div class="col-md-9">
+                                <textarea rows="3" cols="100" ng-disabled="vm.islook" required ng-model="vm.noticeDetails.Content" class="validate form-control"
+                                />
+                                <script id="editor" type="text/plain" class="validate" style="width:100%;height:380px;">
+
+                                </script>
+                            </div>
+
+                        </div>
+                        <div class="form-group " ng-if="vm.islook!=true">
+                            <label class="control-label col-md-2">公告URL</label>
+                            <div class="col-md-9">
+                                <input ng-disabled="vm.islook" ng-model="vm.noticeDetails.Url" required class="validate form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions" ng-if="vm.islook!=true">
+
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-7">
+                                <button type="submit" class="btn btn-primary waves-effect" ng-click="vm.save()">
+                                    保存
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions" ng-if="vm.islook==true">
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-7">
+                                <button type="button" class="btn btn-primary waves-effect" ng-click="vm.cancel()">
+                                    返回
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

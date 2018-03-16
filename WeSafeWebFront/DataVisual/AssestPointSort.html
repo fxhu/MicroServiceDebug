@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>点位编号</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/apiConfig.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="bootstrap/js/html5shiv.min.js"></script>
+      <script src="bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="/assets/js/common.js"></script>
+    <script type="text/javascript" src="/DataVisual/js/public.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.json.js"></script>
+    <script type="text/javascript" src="/assets/lib/vue/2.4.2/vue.min.js"></script>
+    <style type="text/css">
+        .panel-heading{padding:5px}
+        .panel-footer{padding:5px}
+    </style>
+    <script type="text/javascript">
+
+    var AssestPointList=[];
+    $(function(){
+        //绑定
+        new Vue({
+            el: '#pointList',
+            data: {list:AssestPointList}
+        })
+    })
+    function GenAccessPointCode(reverse)
+    {
+        var startIndex=parseInt($("#iptStartIndex").val(),10);
+        var prefix=$("#iptPrefix").val();
+        var step=parseInt($("#iptStepNum").val(),10);
+        if(reverse){
+            var len=AssestPointList.length-1;
+            for(var i=0;i<AssestPointList.length;i++)
+            {
+                AssestPointList[i].accessPointCode=BuildCode(startIndex,len-i,step,prefix);
+            }
+        }
+        else{
+            for(var i=0;i<AssestPointList.length;i++)
+            {
+                AssestPointList[i].accessPointCode=BuildCode(startIndex,i,step,prefix);
+            }
+        }
+    }
+    //构建接入点号
+    function BuildCode(startIndex,index,step,prefix){
+        if(prefix==""){
+            return startIndex+index*step;
+        }
+        else{
+            return PadLeft(prefix,(startIndex+index*step));
+        }
+    }
+    function PadLeft(prefix,code){
+        return prefix.substring(0,prefix.length-(code+"").length+1) +code;
+    }
+    function AddToList(id)
+    {
+        $.ajax({
+            type: "get",
+            url: authorityHost+"AssestsPoint/GetAssestPointInfo?id="+id,
+            async:false,
+            success: function (data) {
+                if(!InList(data.id))
+                {
+                    AssestPointList.push({
+                        id:data.id,
+                        code:data.code,
+                        assestTypeName:data.assestTypeName,
+                        accessPointCode:SnaxExtra(data.extra,"物联编码"),
+                        iotNo:SnaxExtra(data.extra,"物联序号")
+                    });
+                    refreshCount();
+                }
+            }
+        });
+    }
+    function removeFromList(id){
+        for(var i=0;i<AssestPointList.length;i++){
+            if(AssestPointList[i].id==id){
+                AssestPointList.splice(i,1);
+            }
+        }
+        refreshCount();
+    }
+    function refreshCount(){
+        $("#labelAllNum").html("已选数量："+AssestPointList.length);
+    }
+    function InList(id){
+        for(var i=0;i<AssestPointList.length;i++){
+            if(AssestPointList[i].id==id){
+                return true;
+            }
+        }
+        return false;
+    }
+    //解析扩展属性
+    function SnaxExtra(str, name) {
+        if(str==null || str==""){return "";}
+        var obj=$.evalJSON(str);
+        if (obj == null) { return ""; }
+        for (var i = 0; i < obj.length; i++) {
+            if (obj[i].Name == name) {
+                return obj[i].Value;
+            }
+        }
+        return "";
+    }
+    //保存
+    function doSave(){
+        //处理数据
+        var data=$(AssestPointList).map(function(){
+                return {
+                    Name:this.id,
+                    Value:this.accessPointCode
+                }
+        }).get();
+        //异步保存
+        $.ajax({
+            type: "post",
+            url: authorityHost+"AssestsPoint/SaveAssestPointExtra",
+            data:{
+                ExtraName:"物联编码",
+                Data:$.toJSON(data)
+            },
+            success: function (info) {
+                if(info=="OK"){
+                    $("#resultLabel").html("保存成功").show().fadeOut('slow');
+                }
+                else
+                {
+                    $("#resultLabel").html(info);
+                }
+            },
+            error: function (err) {
+                $("#resultLabel").html(err.statusText);
+            }
+        });
+    }
+    function closeSelf(){
+        if(parent.batchAccessMNG!=null){
+            parent.batchAccessMNG.hide();
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="panel panel-primary" style="margin-bottom:0px">
+        <div class="panel-heading">
+                批量生成物联编码<span style='font-size:25px;line-height:20px;float:right;cursor:pointer' onclick="closeSelf()">×</span>
+        </div>
+        <div class="panel-body" style="padding:0px;height:508px;overflow:auto">
+            <table class="table table-bordered table-condensed" id="pointList">
+                <tr><th>类型</th><th>序号</th><th>编号</th><th>物联编码</th><th></th></tr>
+                <tr v-for="item in list">
+                    <td>{{item.assestTypeName}}</td>
+                    <td>{{item.iotNo}}</td>
+                    <td>{{item.code}}</td>
+                    <td>{{item.accessPointCode}}</td>
+                    <td><a href="javascript:void(0)"  @click='removeFromList(item.id)' style="color:red;font-size:20px;line-height:18px;font-weight:600">×</a></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="panel-footer">
+            <div>
+                    前缀<input style="width:100px;margin-left:5px" id="iptPrefix"/>
+                    起始<input type="number" id="iptStartIndex" style="width:50px;margin-left:5px" value="1" />
+                    间隔<input type="number" id="iptStepNum" style="width:50px;margin-left:5px" value="1" />
+            </div>
+            <br/>
+            <div style="text-align:right">
+                    <label class="pull-left" id="labelAllNum"></label>
+                    <button class="btn btn-warning btn-sm" onclick="GenAccessPointCode()">生成</button>
+                    <button class="btn btn-success btn-sm" onclick="GenAccessPointCode(true)">反向</button>
+                    <span class="label label-success" id="resultLabel"></span>
+                    <button class="btn btn-primary btn-sm" onclick="doSave()">保存</button>
+            </div>
+            
+            
+           
+        </div>
+    </div>
+</body>
+</html>

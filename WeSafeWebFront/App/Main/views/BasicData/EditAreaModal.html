@@ -1,0 +1,41 @@
+﻿
+<div class="{{vm.myclass}}" novalidate>
+    <form name="exampleForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>编辑场所信息</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <input auto-focus class="form-control" type="text" name="DisplayName" ng-class="{'edited':vm.area.DisplayName}" ng-model="vm.area.DisplayName" required>
+                <label>名称</label>
+            </div>
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <input auto-focus class="form-control" type="text" name="DisplayName" ng-class="{'edited':vm.area.ShortName}" ng-model="vm.area.ShortName" required>
+                <label>简称</label>
+            </div>
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <select class="form-control"  ng-model="vm.unit"
+                        ng-options="ut.displayName as ut.displayName group by ut.parentId for ut in vm.units">
+                    <option>--</option>
+                </select>
+                <label style="top:0px;">所属机构</label>
+            </div>
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <input auto-focus class="form-control" type="text" name="DisplayName" ng-class="{'edited':vm.area.Level}" ng-model="vm.area.Level" required >
+                <label>区域等级</label>
+            </div>
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                <select id="areatype" class="form-control"  ng-class="{'edited':vm.area.AreType}" ng-options="area.name for area in vm.areas" ng-model="vm.area.AreaType">
+                  
+                </select>
+                <label>区域类型</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+            <button type="submit" button-busy="vm.saving" busy-text="保存中..." class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="exampleForm.$invalid"><i class="fa fa-save"></i> <span>保存</span></button>
+        </div>
+    </form>
+</div>

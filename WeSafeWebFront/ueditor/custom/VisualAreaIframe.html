@@ -1,0 +1,186 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>表单模板</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <script src="/assets/plugins/libs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/ueditor/dialogs/internal.js"></script>
+    <script src="/assets/plugins/jsTree/jsTree.min.js"></script>
+    <script src="/apiConfig.js"></script>
+    <script src="/DataVisual/js/public.js"></script>
+    <link rel="stylesheet" href="/assets/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/plugins/metronic/global/css/components-md.css" />
+    <link href="/assets/plugins/jsTree/themes/default/style.css" rel="stylesheet" />
+    <link href="/assets/plugins/jsTree/jsTree.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="col-md-12">
+                    <div class="portlet light">
+                        <div class="portlet-body">  
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-md-2" style="float:left">显示高度</label>
+                                        <div class="col-md-4" style="float:left">
+                                            <input id="iframeHeight" type="text" name="iframeHeight"> px
+                                        </div>
+                                        <label class="control-label col-md-2" style="float:left">显示宽度</label>
+                                        <div class="col-md-4" style="float:left">
+                                            <input id="iframeWidth" type="text" name="iframeWidth"> px
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">选择区域</label>
+                                    <div class="col-md-10">
+                                        <div id="areaTree" class="tree-demo">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                          
+                        </div>
+                        <div class="portlet-body">
+                            <div id="errorMsg">
+                                请选择区域
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->       
+    </div>
+    <!-- ./wrapper -->
+    <script type="text/javascript">
+        var areaTypes = [];
+        $("#errorMsg").hide();
+        var url = "/ueditor/custom/VisualAreaIframe.json";
+        $.getJSON(url, function (types) {
+            areaTypes = types;
+            var me = editor;
+
+            var selectIdx = -1;
+
+            function FormatDataTree() {
+                var data = me.iframeData;
+                var treeArray = [];
+                $.each(data, function (idx, item) {
+                    if (item.parentId == 0) {
+                        var child = GetChild(item.id);
+                        treeArray.push({
+                            "text": item.displayName,
+                            "id": item.id,
+                            "areaType": item.areaType,
+                            "parentId": item.parentId,
+                            "state": { "opened": true },
+                            "children": child
+                        });
+                    }
+                });
+
+                function GetChild(parentId) {
+                    var child = [];
+                    $.each(data, function (idx, item) {
+                        if (item.parentId == parentId && IsExistsArrays(areaTypes, item.areaType)) {
+                            var newchild = GetChild(item.id);
+                            child.push({
+                                "text": item.displayName,
+                                "id": item.id,
+                                "areaType": item.areaType,
+                                "parentId": item.parentId,
+                                "children": newchild
+                            });
+                        }
+                    });
+                    return child;
+                }
+
+                return treeArray;
+            };
+
+            function IsExistsArrays(list, val) {
+                var IsExists = false;
+                $.each(list, function (idx, item) {
+                    if (item.areaType == val) {
+                        IsExists = true;
+                        return false;
+                    }
+                });
+                return IsExists;
+            }
+
+            var treeData = FormatDataTree();
+
+            var oTreeObj = $('#areaTree').jstree({
+                'core': {
+                    'data': treeData
+                }
+            }).on("changed.jstree", function (e, data) {
+                selectIdx = parseInt(data.selected);
+                var node = $('#areaTree').jstree(true).get_node(selectIdx);
+                var attrs = GetAreaTypeModel(node.original.areaType);
+                $("#iframeHeight").val(attrs.iframeHeight);
+                $("#iframeWidth").val(attrs.iframeWidth);
+            });
+
+            function queding() {
+                if (selectIdx < 0) {
+                    $("#errorMsg").show();
+                    return false;
+                }
+                var node = $('#areaTree').jstree(true).get_node(selectIdx);
+                var attrs = GetAreaTypeModel(node.original.areaType);
+                var id = node.original.id;
+
+               // var url = attrs.url + id;
+                var url = getAreaViewUrl(id);
+                var width = attrs.iframeWidth;
+                var height = attrs.iframeHeight;
+                var float = attrs.iframeAlign;
+                var newIframe = editor.document.createElement("iframe");
+                var iframeH = parseInt($("#iframeHeight").val());
+                if (!isNaN(iframeH)) {
+                    height = iframeH;
+                }
+                var iframeW = parseInt($("#iframeWidth").val());
+                if (!isNaN(iframeW)) {
+                    width = iframeW;
+                }
+
+                // newIframe.setAttribute("src",/http:\/\/|https:\/\//ig.test(url) ? url : "http://"+url);
+                newIframe.setAttribute("src", url);
+                newIframe.setAttribute("width", width);
+                newIframe.setAttribute("height", height);
+                newIframe.setAttribute("scrolling", "no");
+                newIframe.setAttribute("frameborder", "0", 0);
+
+                div = editor.document.createElement("div");
+                div.appendChild(newIframe);
+                editor.execCommand("inserthtml", div.innerHTML);
+                editor._iframe = null;
+            }
+
+            function GetAreaTypeModel(areaType)
+            {
+                var obj;
+                $.each(areaTypes, function (idx, item) {
+                    if (item.areaType == areaType) {
+                        obj = item;
+                        return false;
+                    }
+                });
+                return obj;
+            }
+            dialog.onok = queding;  
+
+        });      
+    </script>
+</body>
+</html>

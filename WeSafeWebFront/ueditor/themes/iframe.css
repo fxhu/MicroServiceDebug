@@ -1,0 +1,31 @@
+/*可以在这里添加你自己的css*/
+sechr {
+    position: absolute;
+    text-align: center;
+    width:99%;
+}
+
+    sechr sectitle {
+        font: 400 20px Helvetica, Arial, sans-serif;
+        line-height: 20px;
+    }
+
+
+    /*CSS伪类用法*/
+    sechr sectitle:after, sechr sectitle:before {
+        background: #000000;
+        content: "";
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        width: 40%;
+    }
+
+    /*调整背景横线的左右距离*/
+    sechr sectitle:before {
+        left: 0;
+    }
+
+    sechr sectitle:after {
+        right: 0;
+    }

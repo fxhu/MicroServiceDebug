@@ -1,0 +1,38 @@
+<!-- <div class="clearfix" style="background:#EFF4FB;">
+    <div class="breadMenu">
+        <div id="crumbs">
+            <ul clearfix ng-if="vm.bMenu.length">
+                <li clearfix ng-repeat="menuItem in vm.bMenu">
+                    <a href="{{menuItem.url}}">{{menuItem.name}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div> -->
+
+<div class="page-bar clearfix">
+    <ul class="page-breadcrumb pull-left" ng-if="vm.bMenu.length">     
+        <li class="pull-left" clearfix>
+            <i class="fa fa-home"></i>
+            <a  ng-repeat="menuItem in vm.bMenu" href="{{menuItem.url}}">{{menuItem.name}}</a>
+
+        </li>
+
+    </ul>
+    <!-- <li class="page-toolbar pull-right dropdown dropdown-extended dropdown-notification dropdown-dark lidropdownitem2  noboder clearfix" >
+        <div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height grey-salt"   data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-placement="left" data-original-title="切换园区">
+
+            <span ng-bind="company"></span>
+            <span class="thin uppercase visible-lg-inline-block"></span>&nbsp;
+            <i class="fa fa-angle-down"></i>
+        </div>
+        <ul class="dropdown-menu dropdown-menu-default">                
+            <li class="divider"></li>
+            <li ng-repeat="value in list">
+                <a href="javascript: void(0)" ng-click="showDetil(value.parentId,value.id,value.displayName)">
+                    {{value.displayName}}</a>
+            </li>
+            <li class="divider"></li>
+        </ul>
+    </li> -->
+</div>

@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/apiConfig.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=IT8ydiFlplstEB7aL0A4HxdFEBo5Uor8"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="/DataVisual/js/takeToken.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script type="text/javascript" src="/DataVisual/js/public.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+    <script src="/assets/js/jquery.json.js"></script>
+    <link rel="stylesheet" href="css/pub.css" />
+    <title>园区可视化编辑</title>
+</head>
+<body>
+    <div class="topright" style="top:50px;">
+        <div class="btn-group" id="btn2">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                中心点 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="drawOverlay('marker')">设置</a></li>
+                <li><a href="#" onclick="clearOverlay('marker')">清除</a></li>
+            </ul>
+        </div>
+        <div class="btn-group" id="btn3">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                轮廓 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="drawOverlay('polygon')">新建</a></li>
+                <li><a href="#" onclick="editOverlay()">调整</a></li>
+                <li><a href="#" onclick="clearOverlay('polygon')">清除</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-success" onclick="doSave()" id="btn4">保存  <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span></button>
+    </div>
+    <div class="top2right"><span class="label label-success" id="saveResult"></span></div>
+    <div class="rightbottom"></div>
+    <div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    function doSave() {
+        var strOutline = "";
+        if (lastPolygon != null) {
+            strOutline = $(lastPolygon.getPath()).map(function () { return $(this).attr("lng") + "," + $(this).attr("lat"); }).get().join(";");
+        }
+        if (lastMarker == null) {
+            alert("请先标记一个中心点！");
+            return;
+        }
+        $.ajax({
+            type: "post",
+            url: authorityHost+"visualarea/SaveAreaInfo",
+            data: {
+                Latitude: lastMarker == null ? "0" : lastMarker.point.lat,
+                Longitude: lastMarker == null ? "0" : lastMarker.point.lng,
+                Outline: strOutline,
+                AreaId: Common.getQueryString("id")
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.result) {
+                    if (lastPolygon != null) {
+                        lastPolygon.disableEditing();
+                    }
+                    drawingManager.close();
+                    $("#saveResult").html("保存成功");
+                    setTimeout('$("#saveResult").html("")', 1000);
+                }
+                else {
+
+                }
+            },
+            error: function (err) {
+
+            },
+            complete: function () {
+
+            }
+
+        });
+
+    }
+    //清除中心点
+    function clearOverlay(type) {
+        if (type == "marker") {
+            map.removeOverlay(lastMarker);
+            lastMarker = null;
+        }
+        else {
+            map.removeOverlay(lastPolygon);
+            lastPolygon = null;
+        }
+    }
+    //绘制图形
+    function drawOverlay(type) {
+        drawingManager.open();
+        drawingManager.setDrawingMode(type);
+    }
+    //编辑多边形
+    function editOverlay() {
+        if (lastPolygon != null) {
+            lastPolygon.enableEditing();
+        }
+    }
+    function LoadAreaInfo() {
+
+    }
+    var map, drawingManager;
+    $(function () {
+        //1 加载百度地图
+        map = new BMap.Map("allmap", { enableMapClick: false });
+        map.enableScrollWheelZoom(true);
+        map.setMapStyle({ style: 'bluish' });
+        map.centerAndZoom(new BMap.Point(114.429826, 30.45377), 5);
+        map.addControl(new BMap.MapTypeControl({
+            mapTypes: [
+                BMAP_NORMAL_MAP,
+                BMAP_HYBRID_MAP
+            ]
+        }));
+        LoadExtPic();
+        //2 加载建筑所在的园区数据
+        $.getJSON(authorityHost+"visualarea/GetParentAreaInfo?id=" + Common.getQueryString("id"), function (data) {
+
+            //2 园区轮廓
+            if (data.outline) {
+                var points = [];
+                var allPoints = data.outline.split(";");
+                for (var i = 0; i < allPoints.length; i++) {
+                    points.push(new BMap.Point(allPoints[i].split(",")[0], allPoints[i].split(",")[1]));
+                }
+                map.addOverlay(new BMap.Polygon(points, parkStyle));   //增加多边形
+            }
+            //3 加载当前建筑对应的数据
+            $.getJSON(authorityHost+"visualarea/GetAreaInfo?id=" + Common.getQueryString("id"), function (building) {
+                
+                //建筑轮廓
+                drawOutline(building);
+                //4 建筑位置
+                if (building.longitude == null || building.longitude == 0) {
+                    BMapDrawCenter(data,true);
+                }
+                else{
+                    BMapDrawCenter(building);
+                }
+            })
+        })
+
+
+        //实例化鼠标绘制工具
+        drawingManager = new BMapLib.DrawingManager(map, {
+            isOpen: false, //是否开启绘制模式
+            enableDrawingTool: false, //是否显示工具栏
+            drawingMode: BMAP_DRAWING_POLYGON,
+            drawingToolOptions: {
+                anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+                offset: new BMap.Size(5, 5), //偏离值
+                drawingModes: [
+                    BMAP_DRAWING_POLYGON
+                ]
+            },
+            polygonOptions: styleOptions
+        });
+        //添加鼠标绘制工具监听事件，用于获取绘制结果
+        drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+
+    })
+    function drawCenter(data) {
+        if (data.longitude && data.latitude && data.longitude != 0 && data.latitude != 0) {
+            lastMarker = new BMap.Marker(new BMap.Point(data.longitude, data.latitude)); // 创建点
+            map.addOverlay(lastMarker);
+            var scaleLevel = 19;
+            var level = GetExtAttrValue(data, "缩放级别");
+            if (level != "") {
+                scaleLevel = parseInt(level, 10);
+            }
+            map.centerAndZoom(new BMap.Point(data.longitude, data.latitude), scaleLevel);
+        }
+    }
+    function drawOutline(data) {
+        if (data.outline) {
+            var points = [];
+            var allPoints = data.outline.split(";");
+            for (var i = 0; i < allPoints.length; i++) {
+                points.push(new BMap.Point(allPoints[i].split(",")[0], allPoints[i].split(",")[1]));
+            }
+            lastPolygon = new BMap.Polygon(points, styleOptions);   //创建多边形
+            map.addOverlay(lastPolygon);   //增加多边形
+        }
+    }
+    var lastMarker = null;
+    var lastPolygon = null;
+    var overlaycomplete = function (e) {
+        if (e.drawingMode == "marker") {
+            if (lastMarker != null) {
+                map.removeOverlay(lastMarker);
+            }
+            lastMarker = e.overlay;
+        }
+        else if (e.drawingMode == "polygon") {
+            if (lastPolygon != null) {
+                map.removeOverlay(lastPolygon);
+            }
+            lastPolygon = e.overlay;
+        }
+    };
+
+</script>

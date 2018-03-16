@@ -1,0 +1,178 @@
+﻿<div>
+    <form name="userCreateOrEditForm" role="form" novalidate class="form-validation" enctype="multipart/form-data" method="post">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="vm.user.id">修改用户: {{vm.user.userName}}</span>
+                <span ng-if="!vm.user.id">添加用户</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="用户信息">
+
+                    <div class="row">
+                        <div class="col-sm-4 text-center">
+                            <img id="UpdateUserHeaderProfilePicture" ng-if="vm.profilePictureId" ng-src="{{vm.abppath}}" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image"
+                            />
+                            <img id="AddUserHeaderProfilePicture" ng-if="!vm.profilePictureId" src="/assets/Common/Images/default-profile-picture.png"
+                                width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
+
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input type="file" nv-file-select uploader="vm.uploader" />
+                                    <span class="help-block m-b-none">你可以选择一个1MB以下jpg/jpeg/png格式的图片。</span>
+                                </div>
+                                <img id="ProfilePictureResize" src="" ng-show="vm.uploadedFileName" />
+                            </div>
+
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                                <input class="form-control" type="text" name="Name" ng-class="{'edited':vm.user.name}" ng-model="vm.user.name" required maxlength="32">
+                                <label>姓名</label>
+                            </div>
+                            <!--
+                              <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                                <input type="text" name="Surname" class="form-control"   ng-class="{'edited':vm.user.surname}" ng-model="vm.user.surname"  required maxlength="32" value="123">
+                                <label>姓氏</label>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="email" name="EmailAddress" class="form-control" ng-class="{'edited':vm.user.emailAddress}" ng-model="vm.user.emailAddress"
+                            required maxlength="256">
+                        <label>邮箱地址</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="PhoneNumber" class="form-control" ng-class="{'edited':vm.user.phoneNumber}" ng-model="vm.user.phoneNumber"
+                            maxlength="24">
+                        <label>电话号码</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text" ng-disabled="!vm.canChangeUserName" ng-class="{'edited':vm.user.userName}" name="UserName" class="form-control input-ltr"
+                            ng-model="vm.user.userName" required maxlength="32">
+                        <label>用户名</label>
+                        <span class="help-block" ng-show="!vm.canChangeUserName">管理用户，不能修改用户名.</span>
+                    </div>
+
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox" ng-if="vm.setRandomPasswordEnabled">
+                            <input id="EditUser_SetRandomPassword" class="md-check" type="checkbox" name="SetRandomPassword" ng-model="vm.setRandomPassword">
+                            <label for="EditUser_SetRandomPassword">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                使用随机密码
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="!vm.setRandomPassword">
+                        <input type="password" name="Password" class="form-control" ng-model="vm.user.password" ng-required="!vm.user.id && !vm.setRandomPassword"
+                            maxlength="32" ng-minlength="6">
+                        <label>密码</label>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="!vm.setRandomPassword">
+                        <input type="password" name="PasswordRepeat" class="form-control" ng-model="vm.user.passwordRepeat" ng-required="!vm.user.id && !vm.setRandomPassword"
+                            maxlength="32" ui-validate=" '$value==vm.user.password' " ui-validate-watch=" 'vm.user.password' "
+                            ng-minlength="6">
+                        <label>新密码 (核对)</label>
+                    </div>
+
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox" ng-if="vm.shouldChangePasswordOnNextLoginEnabled">
+                            <input id="EditUser_ShouldChangePasswordOnNextLogin" class="md-check" type="checkbox" name="ShouldChangePasswordOnNextLogin"
+                                ng-model="vm.user.shouldChangePasswordOnNextLogin">
+                            <label for="EditUser_ShouldChangePasswordOnNextLogin">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                下次登录需要修改密码.
+                            </label>
+                        </div>
+                        <div class="md-checkbox">
+                            <input id="EditUser_SendActivationEmail" class="md-check" type="checkbox" name="SendActivationEmail" ng-model="vm.sendActivationEmail">
+                            <label for="EditUser_SendActivationEmail">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                发送激活邮件.
+                            </label>
+                        </div>
+                        <div class="md-checkbox">
+                            <input id="EditUser_IsActive" class="md-check" type="checkbox" name="IsActive" ng-model="vm.user.isActive">
+                            <label for="EditUser_IsActive">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                激活
+                            </label>
+                        </div>
+                        <div class="md-checkbox" ng-if="vm.isTwoFactorEnabled">
+                            <input id="EditUser_IsTwoFactorEnabled" class="md-check" type="checkbox" name="IsTwoFactorEnabled" ng-model="vm.user.isTwoFactorEnabled">
+                            <label for="EditUser_IsTwoFactorEnabled">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                是否启用了两个因素身份验证?
+                            </label>
+                        </div>
+                        <div class="md-checkbox" ng-if="vm.isLockoutEnabled">
+                            <input id="EditUser_IsLockoutEnabled" class="md-check" type="checkbox" name="IsLockoutEnabled" ng-model="vm.user.isLockoutEnabled">
+                            <label for="EditUser_IsLockoutEnabled" uib-tooltip="在一定数量的失败登录尝试之后，用户被锁定了一段时间。">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                锁定启用?
+                            </label>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab>
+                    <uib-tab-heading>
+                        角色管理
+                        <b class="badge badge-primary">{{vm.getAssignedRoleCount()}}</b>
+                    </uib-tab-heading>
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox" ng-repeat="role in vm.roles">
+                            <input id="EditUser_{{role.roleName}}" class="md-check" type="checkbox" name="{{role.roleName}}" ng-model="role.isAssigned">
+                            <label for="EditUser_{{role.roleName}}">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                {{role.roleDisplayName}}
+                            </label>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab ng-if="vm.showorganization">
+                    <uib-tab-heading>
+                        组织机构管理
+                    </uib-tab-heading>
+                    <div ng-class="vm.treeContainerClassName">
+                        <div class="portlet light">
+                            <div class="portlet-body">
+                                <div id="OrganizationUnitEditTree"></div>
+                                <div ng-if="!vm.organizationTree.unitCount" class="text-muted">
+                                    尚未定义组织机构
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+            <button type="submit" button-busy="vm.saving" busy-text="保存中..." class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="userCreateOrEditForm.$invalid">
+                <i class="fa fa-save"></i>
+                <span>保存</span>
+            </button>
+        </div>
+    </form>
+</div>

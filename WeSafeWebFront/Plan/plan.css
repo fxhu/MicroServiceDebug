@@ -1,0 +1,289 @@
+﻿.portlet-custom-title {
+    font-family: ﻿MicrosoftYaHei-Bold;
+    font-size: 30px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    height: 60px;
+}
+
+.portlet-custom-btn-download {
+    background-color: rgba(1, 172, 252, 1);
+    color: #fff;
+    height: 60px;
+    width: 60px;
+    border-radius: 50% !important;
+    right: 60px;
+}
+
+    .portlet-custom-btn-download span {
+        height: 60px;
+        width: 60px;
+        border-radius: 50% !important;
+        float: left;
+        margin-left: -10px;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+
+.portlet-light-bordered-box {
+    box-shadow: 3px 0px 7px 0px rgba(0, 0, 0, 0.35);
+    border-radius: 6px 6px 6px 6px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.portlet-body button.btnNum {
+    float: left;
+    height: 42px;
+    width: 42px;
+}
+
+.portlet-body button.actived {
+    background-color: #D0D0D0;
+}
+
+.portlet-body button.activing {
+    background-color: #04adfc;
+}
+
+.portlet-body span.num {
+    vertical-align: middle;
+    font-family: ﻿MicrosoftYaHei-Bold;
+    font-size: 16px;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #fff;
+}
+
+.order-ico-group {
+    float: left;
+}
+
+.list-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    color: #efe;
+    display: block;
+    text-align: center;
+    line-height: 32px;
+    background: url("/images/plan_num_bg.png") no-repeat;
+}
+
+.list-icon-link {
+    width: 32px;
+    height: 34px;
+    display: block;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+    line-height: 32px;
+    background: url("/images/planNum.png") no-repeat 0 -68px;
+}
+
+.list-icon-current {
+    background-position: 0 0;
+}
+
+.pre-timeline {
+    background: url(../../assets/images/timeline.png) repeat-y 20px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.pre-box {
+    width: 100%;
+    /*border-right: 1px solid silver;*/
+    border-left: 0px;
+    border-bottom: 0px;
+    border-top: 0px;
+}
+
+.pre-content {
+    padding:0 0 30px 50px;
+    font-size: 18px;
+    background-color: transparent;
+    width: 100%;
+}
+
+    .pre-content .pre-title {
+        padding-bottom: 30px;
+        float: left;
+        width: 98%;
+    }
+
+    .pre-content p {
+        width: 98%;
+    }
+
+    .pre-content .pre-title .title-content {
+        color: #fff;
+        height: 37px;
+        background-color: #04adfc;
+        float: left;
+        font-family: MicrosoftYaHei;
+        font-size: 24px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 0px;
+        letter-spacing: 0px;
+        padding-top: 18px;
+        padding-right: 20px;
+        padding-bottom: 6px;
+        border-radius: 0 25px 25px 0;
+    }
+
+    .pre-content .title-arrow {
+        border-top: 19px solid transparent;
+        border-bottom: 18px solid transparent;
+        border-right: 30px solid rgba(4, 173, 252, 1);
+        float: left;
+    }
+
+.content-clear {
+    clear: both;
+}
+
+.quick-nav ul.nav-box {
+    width: 60px;
+}
+
+    .quick-nav ul.nav-box li {
+        text-align: center;
+        font-size: 12px;
+        padding-bottom: 10px;
+    }
+
+    .quick-nav ul.nav-box button span {
+        color: #000;
+        font-family: MicrosoftYaHei-Bold;
+        font-size: 12px;
+    }
+
+.demo-menu {
+    list-style: none;
+    text-align: left;
+    margin-top: 40px;
+    z-index: 2000;
+    position: absolute;
+    padding: 0;
+    font-size: 14px;
+    width: 210px;
+}
+
+.demo-menu li {
+width: 100%;
+margin-bottom: 10px;
+}
+
+.demo-menu li a {
+text-decoration: none;
+}
+
+.demo-menu li a:hover {
+    color: aqua;
+}
+
+.pagebreak {
+    display: block;
+    clear: both !important;
+    cursor: default !important;
+    width: 100% !important;
+    margin: 0;
+}
+
+pre {
+    margin: .5em 0;
+    padding: .4em .6em;
+    border-radius: 8px;
+    background: #f8f8f8;
+}
+
+.anchorclass {
+    background: url('/ueditor/themes/default/images/anchor.gif') no-repeat scroll left center transparent;
+    cursor: auto;
+    display: inline-block;
+    height: 16px;
+    width: 15px;
+}
+
+/* loading样式 */
+.loadingclass {
+    display: inline-block;
+    cursor: default;
+    background: url('/ueditor/themes/default/images/loading.gif') no-repeat center center transparent;
+    border: 1px solid #cccccc;
+    margin-left: 1px;
+    height: 22px;
+    width: 22px;
+}
+
+.loaderrorclass {
+    display: inline-block;
+    cursor: default;
+    background: url('/ueditor/themes/default/images/loaderror.png') no-repeat center center transparent;
+    border: 1px solid #cccccc;
+    margin-right: 1px;
+    height: 22px;
+    width: 22px;
+}
+
+/* table样式 */
+.selectTdClass {
+    background-color: #edf5fa !important
+}
+
+table.noBorderTable td, table.noBorderTable th, table.noBorderTable caption {
+    border: 1px dashed #ddd !important
+}
+
+table {
+    margin-bottom: 10px;
+    border-collapse: collapse;
+    display: table;
+}
+
+td, th {
+    padding: 5px 10px;
+    border: 1px solid #DDD;
+}
+
+caption {
+    border: 1px dashed #DDD;
+    border-bottom: 0;
+    padding: 3px;
+    text-align: center;
+}
+
+th {
+    border-top: 1px solid #BBB;
+    background-color: #F7F7F7;
+}
+
+table tr.firstRow th {
+    border-top-width: 2px;
+}
+
+.ue-table-interlace-color-single {
+    background-color: #fcfcfc;
+}
+
+.ue-table-interlace-color-double {
+    background-color: #f7faff;
+}
+
+td p {
+    margin: 0;
+    padding: 0;
+}
+table.sortEnabled tr.firstRow th, table.sortEnabled tr.firstRow td {
+    padding-right: 20px;
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-image: url(/ueditor/themes/default/images/sortable.png);
+}
+

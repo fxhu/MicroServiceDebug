@@ -1,0 +1,81 @@
+.actions{
+    margin-top: -60px;
+    margin-right: -20px;
+
+}
+.actions .btn-group #btn-radius{
+    border-radius: 5px;
+}
+#portlet-title{
+    border-bottom: 0px;
+    margin-bottom: -45px;
+}
+
+#form-control{
+    width: 180px !important;
+    border-radius: 20px !important;
+}
+
+
+
+
+.form-group #btnSearch{
+    /*display: none;*/
+}
+
+
+
+
+
+tr td:last-child{
+    min-width: 153px;
+    text-align: center;
+
+}
+
+#btnReset,#btnAdd{
+    border: none !important;
+    background: #fff !important;
+}
+
+.fixed-table-container{
+    margin-top: 20px;
+}
+
+
+
+/*下拉框*/
+.btn-group button{
+    box-shadow: none;
+
+}
+.portlet-title{
+    border: none !important;
+    /* display: none; */
+}
+
+.portlet.light > .portlet-title > .caption.btn.blue{
+    background-color: #3598DC;
+    padding:8px 14px 7px 14px;
+    box-shadow: none;
+    margin-top: 15px;
+    margin-bottom: 13px;
+   
+}
+.portlet.light > .portlet-title > .caption.btn.blue:hover{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.26);
+    background-color: #337AB7;
+}
+
+.portlet-title>.caption.btn.blue>.caption-subject{
+    color: #fff;
+    font-size: 12px;
+}
+
+.form-group button:first-child{
+    display: none
+}
+
+
+
+
